@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @help_item.title %>
+</p>
+
+<p>
+  <b>Text:</b>
+  <%= @help_item.text %>
+</p>
+
+
+<%= link_to 'Edit', edit_help_item_path(@help_item) %> |
+<%= link_to 'Back', help_items_path %>
