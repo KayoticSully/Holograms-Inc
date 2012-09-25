@@ -1,6 +1,20 @@
 <h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
+<br>
+<p>
+  The model is split into two groups.  Scaffolding that is needed
+  and Scaffolding that is not.  For the models with needed Scaffolding
+  the views and controllers will stay in place as we move forward.
+</p>
+<p>
+  Basically I generated scaffolding for everything so it is easy for us to enter
+  in test data and make sure things are working.  Some models will be managed
+  completely by controllers so the scaffolding will be removed once we get
+  that code working.
+</p>
+  
+<h2>Models with needed Scaffolding</h2>
 <%= link_to "Products", products_path %>
 <br>
 <%= link_to "Users", users_path %>
@@ -8,10 +22,25 @@
 <%= link_to "User Types", user_types_path %>
 <br>
 <%= link_to "Help Items", help_items_path %>
+
+<br>
+  
+<h2>Models with Scaffolding that will be removed</h2>
+<%= link_to "Orders", orders_path %>
+<br>
+<%= link_to "Order Items", order_items_path %>
+
 <br>
 <br>
-User Test (false means its working)
+  <strong>Note:</strong> Just a thought, maybe we do not need a "cart" model.  Maybe
+  the "cart" is just the "order" that is not marked as complete?  Could simplify things.
 <br>
-Products Permissions: <%= @user.user_type.products %>
+
+<h2>Random Model Tests</h2>
+User to User Type Test
 <br>
-blabl
+<%= debug @user.user_type %>
+<br>
+<br>
+User to Product from Order Test
+<%= debug @user.orders[0].order_items[0].product %>

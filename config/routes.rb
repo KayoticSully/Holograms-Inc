@@ -1,4 +1,8 @@
 ProjectCourse::Application.routes.draw do
+  resources :order_items
+
+  resources :orders
+
   resources :help_items
 
   resources :user_types
