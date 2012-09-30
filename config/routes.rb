@@ -1,4 +1,10 @@
 ProjectCourse::Application.routes.draw do
+  resources :groups
+
+  resources :product_keywords
+
+  resources :keywords
+
   resources :order_items
 
   resources :orders
