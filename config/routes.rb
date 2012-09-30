@@ -1,21 +1,19 @@
 ProjectCourse::Application.routes.draw do
   resources :groups
-
   resources :product_keywords
-
   resources :keywords
-
   resources :order_items
-
   resources :orders
-
   resources :help_items
-
   resources :user_types
-
   resources :users
-
   resources :products
+  resources :sessions
+  
+  get "sessions/new"
+  get "login_in" => "sessions#new", :as => "log_in"
+  get "log_out" => "sessions#destroy", :as => "log_out"
+  get "sign_up" => "users#new", :as =>"sign_up"
 
   get "home/index"
 
