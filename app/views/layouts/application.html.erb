@@ -18,6 +18,27 @@
   <% end %>
 </div>
 
+<div class="container">
+	<div class="row">
+		<div id="category_bar" class="span3">
+			<img src="/assets/HoloIncTrans.png" alt="Holograms Inc Logo"/>
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-heaver">Browse By Category</li>
+					<% #may want to check if there are any, not sure what happens on empty list %>
+					<% @keywords.each do |keyword| %>
+							<li class>
+								<a href="#">
+									<%= keyword.name %>
+								</a>
+							</li>
+					<% end %>
+				</ul>
+			</div>
+
+		<div>
+	</div>
+</div>
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>
 <% end %>
