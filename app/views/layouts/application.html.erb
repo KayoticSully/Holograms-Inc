@@ -16,11 +16,15 @@
 </head>
 <body>
 
-<div id="user_nav" class="navbar navbar-fixed-top">
+<div id="user_nav" class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
 			<a class="brand" href="/">	<img src="/assets/HoloIncTransSmall.png" alt="Holograms Inc Logo" width="133" height="30"/> </a>
 			<ul class="nav">
+				<li> <a href="#">  Left button </a> </li>
+			</ul>
+			<ul class="nav pull-right">
+				
 				<% if current_user %>
 					<li> Logged in as <%= current_user.email_address %>. </li>
 					<li> <%= link_to "Log out", log_out_path %> </li>
@@ -28,6 +32,9 @@
 					<li> <%= link_to "Sign up", sign_up_path %></li>
 					<li> <%= link_to "Log in", log_in_path %> </li>
 				<% end %>
+				
+				<li> <a href="#">View cart - # items </a> </li>
+				
 			</ul>
 		</div>
 	</div>
@@ -37,9 +44,10 @@
 	<div class="row-fluid">
 		<div id="category_bar" class="span3">
 
-			<div class="well sidebar-nav">
-				<ul class="nav nav-list">
-					<li class="nav-heaver">Browse By Category</li>
+			<div class="well">
+				<ul class="nav navbar-inverse nav-list">
+					<li class="nav-heaver"><h5>Browse By Category</h5></li>
+					<li class="divider"></li>
 					<% #may want to check if there are any, not sure what happens on empty list %>
 					<% @keywords.each do |keyword| %>
 							<li class>
