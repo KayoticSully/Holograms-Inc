@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ProjectCourse</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+  <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+ </style>
+ 
+</head>
+<body>
+
+<div id="user_nav" class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="brand" href="/employee">	Employee Access </a>
+			<ul class="nav">
+				<li> <a href="#">  Left button </a> </li>
+			</ul>
+			<ul class="nav pull-right">
+				
+				<% if current_user %>
+					<li> Logged in as <%= current_user.email_address %>. </li>
+					<li> <%= link_to "Log out", log_out_path %> </li>
+				<% else %>
+					<li> <%= link_to "Sign up", sign_up_path %></li>
+					<li> <%= link_to "Log in", log_in_path %> </li>
+				<% end %>
+				
+				<li> <a href="#">View cart - # items </a> </li>
+				
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+<%= yield %>
+
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, :id => "flash_#{name}" %>
+<% end %>
+
+</body>
+</html>
