@@ -16,12 +16,13 @@
 </head>
 <body>
 
-<div id="user_nav" class="navbar navbar-inverse navbar-fixed-top">
+<div id="user_nav" class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
-		<div class="container">
-			<a class="brand" href="/">	<img src="/assets/HoloIncTransSmall.png" alt="Holograms Inc Logo" width="133" height="30"/> </a>
-			<ul class="nav">
-				<li> <a href="#">  Left button </a> </li>
+		<div class="container-fluid">
+		    <ul class="nav">
+				<li>
+					<a class="brand" href="/"><img src="/assets/HoloIncTransSmallFlat.png" alt="Holograms Inc Logo" width="200" height="22"/> </a>
+				</li>
 			</ul>
 			<ul class="nav pull-right">
 				
@@ -40,15 +41,14 @@
 	</div>
 </div>
 
-<div class="container">
+<div class="container-fluid">
 	<div class="row-fluid">
-		<div id="category_bar" class="span3">
+		<div id="category_bar" class="span2">
 
 			<div class="well">
 				<ul class="nav navbar-inverse nav-list">
-					<li class="nav-heaver"><h5>Browse By Category</h5></li>
+					<li class="nav-heaver"><h5>Categories</h5></li>
 					<li class="divider"></li>
-					<% #may want to check if there are any, not sure what happens on empty list %>
 					<% @keywords.each do |keyword| %>
 							<li class>
 								<a href="#">
@@ -59,7 +59,7 @@
 				</ul>
 			</div>
 		</div>
-		<div id="everything_else" class="span9">
+		<div id="everything_else" class="span10">
 			
 			<%= yield %>
 			
