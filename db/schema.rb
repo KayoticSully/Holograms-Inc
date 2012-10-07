@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007224136) do
+ActiveRecord::Schema.define(:version => 20121007231009) do
 
   create_table "groups", :force => true do |t|
     t.integer  "product_id"
@@ -58,8 +58,6 @@ ActiveRecord::Schema.define(:version => 20121007224136) do
     t.boolean  "public"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-    t.string   "state"
-    t.string   "country"
     t.float    "weight"
     t.float    "height"
     t.float    "length"
@@ -86,6 +84,8 @@ ActiveRecord::Schema.define(:version => 20121007224136) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_salt"
+    t.string   "state"
+    t.string   "country"
   end
 
 end
