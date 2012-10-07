@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   validates_confirmation_of :password 
   validates_presence_of :password, :on => :create
   
-  validates_presence_of :first_name, :last_name, :zipcode, :city, :email_address
+  validates_presence_of :first_name, :last_name, :zipcode, :city, :address, :email_address
   validates_uniqueness_of :email_address
   
   def self.authenticate(email, password)
