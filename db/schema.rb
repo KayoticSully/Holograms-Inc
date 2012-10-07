@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007231009) do
+ActiveRecord::Schema.define(:version => 20121007232200) do
 
   create_table "groups", :force => true do |t|
     t.integer  "product_id"
@@ -66,8 +66,12 @@ ActiveRecord::Schema.define(:version => 20121007231009) do
 
   create_table "user_types", :force => true do |t|
     t.boolean  "products"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.boolean  "purchase"
+    t.boolean  "products_edit"
+    t.boolean  "products_quantity"
+    t.boolean  "help_edit"
   end
 
   create_table "users", :force => true do |t|
