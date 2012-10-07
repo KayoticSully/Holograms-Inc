@@ -61,11 +61,11 @@
 		</div>
 		<div id="everything_else" class="span10">
 			
-			<%= yield %>
-			
 			<% flash.each do |name, msg| %>
 				<%= content_tag :div, msg, :id => "flash_#{name}" %>
 			<% end %>
+			
+			<%= yield %>
 	
 	</div>
 	</div>
