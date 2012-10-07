@@ -1,13 +1,12 @@
-<h1>Log in</h1>
-
 <%= form_tag sessions_path do %>
+  <legend> Log In</legend>
   <p>
-    <%= label_tag :email_address %><br/>
-    <%= text_field_tag :email_address, params[:email_address] %>
+    <%= label_tag :email_address, 'Email Address' %>
+	<%= text_field_tag :email_address, params[:email_address] %>
   </p>
   <p>
-    <%= label_tag :password %><br/>
+    <%= label_tag :password %>
     <%= password_field_tag :password %>
   </p>
-  <p class="button"><%= submit_tag %></p>
+  <p class="button"><input class="btn btn-inverse" name="commit" type="submit" value="Sign In" /></p>
 <% end %>
