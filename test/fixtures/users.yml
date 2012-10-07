@@ -1,15 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  address: MyString
-  city: MyString
-  zipcode: 1
-  email_address: MyString
-  hashed_password: MyString
-  credit_card: MyString
-  phone_number: MyString
+  first_name: TestFirst
+  last_name: TestLast
+  address: 123 Test Avenue
+  city: Testville
+  zipcode: 11111
+  email_address: Test@test.test
+  hashed_password: test
+  credit_card: 1
+  phone_number: 1234567890
   user_type_id: 1
 
 two:
