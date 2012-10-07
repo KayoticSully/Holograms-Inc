@@ -14,7 +14,8 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @product = Product.find(params[:id])
-    @keyword = Keyword.find(2)
+#	I think this is bad…. don't hate me shane if i mess this up 
+#	@keyword = Keyword.find(2)
 
     respond_to do |format|
       format.html # show.html.erb
