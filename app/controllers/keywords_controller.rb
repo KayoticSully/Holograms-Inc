@@ -13,7 +13,7 @@ class KeywordsController < ApplicationController
   # GET /keywords/1
   # GET /keywords/1.json
   def show
-    @keyword = Keyword.find(params[:id])
+    @keyword = Keyword.find_by_name(params[:id].gsub("_", " "))
 
     respond_to do |format|
       format.html # show.html.erb
