@@ -9,7 +9,8 @@ class User < ActiveRecord::Base
   before_save :encrypt_password
   
   validates_confirmation_of :password 
-  validates_presence_of :password, :on => :create
+  validates :password, :presence => true, :length => { :within => 6..40}, :on => :create
+  validates :password, :length => { :within => 6..40}, :on => :update
   
   validates_presence_of :first_name, :last_name, :zipcode, :city, :address, :email_address
   validates_uniqueness_of :email_address
