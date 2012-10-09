@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
   validates :zipcode, :zipcode => true
   validates :phone_number, :phone_number => true
   
+  validates :credit_card, :creditcard  => true
+  
   def self.authenticate(email, password)
     user = find_by_email_address(email)
     if user && user.hashed_password == BCrypt::Engine.hash_secret(password, user.password_salt)
