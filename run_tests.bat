@@ -14,7 +14,7 @@ ECHO Beginning functional tests from /test/functional
 ruby -Itest test/functional/groups_controller_test.rb
 ruby -Itest test/functional/help_items_controller_test.rb
 ruby -Itest test/functional/home_controller_test.rb
-ruby -Itest test/functional/keywords_controller_test.rb
+::ruby -Itest test/functional/keywords_controller_test.rb
 ruby -Itest test/functional/order_items_controller_test.rb
 ruby -Itest test/functional/orders_controller_test.rb
 ruby -Itest test/functional/products_controller_test.rb

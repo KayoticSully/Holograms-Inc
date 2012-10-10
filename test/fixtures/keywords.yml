@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
+  name: Test1
   under: 1
 
 two:
-  name: MyString
-  under: 1
+  name: Test2
+  under: 2
