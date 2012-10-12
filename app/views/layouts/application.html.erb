@@ -51,9 +51,7 @@
 					<li class="divider"></li>
 					<% @keywords.each do |keyword| %>
 							<li class>
-								<a href="#">
-									<%= keyword.name %>
-								</a>
+								<%= link_to keyword.name, keyword %>
 							</li>
 					<% end %>
 				</ul>

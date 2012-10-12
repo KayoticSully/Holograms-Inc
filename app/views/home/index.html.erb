@@ -1,17 +1,28 @@
 <!--for each product we will use a 6 span 2's to list the product per row-->
-<div class="row-fluid">
-<%= debug @products %>
+
+
+<% count=0 %>
 <% @products.each do |product| %>
-	  <div class="span2">
-		<a href="#">
-			<h5><%= product.name %></h5>
-			<img src="/assets/<%= product.image %>" class="img-polaroid"><br/>
-			Rating: <i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><br/>
-			<strong>$<%= product.price %></strong>
-		</a>
-	</div>
+
+	<%= raw "<div class=\"row-fluid\">" if (count%5==0) %>
+
+		<div class="span2">
+
+			<a href="#">
+				<h5><%= product.name %></h5>
+				<img src="/assets/<%= product.image %>" class="img-polaroid"><br/>
+				Rating: <i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><br/>
+				<strong>$<%= product.price %></strong>
+			</a>
+		</div>
+		
+	<%= raw "</div>" if (count%5==4) %>
+	
+	<% count+=1 %>
+	
 <% end %>
-</div>
+
+
 
 
  <!--
