@@ -1,10 +1,36 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <b>Name:</b>
+  <%= @user_type.name %>
+</p>
+
+<p>
+  <b>Purchase:</b>
+  <%= @user_type.purchase %>
+</p>
+
+<p>
   <b>Products:</b>
   <%= @user_type.products %>
 </p>
 
+<p>
+  <b>Products Edit:</b>
+  <%= @user_type.products_edit %>
+</p>
+
+<p>
+  <b>Products Quantity:</b>
+  <%= @user_type.products_quantity %>
+</p>
+
+<p>
+  <b>Help Edit:</b>
+  <%= @user_type.help_edit %>
+</p>
+
+<%= debug @user_type %>
 
 <%= link_to 'Edit', edit_user_type_path(@user_type) %> |
 <%= link_to 'Back', user_types_path %>

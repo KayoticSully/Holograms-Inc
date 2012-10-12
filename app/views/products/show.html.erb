@@ -30,6 +30,32 @@
   <%= @product.public %>
 </p>
 
+<p>
+  <b>Weight:</b>
+  <%= @product.weight %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @product.height %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%= @product.length %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @product.width %>
+</p>
+
+<p>
+  <b>Keywords</b>
+  <%= @product.keywords %>
+</p>
+
+<%= debug @product %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

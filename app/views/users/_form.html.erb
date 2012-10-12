@@ -52,8 +52,8 @@
     <%= f.text_field :phone_number %>
   </div>
   <div class="field">
-    <%= f.label :user_type_id %>
-    <%= f.number_field :user_type_id %>
+    <%= f.label :user_type_id %><br />
+    <%= f.collection_select(:user_type_id, UserType.all, :id, :name) %>
   </div>
   <div class="actions">
     <%= f.submit %>

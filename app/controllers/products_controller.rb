@@ -27,6 +27,7 @@ class ProductsController < ApplicationController
   # GET /products/new.json
   def new
     @product = Product.new
+    #@keywords = Keyword.
 
     respond_to do |format|
       format.html # new.html.erb
@@ -59,7 +60,10 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     @product = Product.find(params[:id])
-
+    
+    # set keywords selected
+    @product.keywords = Keyword.find(params[:keyword_ids])
+    
     respond_to do |format|
       if @product.update_attributes(params[:product])
         format.html { redirect_to @product, notice: 'Product was successfully updated.' }
