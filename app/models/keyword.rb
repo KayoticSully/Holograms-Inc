@@ -9,6 +9,6 @@ class Keyword < ActiveRecord::Base
   end
   
   def to_param
-    return name.gsub(/\s+/, '_')
+    return name.gsub(/\s+/, '_').downcase
   end
 end

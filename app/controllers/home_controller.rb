@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-		@products = Product.all
+    redirect_to "/keywords/promoted"
   end
 end
