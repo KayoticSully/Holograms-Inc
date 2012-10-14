@@ -3,7 +3,8 @@ class User < ActiveRecord::Base
   
   belongs_to :user_type
   has_many :orders
-  attr_accessible :address, :city, :credit_card, :email_address, :first_name, :hashed_password, :password_salt, :password, :password_confirmation, :last_name, :phone_number, :user_type_id, :zipcode
+  attr_accessible :address, :city, :credit_card, :email_address, :first_name, :hashed_password,
+                  :password_salt, :password, :password_confirmation, :last_name, :phone_number, :user_type_id, :zipcode, :state, :country
   
   attr_accessor :password
   before_save :encrypt_password
@@ -12,7 +13,7 @@ class User < ActiveRecord::Base
   validates :password, :presence => true, :length => { :within => 6..40}, :on => :create
   validates :password, :length => { :within => 6..40}, :on => :update
   
-  validates_presence_of :first_name, :last_name, :zipcode, :city, :address, :email_address
+  validates_presence_of :first_name, :last_name, :zipcode, :city, :address, :email_address, :state, :country
   validates_uniqueness_of :email_address
   
   validates :email_address, :email => true

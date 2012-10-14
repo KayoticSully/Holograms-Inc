@@ -69,7 +69,7 @@ class OrdersController < ApplicationController
   
   def add
     if(!@current_user)
-      redirect_to root_url
+      redirect_to "/log_in"
       return
     end
     if(@current_user)
