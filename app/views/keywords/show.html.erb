@@ -5,15 +5,14 @@
 	<%= raw "<div class=\"row-fluid\">" if (count%5==0) %>
 
 		<div class="span2">
-
-			<a href="#">
+			<div class="well">
 				<h5><%= link_to product.name, product %></h5>
-				<%= link_to image_tag("/assets/#{product.image}"), product %>
+				<%= link_to image_tag("/assets/#{product.image}", :class => ""), product %>
 				<br/>
 				Rating: <%= ("<i class=icon-thumbs-up></i>" * product.rating).html_safe %>
 				<br/>
 				<strong>$<%= product.price %></strong>
-			</a>
+			</div>
 		</div>
 		
 	<%= raw "</div>" if (count%5==4) %>
