@@ -2,7 +2,7 @@
 
 <p>
   <b>User:</b>
-  <%= @order.user_id %>
+  <%= @order.user.first_name %>
 </p>
 
 <p>
@@ -10,6 +10,23 @@
   <%= @order.total_price %>
 </p>
 
+<% @order.order_items.each do |order_item| %>
+  <div>
+    <strong>Name: </strong><%= link_to order_item.product.name, order_item.product %>
+    <br>
+    <strong>Quantity: </strong><%= order_item.quantity %>
+  </div>
+  <br>
+<% end %>
+
+<br>
+
+
+
+<br>
+<br>
+
+<%= debug @order.order_items %>
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>

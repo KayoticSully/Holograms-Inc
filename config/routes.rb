@@ -15,6 +15,13 @@ ProjectCourse::Application.routes.draw do
   get "sign_up" => "users#new", :as =>"sign_up"
 
   get "home/index"
+  
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => redirect('/keywords/promoted')
+  
+  match "orders/add/:id", :to => 'orders#add'
+  match "orders/purchase/:id", :to => 'orders#purchase'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -62,10 +69,6 @@ ProjectCourse::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => redirect('/keywords/promoted')
 
   # See how all your routes lay out with "rake routes"
 

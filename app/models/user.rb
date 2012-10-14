@@ -37,4 +37,15 @@ class User < ActiveRecord::Base
     end
   end
   
+  def cart
+    @cart = orders.last
+    
+    if(!@cart || @cart.purchased == true)
+      @cart = Order.new
+      orders.push(@cart)
+    end
+    
+    @cart
+  end
+  
 end

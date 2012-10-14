@@ -7,9 +7,11 @@
 		<div class="span2">
 
 			<a href="#">
-				<h5><%= product.name %></h5>
-				<img src="/assets/<%= product.image %>" class="img-polaroid"><br/>
-				Rating: <i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><br/>
+				<h5><%= link_to product.name, product %></h5>
+				<%= link_to image_tag("/assets/#{product.image}"), product %>
+				<br/>
+				Rating: <%= ("<i class=icon-thumbs-up></i>" * product.rating).html_safe %>
+				<br/>
 				<strong>$<%= product.price %></strong>
 			</a>
 		</div>

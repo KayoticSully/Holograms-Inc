@@ -41,7 +41,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(params[:order])
-
+    
     respond_to do |format|
       if @order.save
         format.html { redirect_to @order, notice: 'Order was successfully created.' }
@@ -51,6 +51,49 @@ class OrdersController < ApplicationController
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
+  end
+  
+  def add
+    if(@current_user)
+      # get the product based on the id passed in
+      product = Product.find(params[:id])
+      # get the users current cart
+      cart = @current_user.cart
+      
+      # see if item is in cart already
+      order_items = cart.order_items.select { |item| item.product_id == product.id }
+      order_item = order_items[0]
+      
+      if(order_item) # if it is
+        #increment it by one
+        order_item.quantity += 1
+        order_item.save
+      else
+        #add product
+        order_item = OrderItem.new do |item|
+          item.product_id = product.id
+          item.quantity = 1
+        end
+        
+        cart.order_items.push(order_item)
+      end
+      
+      redirect_to :action =>"edit", :id => cart.id
+    end
+  end
+  
+  def purchase
+    # get order
+    order = Order.find(params[:id])
+    
+    # mark as purchased
+    order.purchased = true
+    
+    #save changes
+    order.save
+    
+    #redirect to view order
+    redirect_to order
   end
 
   # PUT /orders/1

@@ -2,5 +2,25 @@
 
 <%= render 'form' %>
 
+<br>
+
+<h2>Items in this order</h2>
+
+<% @order.order_items.each do |order_item| %>
+  <div>
+    <strong>Name: </strong><%= link_to order_item.product.name, order_item.product %>
+    <br>
+    <strong>Quantity: </strong><%= order_item.quantity %>
+  </div>
+  <br>
+<% end %>
+
+<br>
+
+<%= link_to "Check Out", "/orders/purchase/#{@order.id}" %>
+
+<br>
+<br>
+
 <%= link_to 'Show', @order %> |
 <%= link_to 'Back', orders_path %>

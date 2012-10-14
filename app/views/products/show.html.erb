@@ -1,6 +1,9 @@
 <p id="notice"><%= notice %></p>
 
 <p>
+  <%= link_to "Add to Cart", "/orders/add/#{@product.id}" %>
+</p>
+<p>
   <b>Name:</b>
   <%= @product.name %>
 </p>

@@ -52,6 +52,10 @@
     <%= f.text_field :width %>
   </div>
   <div class="field">
+    <%= f.label :rating %><br />
+    <%= f.text_field :rating %>
+  </div>
+  <div class="field">
     <%= f.label :keywords %><br />
     <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6})%>
   </div>
