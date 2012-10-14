@@ -2,6 +2,11 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
+    if(!@current_user || !@current_user.user_type_id.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @orders = Order.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    if(!@current_user || !@current_user.user_type_id.orders_list || !@current_user.orders.select{|n| n == params[:id]})
+      redirect_to root_url
+      return
+    end
+    
     @order = Order.find(params[:id])
 
     respond_to do |format|
@@ -34,6 +44,10 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
+    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+      redirect_to root_url
+      return
+    end
     @order = Order.find(params[:id])
   end
 
@@ -54,6 +68,10 @@ class OrdersController < ApplicationController
   end
   
   def add
+    if(!@current_user)
+      redirect_to root_url
+      return
+    end
     if(@current_user)
       # get the product based on the id passed in
       product = Product.find(params[:id])
@@ -82,7 +100,13 @@ class OrdersController < ApplicationController
     end
   end
   
+  #POST /orders/purchase/1
   def purchase
+    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+      redirect_to root_url
+      return
+    end
+    
     # get order
     order = Order.find(params[:id])
     
@@ -99,6 +123,11 @@ class OrdersController < ApplicationController
   # PUT /orders/1
   # PUT /orders/1.json
   def update
+    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+      redirect_to root_url
+      return
+    end
+    
     @order = Order.find(params[:id])
 
     respond_to do |format|
@@ -115,6 +144,11 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
+    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+      redirect_to root_url
+      return
+    end
+    
     @order = Order.find(params[:id])
     @order.destroy
 

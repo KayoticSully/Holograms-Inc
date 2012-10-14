@@ -34,7 +34,11 @@
 					<li> <%= link_to "Log in", log_in_path %> </li>
 				<% end %>
 				
-				<li> <%= link_to "View cart - #{@current_user.cart.size} items", :controller => "orders", :action =>"edit", :id => @current_user.cart.id %> </li>
+				<li>
+				  <% if(@current_user) %>
+				    <%= link_to "View cart - #{@current_user.cart.size} items", :controller => "orders", :action =>"edit", :id => @current_user.cart.id %>
+				  <% end %>
+				  </li>
 				
 			</ul>
 		</div>
