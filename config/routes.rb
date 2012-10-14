@@ -22,6 +22,7 @@ ProjectCourse::Application.routes.draw do
   
   match "orders/add/:id", :to => 'orders#add'
   match "orders/purchase/:id", :to => 'orders#purchase'
+  match "about", :to => 'home#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
