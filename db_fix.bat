@@ -8,7 +8,7 @@ TITLE Database fix
 ECHO Preparing the test databse
 
 ::Begin the tasks
-rake db:drop
+::rake db:drop
 rake db:create 
 rake db:schema:load
 rake db:test:load

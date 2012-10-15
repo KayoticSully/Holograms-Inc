@@ -2,7 +2,7 @@
 
 one:
   order_id: 1
-  price: 9.99
+  price: 100.00
   product_id: 1
 
 two:

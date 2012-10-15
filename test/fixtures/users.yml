@@ -5,8 +5,8 @@ one:
   last_name: TestLast
   address: 123 Test Avenue
   city: Testville
-  zipcode: 11111
-  email_address: Test@test.test
+  zipcode: 12601
+  email_address: test@test.test
   hashed_password: test
   credit_card: 1
   phone_number: 1234567890

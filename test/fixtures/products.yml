@@ -1,12 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  name: MyString
-  description: MyText
-  price: 9.99
-  image: MyString
-  stock: 1
-  public: false
+  name: ExampleProduct
+  description: ExampleDescription
+  price: 100.00
+  image: example.jpg
+  stock: 10
+  public: true
 
 two:
   name: MyString
