@@ -1,6 +1,6 @@
 <h1>Help and FAQs</h1>
 
-<%#Creating the table for FAQ %>
+<%# Creating the table for FAQ %>
 <table class="table">
   <%# First line to define colomns %>
   <tr>
@@ -16,6 +16,7 @@
 <% end %>
 </table>
 
+<%# if the user is allowed to edit the help files, thenlet them see this link.%>
 <%= if @current_user.user_type.help_edit then link_to 'New FAQ (employees only)', new_help_item_path  end %>
 
 <a class="btn" href="mailto:help@hologramsinc.com">E-mail us!</a>
