@@ -1,29 +1,21 @@
-<h1>TODO: ADD EMAIL FORM</h1>
-<h1>Listing FAQs</h1>
+<h1>Help and FAQs</h1>
 
-<table>
+<%#Creating the table for FAQ %>
+<table class="table">
+  <%# First line to define colomns %>
   <tr>
-    <th>Question Title</th>
-    <th>Question Text</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Question</th>
+    <th>Answer</th>
   </tr>
-
+  <%# Make a row for each entry in the FAQ %>
 <% @help_items.each do |help_item| %>
   <tr>
     <td><%= help_item.title %></td>
     <td><%= help_item.text %></td>
-    <td><%= link_to 'Show', help_item %></td>
-    <td><%= link_to 'Edit', edit_help_item_path(help_item) %></td>
-    <td><%= link_to 'Destroy', help_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
+<%= if @current_user.user_type.help_edit then link_to 'New FAQ (employees only)', new_help_item_path  end %>
 
-<%= link_to 'New FAQ (employees only)', new_help_item_path %>
-
-<br> <br>
-<a class="btn primary" href="mailto:help@hologramsinc.com">E-mail us!</a>
+<a class="btn" href="mailto:help@hologramsinc.com">E-mail us!</a>
