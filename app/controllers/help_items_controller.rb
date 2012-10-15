@@ -24,7 +24,7 @@ class HelpItemsController < ApplicationController
   # GET /help_items/new
   # GET /help_items/new.json
   def new
-    if(!@current_user || !@current_user.user_type_id.help_edit)
+    if(!@current_user || !@current_user.user_type.help_edit)
       redirect_to root_url
       return
     end
@@ -39,7 +39,7 @@ class HelpItemsController < ApplicationController
 
   # GET /help_items/1/edit
   def edit
-    if(!@current_user || !@current_user.user_type_id.help_edit)
+    if(!@current_user || !@current_user.user_type.help_edit)
       redirect_to root_url
       return
     end
@@ -50,7 +50,7 @@ class HelpItemsController < ApplicationController
   # POST /help_items
   # POST /help_items.json
   def create
-    if(!@current_user || !@current_user.user_type_id.help_edit)
+    if(!@current_user || !@current_user.user_type.help_edit)
       redirect_to root_url
       return
     end
@@ -71,7 +71,7 @@ class HelpItemsController < ApplicationController
   # PUT /help_items/1
   # PUT /help_items/1.json
   def update
-    if(!@current_user || !@current_user.user_type_id.help_edit)
+    if(!@current_user || !@current_user.user_type.help_edit)
       redirect_to root_url
       return
     end
@@ -92,7 +92,7 @@ class HelpItemsController < ApplicationController
   # DELETE /help_items/1
   # DELETE /help_items/1.json
   def destroy
-    if(!@current_user || !@current_user.user_type_id.help_edit)
+    if(!@current_user || !@current_user.user_type.help_edit)
       redirect_to root_url
       return
     end

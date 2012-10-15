@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
-    if(!@current_user || !@current_user.user_type_id.orders_list)
+    if(!@current_user || !@current_user.user_type.orders_list)
       redirect_to root_url
       return
     end
@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    if(!@current_user || !@current_user.user_type_id.orders_list || !@current_user.orders.select{|n| n == params[:id]})
+    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
       redirect_to root_url
       return
     end

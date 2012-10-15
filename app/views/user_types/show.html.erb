@@ -30,6 +30,16 @@
   <%= @user_type.help_edit %>
 </p>
 
+<p>
+  <b>Users List:</b>
+  <%= @user_type.users_list %>
+</p>
+
+<p>
+  <b>Orders List:</b>
+  <%= @user_type.orders_list %>
+</p>
+
 <%= debug @user_type %>
 
 <%= link_to 'Edit', edit_user_type_path(@user_type) %> |

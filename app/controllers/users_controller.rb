@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if(!@current_user || !@current_user.user_type_id.users_list)
+    if(!@current_user || !@current_user.user_type.users_list)
       redirect_to root_url
       return
     end
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if(!@current_user || !@current_user.user_type_id.users_list || @current_user.id != params[:id])
+    if(!@current_user || !@current_user.user_type.users_list || @current_user.id != params[:id])
       redirect_to root_url
       return
     end

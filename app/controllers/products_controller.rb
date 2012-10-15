@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
   # GET /products/new
   # GET /products/new.json
   def new
-    if(!@current_user || !@current_user.user_type_id.products_edit)
+    if(!@current_user || !@current_user.user_type.products_edit)
       redirect_to root_url
       return
     end
@@ -45,7 +45,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    if(!@current_user || !@current_user.user_type_id.products_edit)
+    if(!@current_user || !@current_user.user_type.products_edit)
       redirect_to root_url
       return
     end
@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    if(!@current_user || !@current_user.user_type_id.products_edit)
+    if(!@current_user || !@current_user.user_type.products_edit)
       redirect_to root_url
       return
     end
@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
   # PUT /products/1
   # PUT /products/1.json
   def update
-    if(!@current_user || !@current_user.user_type_id.products_edit)
+    if(!@current_user || !@current_user.user_type.products_edit)
       redirect_to root_url
       return
     end
@@ -101,7 +101,7 @@ class ProductsController < ApplicationController
   # DELETE /products/1
   # DELETE /products/1.json
   def destroy
-    if(!@current_user || !@current_user.user_type_id.products_edit)
+    if(!@current_user || !@current_user.user_type.products_edit)
       redirect_to root_url
       return
     end
