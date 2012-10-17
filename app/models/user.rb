@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   include ActiveModel::Validations
-  
   belongs_to :user_type
   has_many :orders
   attr_accessible :address, :city, :credit_card, :email_address, :first_name, :hashed_password,
@@ -8,8 +7,7 @@ class User < ActiveRecord::Base
   
   attr_accessor :password
   before_save :encrypt_password
-  
-  validates_confirmation_of :password 
+  validates_confirmation_of :password
   validates :password, :presence => true, :length => { :within => 6..40}, :on => :create
   validates :password, :length => { :within => 6..40}, :on => :update
   

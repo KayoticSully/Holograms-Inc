@@ -80,23 +80,42 @@ open("#{Rails.root}/db/faq_seed.csv") do |helpitems|
     #puts "  Added #@title"                
   end  
 end
+ 
+ # Clear out UserTypes table in the database
+UserType.delete_all
+puts " Adding user types"
+# Open the csv file containing the seeds. CSV file has one record per line.
+# Each line contains the user type's name and boolean values for each authority, all split by vertical bars
+# Create a new entry in the UserTypes table for each line
+open("#{Rails.root}/db/usertype_seed.csv") do |usertypes|  
+  usertypes.read.each_line do |usertype|
+    products,purchase,products_edit,products_quantity,help_edit,@name,users_list,orders_list = usertype.chomp.split("|")
+    UserType.create!(:products => products, :purchase => purchase, :products_edit => products_edit,
+                     :products_quantity => products_quantity, :help_edit => help_edit, :name => @name,
+                     :users_list => users_list, :orders_list => orders_list)  
+    puts "  Added #@name"                
+  end  
+end
 
-# Not quite sure how to add users; going to wait until the schema seems more stable before
-# attempting to populate the database.  
-# User.delete_all
-# puts " Adding default users and manager ids"
-# open("#{Rails.root}/db/users_seed.csv") do |users|  
-#   users.read.each_line do |user|  
-#     first_name,last_name,address,city,zipcode,email_address,password,credit_card,phone_number,state = user.chomp.split("|")
-#     User.create!(:title => @title, :text => text)  
-#     ! puts "  Added #@email_address - password #@password"                
-#   end  
-# end
-# open("#{Rails.root}/db/managers_seed.csv") do |users|  
-#   users.read.each_line do |user|  
-#     first_name,last_name,address,city,zipcode,email_address,password,credit_card,phone_number,state = user.chomp.split("|")
-#    User.create!(:title => @title, :text => text)  
-#     ! puts "  Added #@email_address - password #@password"                
-#   end  
-# end
+# Clear out Users table in the database 
+User.delete_all
+puts " Adding default users and manager ids"
+# Open the csv file containing the seeds. CSV file has one record per line.
+# Each line contains the user's information and the plaintext password, all split by vertical bars.
+# Create a new entry in the Users table for each line
+open("#{Rails.root}/db/user_seed.csv") do |users|  
+  users.read.each_line do |user|  
+    first_name,last_name,address,city,zipcode,@email_address,password,@usertype_name,state,country = user.chomp.split("|")
+    usertype_id = UserType.find(:first, :conditions => "name='#@usertype_name'").id
+    User.create!(:first_name => first_name, :last_name => last_name, :address => address,
+                 :city => city, :zipcode => zipcode, :email_address => @email_address, 
+                 :user_type_id => usertype_id, :state => state, :country => country, :password => password, :phone_number => "",:credit_card => "")
+    puts "  Added #@email_address - usertype #@usertype_name"                
+  end  
+end
+
+
+
+
+
 
