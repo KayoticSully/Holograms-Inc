@@ -100,6 +100,84 @@ class OrdersController < ApplicationController
     end
   end
   
+  # Remove an item from the cart (if more than one quantity, remove all)
+  def removeall
+    # Assume user is logged in to be viewing cart
+    # get the product based on the id passed in
+    product = Product.find(params[:id])
+    # get the users current cart
+    cart = @current_user.cart
+      
+    # Find order item in cart
+    order_items = cart.order_items.select { |item| item.product_id == product.id }
+    order_item = order_items[0]
+      
+    if(order_item) # if it is found
+     OrderItem.destroy(order_item)
+    end
+      
+      # Redirect back to the cart
+      redirect_to :action =>"edit", :id => cart.id
+  end
+  
+  # Remove one quantity of an item from the cart
+  def remove
+    # Assume user is logged in to be viewing cart
+    # get the product based on the id passed in
+    product = Product.find(params[:id])
+    # get the users current cart
+    cart = @current_user.cart
+      
+    # Find order item in cart
+    order_items = cart.order_items.select { |item| item.product_id == product.id }
+    order_item = order_items[0]
+      
+    if(order_item) # if it is found
+      #set quantity to zero
+      if order_item.quantity > 0
+       order_item.quantity -= 1
+       order_item.save
+      else
+       OrderItem.destroy(order_item)
+      end 
+    end
+      
+    # Refresh the cart   
+    cart.order_items.push(order_item)
+      
+      # Redirect back to the cart
+      redirect_to :action =>"edit", :id => cart.id
+  end
+  
+    # Update the quantity of an item from the cart
+  def updateqty
+    # Assume user is logged in to be viewing cart
+    # get the product based on the id passed in
+    product = Product.find(params[:id])
+    newquantity = params[:newqty].to_i
+    # get the users current cart
+    cart = @current_user.cart
+      
+    # Find order item in cart
+    order_items = cart.order_items.select { |item| item.product_id == product.id }
+    order_item = order_items[0]
+      
+    if(order_item) # if it is found
+      if newquantity > 0
+       order_item.quantity = newquantity
+       order_item.save
+      else
+       OrderItem.destroy(order_item)
+      end 
+    end
+      
+    # Refresh the cart   
+    cart.order_items.push(order_item)
+      
+      # Redirect back to the cart
+      redirect_to :action =>"edit", :id => cart.id
+  end
+  
   #POST /orders/purchase/1
   def purchase
     if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})

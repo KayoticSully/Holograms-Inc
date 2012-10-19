@@ -6,20 +6,32 @@
 
 <h2>Items in this order</h2>
 
+<% itemstotal = 0 %>
 <% @order.order_items.each do |order_item| %>
   <div>
     <strong>Name: </strong><%= link_to order_item.product.name, order_item.product %>
     <br>
     <strong>Quantity: </strong><%= order_item.quantity %>
+    <% itemstotal += order_item.quantity %>
+    <br>
+    <%= link_to "Add another", "/orders/add/#{order_item.product.id}" %>
+    <br>
+    <%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %>
+    <br>
+    <%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %>
+    <br>
+    <%= link_to "Change quantity to 5", "/orders/updateqty/#{order_item.product.id}/5" %>
+    <br> 
   </div>
   <br>
 <% end %>
 
 <br>
+  <% if itemstotal > 0 %>
+    <%= link_to "Check Out", "/orders/purchase/#{@order.id}" %>
+  <% end %>  
 
-<%= link_to "Check Out", "/orders/purchase/#{@order.id}" %>
-
-<br>
+<br> 
 <br>
 
 <%= link_to 'Show', @order %> |

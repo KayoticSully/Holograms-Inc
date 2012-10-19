@@ -21,7 +21,10 @@ ProjectCourse::Application.routes.draw do
   root :to => redirect('/keywords/promoted')
   
   match "orders/add/:id", :to => 'orders#add'
+  match "orders/remove/:id", :to => 'orders#remove'
+  match "orders/removeall/:id", :to => 'orders#removeall'
   match "orders/purchase/:id", :to => 'orders#purchase'
+  match "orders/updateqty/:id/:newqty", :to => 'orders#updateqty'
   match "about", :to => 'home#about'
 
   # The priority is based upon order of creation:
