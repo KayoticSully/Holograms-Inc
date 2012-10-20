@@ -22,3 +22,5 @@ pickle-email-*.html
 *.komodoproject
 
 .DS_Store
+
+.project

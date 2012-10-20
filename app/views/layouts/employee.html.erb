@@ -16,24 +16,26 @@
 </head>
 <body>
 
+<%# Using inverse navbar for employee access to make UI distinct %>
 <div id="user_nav" class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
+			<%# link to employee %>
 			<a class="brand" href="/employee">	Employee Access </a>
-			<ul class="nav">
-				<li> <a href="#">  Left button </a> </li>
-			</ul>
+			
+			<%= current_user.user_type.products_edit %>
+			
+			<%# These items will be on the right side of the nav bar %>
 			<ul class="nav pull-right">
 				
 				<% if current_user %>
-					<li> Logged in as <%= current_user.email_address %>. </li>
+					
+					<li> 
+						<%# Wrapped logged in messaage in anchor tags to center in navbar (bootstap is weird) %>
+						<a> Logged in as <%= current_user.email_address %>. </a> 
+					</li>
 					<li> <%= link_to "Log out", log_out_path %> </li>
-				<% else %>
-					<li> <%= link_to "Sign up", sign_up_path %></li>
-					<li> <%= link_to "Log in", log_in_path %> </li>
 				<% end %>
-				
-				<li> <a href="#">View cart - # items </a> </li>
 				
 			</ul>
 		</div>
