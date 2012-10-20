@@ -1,18 +1,22 @@
-<p id="notice"><%= notice %></p>
+<% count=0 %>
 
-<p>
-  <b>Name:</b>
-  <%= @keyword.name %>
-</p>
+<% @keyword.products.each do |product| %>
 
-<p>
-  <b>Under:</b>
-  <%= @keyword.under %>
-</p>
+	<%= raw "<div class=\"row-fluid\">" if (count%5==0) %>
 
-
-<%= link_to 'Edit', edit_keyword_path(@keyword) %> |
-<%= link_to 'Back', keywords_path %>
-<br>
-  
-<%= @keyword.products %>
+		<div class="span2">
+			<div class="well">
+				<h5><%= link_to product.name, product %></h5>
+				<%= link_to image_tag("/assets/#{product.image}", :class => ""), product %>
+				<br/>
+				Rating: <%= ("<i class=icon-thumbs-up></i>" * product.rating).html_safe %>
+				<br/>
+				<strong>$<%= product.price %></strong>
+			</div>
+		</div>
+		
+	<%= raw "</div>" if (count%5==4) %>
+	
+	<% count+=1 %>
+	
+<% end %>

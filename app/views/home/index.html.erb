@@ -1,4 +1,31 @@
+<!--for each product we will use a 6 span 2's to list the product per row-->
 
+
+<% count=0 %>
+<% @products.each do |product| %>
+
+	<%= raw "<div class=\"row-fluid\">" if (count%5==0) %>
+
+		<div class="span2">
+
+			<a href="#">
+				<h5><%= product.name %></h5>
+				<img src="/assets/<%= product.image %>" class="img-polaroid"><br/>
+				Rating: <i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><i class=icon-thumbs-up></i><br/>
+				<strong>$<%= product.price %></strong>
+			</a>
+		</div>
+		
+	<%= raw "</div>" if (count%5==4) %>
+	
+	<% count+=1 %>
+	
+<% end %>
+
+
+
+
+ <!--
 	<h1>This is now the product page!</h1>
 	<p>Find me in app/views/home/index.html.erb</p>
 
@@ -12,7 +39,9 @@
 	  Basically I generated scaffolding for everything so it is easy for us to enter
 	  in test data and make sure things are working.  Some models will be managed
 	  completely by controllers so the scaffolding will be removed once we get
-	  that code working.
+	  that code working. 
+	  
+	  
 	</p>
 
 	<h2>Models with Needed Scaffolding</h2>
@@ -48,3 +77,4 @@
 	<br>
 	<br>
 	User to Product from Order Test
+-->

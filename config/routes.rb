@@ -1,6 +1,5 @@
 ProjectCourse::Application.routes.draw do
   resources :groups
-  resources :product_keywords
   resources :keywords
   resources :order_items
   resources :orders
@@ -11,11 +10,22 @@ ProjectCourse::Application.routes.draw do
   resources :sessions
   
   get "sessions/new"
-  get "login_in" => "sessions#new", :as => "log_in"
+  get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "sign_up" => "users#new", :as =>"sign_up"
 
   get "home/index"
+  
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => redirect('/keywords/promoted')
+  
+  match "orders/add/:id", :to => 'orders#add'
+  match "orders/remove/:id", :to => 'orders#remove'
+  match "orders/removeall/:id", :to => 'orders#removeall'
+  match "orders/purchase/:id", :to => 'orders#purchase'
+  match "orders/updateqty/:id/:newqty", :to => 'orders#updateqty'
+  match "about", :to => 'home#about'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -63,10 +73,6 @@ ProjectCourse::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-   root :to => 'home#index'
 
   # See how all your routes lay out with "rake routes"
 

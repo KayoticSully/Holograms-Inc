@@ -13,8 +13,9 @@ class KeywordsController < ApplicationController
   # GET /keywords/1
   # GET /keywords/1.json
   def show
-    @keyword = Keyword.find(params[:id])
-
+    keywordArr = Keyword.find(:all, :conditions => ["lower(name) =?", params[:id].gsub("_", " ").downcase])
+    @keyword = keywordArr[0]
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @keyword }

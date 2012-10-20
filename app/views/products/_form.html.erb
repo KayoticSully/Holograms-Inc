@@ -35,6 +35,30 @@
     <%= f.label :public %><br />
     <%= f.check_box :public %>
   </div>
+  <div class="field">
+    <%= f.label :weight %><br />
+    <%= f.text_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :height %><br />
+    <%= f.text_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.text_field :length %>
+  </div>
+  <div class="field">
+    <%= f.label :width %><br />
+    <%= f.text_field :width %>
+  </div>
+  <div class="field">
+    <%= f.label :rating %><br />
+    <%= f.text_field :rating %>
+  </div>
+  <div class="field">
+    <%= f.label :keywords %><br />
+    <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6})%>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

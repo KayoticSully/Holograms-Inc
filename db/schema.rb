@@ -11,11 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120930023131) do
+ActiveRecord::Schema.define(:version => 20121015014608) do
 
   create_table "groups", :force => true do |t|
-    t.integer  "product_id"
     t.integer  "keyword_id"
+    t.integer  "product_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(:version => 20120930023131) do
     t.integer  "product_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "quantity"
   end
 
   create_table "orders", :force => true do |t|
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120930023131) do
     t.decimal  "total_price"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.boolean  "purchased"
   end
 
   create_table "products", :force => true do |t|
@@ -56,14 +58,26 @@ ActiveRecord::Schema.define(:version => 20120930023131) do
     t.string   "image"
     t.integer  "stock"
     t.boolean  "public"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+    t.float    "weight"
+    t.float    "height"
+    t.float    "length"
+    t.float    "width"
+    t.integer  "rating",      :default => 0
   end
 
   create_table "user_types", :force => true do |t|
     t.boolean  "products"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+    t.boolean  "purchase"
+    t.boolean  "products_edit"
+    t.boolean  "products_quantity"
+    t.boolean  "help_edit"
+    t.string   "name"
+    t.boolean  "users_list"
+    t.boolean  "orders_list"
   end
 
   create_table "users", :force => true do |t|
@@ -71,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20120930023131) do
     t.string   "last_name"
     t.string   "address"
     t.string   "city"
-    t.integer  "zipcode"
+    t.string   "zipcode"
     t.string   "email_address"
     t.string   "hashed_password"
     t.string   "credit_card"
@@ -80,6 +94,8 @@ ActiveRecord::Schema.define(:version => 20120930023131) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.string   "password_salt"
+    t.string   "state"
+    t.string   "country"
   end
 
 end

@@ -1,5 +1,9 @@
 class SessionsController < ApplicationController
   def new
+    if current_user
+      flash[:notice] = "Already logged in as #{current_user.email_address}.  Please logout to login as another user."
+      redirect_to root_url
+    end
   end
   
   def create
