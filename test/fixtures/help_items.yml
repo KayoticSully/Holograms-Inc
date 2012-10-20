@@ -1,8 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  title: MyString
-  text: MyText
+  title: ExampleHelpTitle
+  text: ExampleHelpText
 
 two:
   title: MyString

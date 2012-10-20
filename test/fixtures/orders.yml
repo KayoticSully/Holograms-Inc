@@ -2,7 +2,7 @@
 
 one:
   user_id: 1
-  total_price: 
+  total_price: 100.00
 
 two:
   user_id: 1

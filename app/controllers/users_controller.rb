@@ -2,6 +2,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if(!@current_user || !@current_user.user_type.users_list)
+      redirect_to root_url
+      return
+    end
+    
     @users = User.all
 
     respond_to do |format|
@@ -13,6 +18,11 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    if(!@current_user || !@current_user.user_type.users_list || @current_user.id != params[:id])
+      redirect_to root_url
+      return
+    end
+    
     @user = User.find(params[:id])
     
     respond_to do |format|
@@ -34,6 +44,11 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
+    if(!@current_user || @current_user.id != params[:id])
+      redirect_to root_url
+      return
+    end
+    
     @user = User.find(params[:id])
   end
 
@@ -56,6 +71,10 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
+    if(!@current_user || @current_user.id != params[:id])
+      redirect_to root_url
+      return
+    end
     @user = User.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +91,11 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    if(!@current_user || @current_user != params[:id])
+      redirect_to root_url
+      return
+    end
+    
     @user = User.find(params[:id])
     @user.destroy
 

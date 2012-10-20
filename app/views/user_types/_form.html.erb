@@ -12,9 +12,47 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :purchase %><br />
+    <%= f.check_box :purchase %>
+  </div>
+  
+  <div class="field">
     <%= f.label :products %><br />
     <%= f.check_box :products %>
   </div>
+  
+  <div class="field">
+    <%= f.label :products_edit %><br />
+    <%= f.check_box :products_edit %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :products_quantity %><br />
+    <%= f.check_box :products_quantity %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :help_edit %><br />
+    <%= f.check_box :help_edit %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :users_list %><br />
+    <%= f.check_box :users_list %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :orders_list %><br />
+    <%= f.check_box :orders_list %>
+  </div>
+  
+  
+  
   <div class="actions">
     <%= f.submit %>
   </div>
