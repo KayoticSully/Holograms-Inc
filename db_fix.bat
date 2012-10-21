@@ -12,6 +12,7 @@ rake db:drop
 rake db:create 
 rake db:schema:load
 rake db:test:load
+rake db:test:clone
 rake db:test:prepare
 
 ::Pause at the end so the user can see the results
