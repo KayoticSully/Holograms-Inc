@@ -18,7 +18,7 @@
 		<div class="row-fluid">
 			<div class="span8">
 					<b>Price:</b>
-					<%= @product.price %>
+					<%= number_with_precision(@product.price, :precision => 2) %>
 					</br>
 					  <b>Weight:</b>
 					  <%= @product.weight %> oz

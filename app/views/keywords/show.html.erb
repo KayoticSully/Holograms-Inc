@@ -12,7 +12,7 @@
 					<p>
 					Rating: <%= ("<i class=icon-thumbs-up></i>" * product.rating).html_safe %>
 					<br/>
-					<strong>$<%= product.price %></strong>
+					<strong>$<%= number_with_precision(product.price, :precision => 2) %></strong>
 					<br/>
 					<%= link_to "Details", product, :class => "btn" %>
 					<%= link_to "Add to Cart", "/orders/add/#{product.id}", :class => "btn btn-warning" %>
