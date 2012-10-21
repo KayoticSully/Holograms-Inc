@@ -19,39 +19,38 @@
 <%# Using inverse navbar for employee access to make UI distinct %>
 <div id="user_nav" class="navbar navbar-inverse navbar-fixed-top">
 	<div class="navbar-inner">
-		<div class="container">
-		
-			<%# link to employee. This link is currently broken, need to add a route or remove it%>
-			<a class="brand" href="/employee">	Employee Access </a>
-			
-			
+		<div class="container-fluid">
 			<ul class="nav" role="navigation">
 			
-				<%#Stuff for Inventory Management goes here%>
-				<%if current_user.user_type.products %>
-					<li class="dropdown">
-						<!--This makes the label for the dropdown -->
-						<a id="inventory_dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-							Inventory
-							<b class="caret"></b>
-						</a>
-						<!--Here goes the list that drops down-->
-						<ul class="dropdown-menu" role="menu" aria-labeledby="inventory_dropdown">
-							<li>
-								<a tabindex="-1" href="#">TODO</a>
+				<%# link to employee. This link is currently broken, need to add a route or remove it%>
+				<a class="brand" href="/employee">	Employee Access </a>
+				
+				<% if current_user %>
+						<%#Stuff for Inventory Management goes here%>
+						<%if current_user.user_type.products %>
+							<li class="dropdown">
+								<!--This makes the label for the dropdown -->
+								<a id="inventory_dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+									Inventory
+									<b class="caret"></b>
+								</a>
+								<!--Here goes the list that drops down-->
+								<ul class="dropdown-menu" role="menu" aria-labeledby="inventory_dropdown">
+									<li>
+										<a tabindex="-1" href="#">TODO</a>
+									</li>
+								</ul>
 							</li>
-						</ul>
-					</li>
-				<%end%>
-			
+						<%end%>
+				<%end%>	
 			</ul>
 			
 			
 			<%# These items will be on the right side of the nav bar %>
 			<ul class="nav pull-right">
 				
+				
 				<% if current_user %>
-					
 					<li> 
 						<%# Wrapped logged in messaage in anchor tags to center in navbar (bootstap is weird) %>
 						<a> Logged in as <%= current_user.email_address %>. </a> 

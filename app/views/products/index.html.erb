@@ -8,8 +8,15 @@
     <th>Image</th>
     <th>Stock</th>
     <th>Public</th>
-    <th></th>
-    <th></th>
+	<%#Make top of the tables%>
+	<% if current_user %>
+		<% if current_user.user_type.products %>
+			<th></th>
+		<%end%>
+		<% if current_user.user_type.products_edit %>
+			<th></th>
+		<%end%>
+	<%end%>
     <th></th>
   </tr>
 
@@ -21,9 +28,18 @@
     <td><%= product.image %></td>
     <td><%= product.stock %></td>
     <td><%= product.public %></td>
-    <td><%= link_to 'Show', product %></td>
-    <td><%= link_to 'Edit', edit_product_path(product) %></td>
-    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	
+	<%#Make relevant columns of the tables%>
+	<% if current_user %>
+		<% if current_user.user_type.products %>
+			<td><%= link_to 'Show', product, :class => "btn" %></td>
+		<%end%>
+		<% if current_user.user_type.products_edit %>
+			   <td><%= link_to 'Edit', edit_product_path(product), :class => "btn" %></td>
+		<%end%>
+	<%end%>
+	
+    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %></td>
   </tr>
 <% end %>
 </table>
