@@ -64,7 +64,7 @@
 		<div id="everything_else" class="span10">
 			
 			<% flash.each do |name, msg| %>
-				<%= content_tag :div, msg, :id => "flash_#{name}" %>
+				<%= content_tag :div, msg, :id => "flash_#{name}", :class => "alert alert-info" %>
 			<% end %>
 			
 			<%= yield %>
