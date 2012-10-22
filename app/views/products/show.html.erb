@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <div class="row-fluid">
 	<div class="page-header">
 		<h4> <%= @product.name %> </h4>
@@ -7,7 +6,7 @@
 <div class="row-fluid">
 	<%#Display product image%>
 	<div class="span4">
-		<%= image_tag("/assets/#{@product.image}") %>
+		<%= image_tag("/assets/#{@product.image}", :class => "product_image") %>
 	</div>
 	
 	<div class="span8 well">

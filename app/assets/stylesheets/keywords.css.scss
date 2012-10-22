@@ -1,3 +1,19 @@
 // Place all the styles related to the Keywords controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.image_thumbnail {
+    max-width: 240px;
+    margin:0 auto;
+    display: block;
+    max-height: 240px;
+}
+
+.image_wrapper {
+    height:225px;
+}
+
+.thumbnail {
+    margin-bottom: 20px;
+    height: 358px;
+}

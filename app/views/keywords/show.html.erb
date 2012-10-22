@@ -6,7 +6,9 @@
 
 		<div class="span3">
 			<div class="thumbnail">
-				<%= link_to image_tag("/assets/#{product.image}", :class => ""), product %>
+				<div class="image_wrapper">
+					<%= link_to image_tag("/assets/#{product.image}", :class => "image_thumbnail"), product %>
+				</div>
 				<div class="caption">
 					<h5><%= link_to product.name, product %></h5>
 					<p>
@@ -19,8 +21,6 @@
 					</p>
 				</div>
 				<br/>
-				
-
 			</div>
 		</div>
 		

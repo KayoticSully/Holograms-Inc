@@ -13,7 +13,7 @@ ProjectCourse::Application.routes.draw do
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "sign_up" => "users#new", :as =>"sign_up"
-
+  
   get "home/index"
   
   # You can have the root of your site routed with "root"
@@ -26,7 +26,8 @@ ProjectCourse::Application.routes.draw do
   match "orders/purchase/:id", :to => 'orders#purchase'
   match "orders/updateqty/:id/:newqty", :to => 'orders#updateqty'
   match "about", :to => 'home#about'
-
+  match "employee", :to => "home#employee"
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
