@@ -5,10 +5,10 @@
 TITLE Database fix
 
 ::Alert the user that we are starting the task
-ECHO Preparing the test databse
+ECHO Preparing the test database
 
 ::Begin the tasks
-rake db:drop
+::rake db:drop
 rake db:create 
 rake db:schema:load
 rake db:test:load

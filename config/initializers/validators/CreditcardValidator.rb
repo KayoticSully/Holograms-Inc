@@ -23,17 +23,23 @@ class CreditcardValidator < ActiveModel::EachValidator
     unless Luhn::check_luhn(value)
       record.errors[attribute] << 'is not a valid credit card number'
     end
+    unless Luhn::isValidType(value)
+      record.errors[attribute] << 'is not a valid credit card type. We currently accept MC, Visa, Discover, and AmEx'
+    end
   end
 end
 
 class Luhn
   def self.check_luhn(s)
-    s.gsub!(/[^0-9]/, "")
-    ss = s.reverse.split(//)
+    s.gsub!(/[^0-9]/, "")  # Remove any character that's not a digit
+    ss = s.reverse.split(//) # Split the input to an array each containing one character
  
     alternate = false
     total = 0
-    ss.each do |c|
+    # For each character,
+    # if it's an even numbered character, double it, reduce to one digit, and add to sum
+    # if it's an odd numbered character, just add to sum
+    ss.each do |c| 
       if alternate
          total += double_it(c.to_i)
       else
@@ -41,6 +47,7 @@ class Luhn
       end
       alternate = !alternate
     end
+    # return the result of total mod 10
     total % 10 == 0
   end
  
@@ -51,6 +58,28 @@ class Luhn
     end
     i
   end
+  
+  def self.isValidType(s)
+    # http://money.howstuffworks.com/personal-finance/debt-management/credit-card1.htm
+    s.gsub!(/[^0-9]/, "") # Remove any character that's not a digit
+    result = false # Initialize
+    if s.start_with?("37")
+      result = true # American Express
+    end  
+    if s.start_with?("4")
+       result = true # Visa
+    end   
+    if s.start_with?("5")
+        result = true # MasterCard
+    end    
+    if s.start_with?("6")
+        result = true # Discover
+    end    
+    result
+  end
 end
+
+  
+  
  
 

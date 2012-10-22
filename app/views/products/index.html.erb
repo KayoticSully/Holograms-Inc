@@ -16,6 +16,9 @@
 		<% if current_user.user_type.products_edit %>
 			<th></th>
 		<%end%>
+		<% if current_user.user_type.products_edit %>
+			<th></th>
+		<%end%>
 	<%end%>
     <th></th>
   </tr>
@@ -37,9 +40,10 @@
 		<% if current_user.user_type.products_edit %>
 			   <td><%= link_to 'Edit', edit_product_path(product), :class => "btn" %></td>
 		<%end%>
+		<% if current_user.user_type.products_edit %>
+			   <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %></td>
+		<%end%>
 	<%end%>
-	
-    <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn" %></td>
   </tr>
 <% end %>
 </table>
