@@ -24,3 +24,5 @@ pickle-email-*.html
 .DS_Store
 
 .project
+
+Gemfile.lock
