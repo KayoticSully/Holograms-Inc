@@ -20,6 +20,6 @@ test:
 
 production:
   adapter: sqlite3
-  database: db/production
+  database: db/development
   pool: 5
   timeout: 5000
