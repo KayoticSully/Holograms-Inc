@@ -1,6 +1,6 @@
 <h4>My Shopping Cart</h4>
 
-<%= render 'form' %>
+ <%= render 'form' %>
 
 <br>
 
@@ -19,6 +19,7 @@
 				<th class="cartDescription" id="CartHeaderDesc" style="width: 70%;"> Product Description </th>
 				<th class="cartPrice" id="CartHeaderPrice"> Item Total Price	</th>
   			</tr>
+			
 <!--	</tbody>  			
   	</table>    -->
 	<% itemstotal = 0 %>
@@ -28,19 +29,31 @@
   		<tbody> -->  		
   			<tr>
   				<td class="cartSelect"> <input type="checkbox"></td>
-  				<td class="cartQty"> <input value=<%= order_item.quantity %> type="text" tabindex="1" size="2" maxlength="2"></td>
+  				<td class="cartQty"> <input value=<%= order_item.quantity %> type="text" tabindex="1" rows="5" cols="5" size="2" maxlength="5"></td>
   				<td class="cartDescription">
-  					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => ""), order_item.product %>
+  					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
-  				<td><% itemstotalPrice = order_item.quantity * 89.50 %></td>
+  				<td><% itemstotalPrice = order_item.quantity * order_item.product.price %></td>
   			</tr>
+			<tr >
+			      <table>
+				    <tr>
+					<td><%= link_to "Add another", "/orders/add/#{order_item.product.id}" %></td>
+					<td><%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %></td>
+					<td><%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %></td>
+					<td><%= link_to "Change quantity to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
+				    </tr>
+			      </table>
+			</tr>
+			
     <!-- <strong>Name: </strong><%= link_to order_item.product.name, order_item.product %> -->
     <br>
     <!-- <strong>Quantity: </strong><%= order_item.quantity %> -->
-    </tbody>
-    </table>    
+		  </tbody>
+       </table>    
     <% itemstotal += order_item.quantity %>
+    <!--
     <br>
     <%= link_to "Add another", "/orders/add/#{order_item.product.id}" %>
     <br>
@@ -49,15 +62,23 @@
     <%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %>
     <br>
     <%= link_to "Change quantity to 5", "/orders/updateqty/#{order_item.product.id}/5" %>
-    <br> 
+    <br>
+    -->
 <!--  </div> -->
-  <br>
+
 <% end %>
 
-<br>
-  <% if itemstotal > 0 %>
-    <%= link_to "Check Out", "/orders/purchase/#{@order.id}" %>
-  <% end %>  
+<br> <table>
+      <tr>
+	    <td>
+	    <% if itemstotal > 0 %>
+	    <%= link_to "Check Out", "/orders/purchase/#{@order.id}" %>
+	    <% end %>
+          </td>
+          <td>&nbsp</td>
+          <td><%= link_to "Continue Shopping", "/keywords/promoted" %></td>
+      </tr>
+   </table>
 
 <br> 
 <br>
