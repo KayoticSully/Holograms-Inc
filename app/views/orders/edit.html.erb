@@ -7,7 +7,7 @@
 <h5>Items in this order</h5>
 
   <div>
-  	<table border="0" cellspacing="0" class="table">
+  	<table border="0" cellspacing="0" class="table table-striped">
   		<tbody>
   			<!-- <tr class="cartHeader"> </tr> -->
   			<tr>
@@ -30,7 +30,7 @@
   				<td class="cartSelect"> <input type="checkbox"></td>
   				<td class="cartQty"> <input value=<%= order_item.quantity %> type="text" tabindex="1" size="2" maxlength="2"></td>
   				<td class="cartDescription">
-  					<a href="/products/1"><img alt="Sw_p_adobe" class="" src="/assets/SW_P_Adobe.jpg" width="50" height="50" /></a>
+  					<%= link_to image_tag("/assets/#{product.image}", :class => ""), product %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
   				<td><% itemstotalPrice = order_item.quantity * 89.50 %></td>
