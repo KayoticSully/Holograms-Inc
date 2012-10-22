@@ -11,55 +11,124 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :stock %><br />
-    <%= f.number_field :stock %>
-  </div>
-  <div class="field">
-    <%= f.label :public %><br />
-    <%= f.check_box :public %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.text_field :weight %>
-  </div>
-  <div class="field">
-    <%= f.label :height %><br />
-    <%= f.text_field :height %>
-  </div>
-  <div class="field">
-    <%= f.label :length %><br />
-    <%= f.text_field :length %>
-  </div>
-  <div class="field">
-    <%= f.label :width %><br />
-    <%= f.text_field :width %>
-  </div>
-  <div class="field">
-    <%= f.label :rating %><br />
-    <%= f.text_field :rating %>
-  </div>
-  <div class="field">
-    <%= f.label :keywords %><br />
-    <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6})%>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form_wrapper">
+    <div class="form_float">
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :name, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :description, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_area :description %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-horizontal">
+        <div class="controls">
+          <%= f.submit %>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form_float">
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :price, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :price %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :image, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :image %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :stock, :class => "control-label"%>
+          <div class="controls">
+            <%= f.number_field :stock %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :public, :class => "control-label"%>
+          <div class="controls">
+            <%= f.check_box :public %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :weight, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :weight %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :height, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :height %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :length, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :length %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :width, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :width %>
+          </div>
+        </div>
+      </div>
+    
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :rating, :class => "control-label"%>
+          <div class="controls">
+            <%= f.text_field :rating %>
+          </div>
+        </div>
+      </div>
+      
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :keywords, :class => "control-label"%>
+          <div class="controls">
+            <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6})%>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
   </div>
 <% end %>

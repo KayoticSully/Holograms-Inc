@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   
   def get_keywords
 	@keywords = Keyword.all
+	@keywords.sort! { |a, b| a.name <=> b.name }
   end
   
   def current_user

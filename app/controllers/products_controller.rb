@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   
-  layout "employee", :only => :index
+  layout "employee", :only => [:index, :edit]
   
   # GET /products
   # GET /products.json

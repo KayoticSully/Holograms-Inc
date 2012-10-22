@@ -1,3 +1,21 @@
 // Place all the styles related to the Products controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.form_float {
+    float: left;
+}
+
+.clear {
+    clear:both;
+}
+
+.form_wrapper {
+    margin-left:20px;
+}
+
+.form_title {
+    margin: 0px 0px 20px 200px;
+    font-size: 30px;
+    font-weight: bold;
+}
