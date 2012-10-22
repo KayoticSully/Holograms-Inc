@@ -63,6 +63,9 @@ class Luhn
     # http://money.howstuffworks.com/personal-finance/debt-management/credit-card1.htm
     s.gsub!(/[^0-9]/, "") # Remove any character that's not a digit
     result = false # Initialize
+    if s.empty?
+      result = true # Don't fail for empty string since credit card is not a required field
+    end
     if s.start_with?("37")
       result = true # American Express
     end  
