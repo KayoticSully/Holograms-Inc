@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-<!-- <b>User:</b> -->
+ <b>User:</b>
   <%= @order.user.first_name %>
 </p>
 
@@ -39,8 +39,8 @@
   					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
-  				<td><% itemstotalPrice = order_item.quantity * order_item.product.price %></td>
-  			</tr>
+  				<td><% order_item.price %></td>
+  			</tr><!--
 			<tr >
 			      <table>
 				    <tr>
@@ -50,7 +50,7 @@
 					<td><%= link_to "Change quantity to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
 				    </tr>
 			      </table>
-			</tr>
+			</tr>-->
 			
     <!-- <strong>Name: </strong><%= link_to order_item.product.name, order_item.product %> -->
     <br>
@@ -69,7 +69,6 @@
 <br>
 <br>
 
-<%= debug @order.order_items %>
-
+<!-- <%= debug @order.order_items %> -->
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
