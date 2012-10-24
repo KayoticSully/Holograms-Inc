@@ -12,58 +12,92 @@
 
 
   <div>
-  	<table border="0" cellspacing="0" class="table table-striped">
+  	<table border="0" cellspacing="0" class="table-striped"> <caption>Items in this Order</caption>
   		<tbody>
   			<!-- <tr class="cartHeader"> </tr> -->
   			<tr>
-  				<!-- <th class="cartSelect" id="CartHeaderSelect"> -->
+  				<!-- <th class="cartSelect" id="CartHeaderSelect">
   				<th><input type="checkbox" title="Select all items">
   					<label for="chkItemHeader"><span style="display: none;">Select all items</span></label>
-  				</th>
-  				<th class="cartQty" id="CartHeaderQty"> Qty. </th>
-				<th class="cartDescription" id="CartHeaderDesc" style="width: 70%;"> Product Description </th>
-				<th class="cartPrice" id="CartHeaderPrice"> Item Total Price	</th>
+					
+  				</th>  cartQty cartDescription cartPrice -->
+  				<th class="left" id="CartHeaderQty"> Qty. </th>
+				<th class="left" id="CartHeaderDesc" style="width: 50%;"> Product(s) </th>
+				<th class="left" id="CartHeaderPrice"> Total Price </th>
+				<!-- <th>&nbsp</th> -->
   			</tr>
 			
-<!--	</tbody>  			
-  	</table>    -->
 	<% itemstotal = 0 %>
-	<% itemstotalPrice = 0 %>
+	<% itemsTotalPrice = 0 %>
+	<% subTotal = 0 %>
 	<% @order.order_items.each do |order_item| %>
-<!--  	<table border="0" cellspacing="0" class="table"> 
-  		<tbody> -->  		
   			<tr>
-  				<td class="cartSelect"> <input type="checkbox"></td>
-  				<td class="cartQty"> <input value=<%= order_item.quantity %> type="text" tabindex="1" rows="5" cols="5" size="2" maxlength="5"></td>
-  				<td class="cartDescription">
+  				<!-- <td class="cartSelect"> <input type="checkbox"></td> -->
+  				<td class="left"> <b><%= order_item.quantity %></b>  </td>
+  				<td class="left">
   					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
-  				<td><% order_item.price %></td>
+			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
+				<td class="left"><b><%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
+				<!-- <td> 
+				    <table> 
+					  <tr>
+						<td><%= link_to "Add another", "/orders/add/#{order_item.product.id}" %></td>
+						<td><%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %></td>
+						<td><%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %></td>
+						<td><%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
+					  </tr>
+				    </table>
+				</td> -->
   			</tr><!--
 			<tr >
 			      <table>
 				    <tr>
+					<td>&nbsp&nbsp&nbsp</td>  
 					<td><%= link_to "Add another", "/orders/add/#{order_item.product.id}" %></td>
 					<td><%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %></td>
 					<td><%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %></td>
-					<td><%= link_to "Change quantity to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
+					<td><%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
 				    </tr>
 			      </table>
-			</tr>-->
+			</tr> -->
+	<% itemstotal += order_item.quantity %>
+	<% subTotal += itemsTotalPrice %>
+
+       <% end %>
+       
+      <tr>
+	    <!-- <td>&nbsp</td> -->
+	    <td>&nbsp</td>
+	    <td>&nbsp</td>
+	    <td><b>Order SubTotal: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
+      </tr>
 			
-    <!-- <strong>Name: </strong><%= link_to order_item.product.name, order_item.product %> -->
-    <br>
-    <!-- <strong>Quantity: </strong><%= order_item.quantity %> -->
-		  </tbody>
+      	
+    
+    <br> 
+    
+	    </tbody>
        </table>    
     
   </div>
   <br>
-<% end %>
+
 
 <br>
 
+   <table>
+      <tr>
+	    <td>
+	    <% if itemstotal > 0 %>
+	    <%= link_to "Check Out", "/orders/purchase/#{@order.id}" %>
+	    <% end %>
+          </td><!--
+          <td>&nbsp</td>
+          <td><%= link_to "Continue Shopping", "/keywords/promoted" %></td> -->
+      </tr>
+   </table>
 
 
 <br>

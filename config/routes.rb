@@ -23,6 +23,7 @@ ProjectCourse::Application.routes.draw do
   match "orders/add/:id", :to => 'orders#add'
   match "orders/remove/:id", :to => 'orders#remove'
   match "orders/removeall/:id", :to => 'orders#removeall'
+  match "orders/canceOrder/:id", :to => 'orders#cancelOrder'
   match "orders/purchase/:id", :to => 'orders#purchase'
   match "orders/updateqty/:id/:newqty", :to => 'orders#updateqty'
   match "about", :to => 'home#about'

@@ -139,7 +139,7 @@ class OrdersController < ApplicationController
        order_item.save
       else
         if order_item.quantity == 1
-           order_item.quantity -= 1
+           order_item.quantity = 0
         end 
        OrderItem.destroy(order_item)
       end 
@@ -179,6 +179,18 @@ class OrdersController < ApplicationController
       
       # Redirect back to the cart
       redirect_to :action =>"edit", :id => cart.id
+  end
+  
+  def updateTotalPrice
+    order_item.total_price = order_item.price * order_item.quantity
+  end
+  
+  def cancelOrder
+     cart.order_items.each do |item| 
+      removeall
+       #redirect_to promoted
+    end
+    
   end
   
   #POST /orders/purchase/1
