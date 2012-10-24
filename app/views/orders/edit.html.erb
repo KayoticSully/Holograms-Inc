@@ -3,7 +3,15 @@
 <br>
 
 <!-- <h5>Items in this Order</h5> -->
+<script>
+      function add() {
+	    //document.getElementById("cartQty").
+	    
+	    window.openDialog
+      }
+</script>
 
+      
 <div>
       <!--  -->
   	<table border="0" cellspacing="0" class="table-striped"> <caption>Items in this Order</caption>
@@ -17,7 +25,7 @@
   				</th>  cartQty cartDescription cartPrice -->
   				<th class="left" id="CartHeaderQty"> Qty. </th>
 				<th class="left" id="CartHeaderDesc" style="width: 50%;"> Product(s) </th>
-				<th class="left" id="CartHeaderPrice"> Total Price </th>
+				<th class="left" id="CartHeaderPrice"> Price </th>
 				<!-- <th>&nbsp</th> -->
   			</tr>
 			
@@ -26,39 +34,33 @@
 	<% subTotal = 0 %>
 	<% @order.order_items.each do |order_item| %>
   			<tr>
+			      <!-- add = <%= link_to "/orders/add/#{order_item.product.id}" %> -->
   				<!-- <td class="cartSelect"> <input type="checkbox"></td> -->
-  				<td class="left"> <input value = <%= order_item.quantity %> type="text"></td>
+  				<td class="left"> <input id="cartQty" class="input-mini" type="text" value= "<%= order_item.quantity %>" onchange= "add()">   </td>
   				<td class="left">
   					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
 			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
-				<td class="left"><b><%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
+				<td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
 				<td>
 				    <table> 
 					  <tr>
-						<td><%= link_to "Add another", "/orders/add/#{order_item.product.id}" %></td>
-						<td><%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %></td>
-						<td><%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %></td>
-						<td><%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
+						<td>
+						      <div class="btn-group" >
+							    <%= link_to "Add 1", "/orders/add/#{order_item.product.id}", :class => "btn btn-mini" %>
+							    <%= link_to "Remove 1", "/orders/remove/#{order_item.product.id}", :class => "btn btn-mini" %>
+							    <%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}", :class => "btn btn-mini" %>
+							    <%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5", :class => "btn btn-mini" %>
+						      </div>
+						</td>						
 					  </tr>
 				    </table>
 				</td> 
-  			</tr><!--
-			<tr >
-			      <table>
-				    <tr>
-					<td>&nbsp&nbsp&nbsp</td>  
-					<td><%= link_to "Add another", "/orders/add/#{order_item.product.id}" %></td>
-					<td><%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %></td>
-					<td><%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %></td>
-					<td><%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
-				    </tr>
-			      </table>
-			</tr> -->
+  			</tr>
 	<% itemstotal += order_item.quantity %>
 	<% subTotal += itemsTotalPrice %>
-	<%= link_to "Cancel Order", "/orders/cancelOrder/#{order_item.product.id}" %> 
+	 
 
        <% end %>
        
@@ -67,6 +69,7 @@
 	    <td>&nbsp</td>
 	    <td>&nbsp</td>
 	    <td><b>Order SubTotal: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
+	    <% @order.total_price = subTotal %>
       </tr>
 			
       <tr><td></td></tr>
@@ -77,13 +80,12 @@
        </table>    
 
  <br>
- <%= render 'form' %>
-
+ 
    <table>
       <tr>
 	    <td>
 	    <% if itemstotal > 0 %>
-	    <%= link_to "Review Order", "/orders/purchase/#{@order.id}" %>
+	    <%= link_to "CheckOut", @order, :class => "btn btn-warning" %>
 	    <% end %>
           </td><!--
           <td>&nbsp</td>
@@ -94,6 +96,9 @@
  <br>
 
  <br>
-
-<%= link_to 'Continue Shopping', orders_path %>
+   <div>
+      <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-small" %> |
+      <%= link_to "Cancel Order", @order, :method => :delete,
+      data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-warning" %>
+  </div>
 </div>

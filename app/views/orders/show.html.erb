@@ -4,12 +4,12 @@
  <b>User:</b>
   <%= @order.user.first_name %>
 </p>
-
+<!--
 <p>
-  <b>Total price:</b>
+  <b>OrderNumber:</b>
   <%= @order.total_price %>
 </p>
-
+-->
 
   <div>
   	<table border="0" cellspacing="0" class="table-striped"> <caption>Items in this Order</caption>
@@ -39,29 +39,8 @@
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
 			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
-				<td class="left"><b><%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
-				<!-- <td> 
-				    <table> 
-					  <tr>
-						<td><%= link_to "Add another", "/orders/add/#{order_item.product.id}" %></td>
-						<td><%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %></td>
-						<td><%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %></td>
-						<td><%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
-					  </tr>
-				    </table>
-				</td> -->
-  			</tr><!--
-			<tr >
-			      <table>
-				    <tr>
-					<td>&nbsp&nbsp&nbsp</td>  
-					<td><%= link_to "Add another", "/orders/add/#{order_item.product.id}" %></td>
-					<td><%= link_to "Remove one", "/orders/remove/#{order_item.product.id}" %></td>
-					<td><%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}" %></td>
-					<td><%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5" %></td>
-				    </tr>
-			      </table>
-			</tr> -->
+				<td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
+  			</tr>
 	<% itemstotal += order_item.quantity %>
 	<% subTotal += itemsTotalPrice %>
 
@@ -71,7 +50,7 @@
 	    <!-- <td>&nbsp</td> -->
 	    <td>&nbsp</td>
 	    <td>&nbsp</td>
-	    <td><b>Order SubTotal: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
+	    <td><b>Order Total: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
       </tr>
 			
       	
@@ -89,13 +68,17 @@
 
    <table>
       <tr>
-	    <td>
+	  <td>
 	    <% if itemstotal > 0 %>
-	    <%= link_to "Check Out", "/orders/purchase/#{@order.id}" %>
+	    <%= link_to "MakePurchase", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %>
 	    <% end %>
-          </td><!--
+          </td>
           <td>&nbsp</td>
-          <td><%= link_to "Continue Shopping", "/keywords/promoted" %></td> -->
+	  <td><%= link_to "Change Shipping Address OR Payment Method", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %></td>
+	  <td>&nbsp</td>
+          <td><%= link_to "Cancel Order", @order, :method => :delete, data:
+	    { confirm: 'Are you sure?' }, :class => "btn btn-warning" %>
+	  </td>
       </tr>
    </table>
 
@@ -104,5 +87,5 @@
 <br>
 
 <!-- <%= debug @order.order_items %> -->
-<%= link_to 'Edit', edit_order_path(@order) %> |
-<%= link_to 'Back', orders_path %>
+<%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> |
+<%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>

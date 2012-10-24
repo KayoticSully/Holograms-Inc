@@ -1,5 +1,73 @@
-
 <h1>orders#purchase</h1>
-THIS PAGE IS FOR TESTING ONLY IT WILL NOT BE A REAL PAGE
+<p>
+ <b>User:</b>
+  <%= @order.user.first_name %>
+</p>
 
-<%= debug @order %>
+<p>
+  <b>Your Order Number is:</b>
+  <%= @order.total_price %>
+</p>
+
+
+  <div>
+  	<table border="0" cellspacing="0" class="table-striped"> <caption>Items in this Order</caption>
+  		<tbody>
+  			<!-- <tr class="cartHeader"> </tr> -->
+  			<tr>
+  				<!-- <th class="cartSelect" id="CartHeaderSelect">
+  				<th><input type="checkbox" title="Select all items">
+  					<label for="chkItemHeader"><span style="display: none;">Select all items</span></label>
+					
+  				</th>  cartQty cartDescription cartPrice -->
+  				<th class="left" id="CartHeaderQty"> Qty. </th>
+				<th class="left" id="CartHeaderDesc" style="width: 50%;"> Product(s) </th>
+				<th class="left" id="CartHeaderPrice"> Price </th>
+				<!-- <th>&nbsp</th> -->
+  			</tr>
+			
+	<% itemstotal = 0 %>
+	<% itemsTotalPrice = 0 %>
+	<% subTotal = 0 %>
+	<% @order.order_items.each do |order_item| %>
+  			<tr>
+  				<!-- <td class="cartSelect"> <input type="checkbox"></td> -->
+  				<td class="left"> <b><%= order_item.quantity %></b>  </td>
+  				<td class="left">
+  					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
+  					<%= link_to order_item.product.name, order_item.product %>
+  				</td>
+			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
+				<td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
+  			</tr>
+	<% itemstotal += order_item.quantity %>
+	<% subTotal += itemsTotalPrice %>
+
+       <% end %>
+       
+      <tr>
+	    <!-- <td>&nbsp</td> -->
+	    <td>&nbsp</td>
+	    <td>&nbsp</td>
+	    <td><b>Order Total: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
+      </tr>
+			
+      	
+    
+    <br> 
+    
+	    </tbody>
+       </table>    
+    
+  </div>
+  <br>
+
+
+<br>
+
+<br>
+<br>
+
+<!-- <%= debug @order.order_items %> -->
+
+<%= link_to 'Continue Shopping', orders_path, :class => "btn btn-primary" %>
