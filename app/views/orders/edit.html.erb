@@ -1,8 +1,5 @@
-<h4>My Shopping Cart</h4>
+<legend>My Shopping Cart</legend>
 
-<br>
-
-<!-- <h5>Items in this Order</h5> -->
 <script>
       function add() {
 	    //document.getElementById("cartQty").
@@ -14,7 +11,7 @@
       
 <div>
       <!--  -->
-  	<table border="0" cellspacing="0" class="table-striped"> <caption>Items in this Order</caption>
+  	<table border="0" cellspacing="0" class="table table-bordered table-striped"> 
   		<tbody>
   			<!-- <tr class="cartHeader"> </tr> -->
   			<tr>
@@ -36,27 +33,20 @@
   			<tr>
 			      <!-- add = <%= link_to "/orders/add/#{order_item.product.id}" %> -->
   				<!-- <td class="cartSelect"> <input type="checkbox"></td> -->
-  				<td class="left"> <input id="cartQty" class="input-mini" type="text" value= "<%= order_item.quantity %>" onchange= "add()">   </td>
+  				<td class="left"> 
+					<strong><%= order_item.quantity %></strong>
+					<div class="btn-group" >
+						<%= link_to "+", "/orders/add/#{order_item.product.id}", :class => "btn btn-mini" %>
+						<%= link_to "-", "/orders/remove/#{order_item.product.id}", :class => "btn btn-mini" %>
+						<%= link_to "x", "/orders/removeall/#{order_item.product.id}", :class => "btn btn-mini" %>
+					</div>
+				</td>
   				<td class="left">
   					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
 			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
 				<td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
-				<td>
-				    <table> 
-					  <tr>
-						<td>
-						      <div class="btn-group" >
-							    <%= link_to "Add 1", "/orders/add/#{order_item.product.id}", :class => "btn btn-mini" %>
-							    <%= link_to "Remove 1", "/orders/remove/#{order_item.product.id}", :class => "btn btn-mini" %>
-							    <%= link_to "Remove all", "/orders/removeall/#{order_item.product.id}", :class => "btn btn-mini" %>
-							    <%= link_to "Change Qty to 5", "/orders/updateqty/#{order_item.product.id}/5", :class => "btn btn-mini" %>
-						      </div>
-						</td>						
-					  </tr>
-				    </table>
-				</td> 
   			</tr>
 	<% itemstotal += order_item.quantity %>
 	<% subTotal += itemsTotalPrice %>
