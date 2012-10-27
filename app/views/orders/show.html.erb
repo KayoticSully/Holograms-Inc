@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
-
+<% purchase = false %>
 <p>
  <b>User:</b>
   <%= @order.user.first_name %>
 </p>
+
+<% if purchase %>
+<p><b>Your Order Tracking Number is: 25</b></p>
+<% end %>
+
 <!--
 <p>
   <b>OrderNumber:</b>
@@ -12,9 +17,8 @@
 -->
 
   <div>
-  	<table border="0" cellspacing="0" class="table-striped"> <caption>Items in this Order</caption>
+  	<table border="0" cellspacing="0" class="table table-bordered table-striped"> 
   		<tbody>
-  			<!-- <tr class="cartHeader"> </tr> -->
   			<tr>
   				<!-- <th class="cartSelect" id="CartHeaderSelect">
   				<th><input type="checkbox" title="Select all items">
@@ -23,38 +27,46 @@
   				</th>  cartQty cartDescription cartPrice -->
   				<th class="left" id="CartHeaderQty"> Qty. </th>
 				<th class="left" id="CartHeaderDesc" style="width: 50%;"> Product(s) </th>
-				<th class="left" id="CartHeaderPrice"> Total Price </th>
-				<!-- <th>&nbsp</th> -->
+				<th  class="left" id="CartHeaderPrice"> Price </th>
+				<th class="left" id="CartHeaderTotalPrice"> Total Price </th>
   			</tr>
 			
 	<% itemstotal = 0 %>
+	
 	<% itemsTotalPrice = 0 %>
 	<% subTotal = 0 %>
 	<% @order.order_items.each do |order_item| %>
   			<tr>
-  				<!-- <td class="cartSelect"> <input type="checkbox"></td> -->
-  				<td class="left"> <b><%= order_item.quantity %></b>  </td>
+  				<td class="left"> 
+					<strong><%= order_item.quantity %></strong>
+					<div class="btn-group" >
+						<%= link_to "+", "/orders/add/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
+						<%= link_to "-", "/orders/remove/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
+						<%= link_to "x", "/orders/removeall/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
+					</div>
+				</td>
   				<td class="left">
   					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
+				<td><strong><%= number_with_precision(order_item.product.price, :precision => 2) %></strong></td>
 			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
 				<td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
   			</tr>
 	<% itemstotal += order_item.quantity %>
 	<% subTotal += itemsTotalPrice %>
+	 
 
        <% end %>
        
       <tr>
-	    <!-- <td>&nbsp</td> -->
+	    <td><strong><%= itemstotal %></strong></td>
 	    <td>&nbsp</td>
 	    <td>&nbsp</td>
-	    <td><b>Order Total: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
+	    <td><b>Total: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
+	    <% @order.total_price = subTotal %>
       </tr>
 			
-      	
-    
     <br> 
     
 	    </tbody>
@@ -63,15 +75,15 @@
   </div>
   <br>
 
-
 <br>
 
+  <% if itemstotal > 0 %>
    <table>
       <tr>
 	  <td>
-	    <% if itemstotal > 0 %>
-	    <%= link_to "MakePurchase", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %>
-	    <% end %>
+	    
+	    <%= link_to "Make Purchase", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %>
+	    <% itemstotal = 0, puruchse = true %>
           </td>
           <td>&nbsp</td>
 	  <td><%= link_to "Change Shipping Address OR Payment Method", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %></td>
@@ -79,13 +91,19 @@
           <td><%= link_to "Cancel Order", @order, :method => :delete, data:
 	    { confirm: 'Are you sure?' }, :class => "btn btn-warning" %>
 	  </td>
+	  
       </tr>
+      
    </table>
+  
 
 
 <br>
 <br>
 
 <!-- <%= debug @order.order_items %> -->
-<%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> |
+    <% if purchase %>
+    <%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> |
+    <% end %>
+  <% end %>
 <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>
