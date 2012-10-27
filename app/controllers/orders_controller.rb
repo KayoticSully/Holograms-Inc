@@ -209,8 +209,9 @@ class OrdersController < ApplicationController
     #save changes
     order.save
     
-    #redirect to view order
-    redirect_to order
+    #redirect to view purchased order via updated "show"
+      redirect_to :action =>"show"
+     #redirect_to order 
   end
 
   # PUT /orders/1

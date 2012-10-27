@@ -5,8 +5,9 @@
   <%= @order.user.first_name %>
 </p>
 
-<% if purchase %>
-<p><b>Your Order Tracking Number is: 25</b></p>
+<% if @order.purchased %>
+<p><b>Your Order Number is: 25</b><br>Thank You for your Purchase!
+</p>
 <% end %>
 
 <!--
@@ -77,13 +78,13 @@
 
 <br>
 
-  <% if itemstotal > 0 %>
+  <% if !@order.purchased %>
    <table>
       <tr>
 	  <td>
 	    
 	    <%= link_to "Make Purchase", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %>
-	    <% itemstotal = 0, puruchse = true %>
+	    <% purchase = @order.purchased %>
           </td>
           <td>&nbsp</td>
 	  <td><%= link_to "Change Shipping Address OR Payment Method", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %></td>
@@ -102,8 +103,10 @@
 <br>
 
 <!-- <%= debug @order.order_items %> -->
-    <% if purchase %>
+    <% if !purchase %>
     <%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> |
     <% end %>
   <% end %>
-<%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>
+  
+   <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>
+  
