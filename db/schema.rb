@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027205713) do
+ActiveRecord::Schema.define(:version => 20121027212637) do
 
   create_table "groups", :force => true do |t|
     t.integer  "keyword_id"
@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(:version => 20121027205713) do
     t.boolean  "orders_list"
     t.boolean  "user_types_edit"
     t.boolean  "keywords_edit"
+    t.boolean  "sales_edit"
   end
 
   create_table "users", :force => true do |t|

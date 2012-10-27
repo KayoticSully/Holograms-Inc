@@ -2,6 +2,12 @@ class KeywordsController < ApplicationController
   # GET /keywords
   # GET /keywords.json
   def index
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @keywords = Keyword.all
 
     respond_to do |format|
@@ -25,6 +31,12 @@ class KeywordsController < ApplicationController
   # GET /keywords/new
   # GET /keywords/new.json
   def new
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @keyword = Keyword.new
 
     respond_to do |format|
@@ -35,12 +47,24 @@ class KeywordsController < ApplicationController
 
   # GET /keywords/1/edit
   def edit
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @keyword = Keyword.find(params[:id])
   end
 
   # POST /keywords
   # POST /keywords.json
   def create
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @keyword = Keyword.new(params[:keyword])
 
     respond_to do |format|
@@ -57,6 +81,12 @@ class KeywordsController < ApplicationController
   # PUT /keywords/1
   # PUT /keywords/1.json
   def update
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @keyword = Keyword.find(params[:id])
 
     respond_to do |format|
@@ -73,6 +103,12 @@ class KeywordsController < ApplicationController
   # DELETE /keywords/1
   # DELETE /keywords/1.json
   def destroy
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @keyword = Keyword.find(params[:id])
     @keyword.destroy
 

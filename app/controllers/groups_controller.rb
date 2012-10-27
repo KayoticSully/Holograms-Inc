@@ -2,6 +2,12 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @groups = Group.all
 
     respond_to do |format|
@@ -13,6 +19,12 @@ class GroupsController < ApplicationController
   # GET /groups/1
   # GET /groups/1.json
   def show
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @group = Group.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +36,12 @@ class GroupsController < ApplicationController
   # GET /groups/new
   # GET /groups/new.json
   def new
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @group = Group.new
 
     respond_to do |format|
@@ -34,12 +52,24 @@ class GroupsController < ApplicationController
 
   # GET /groups/1/edit
   def edit
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @group = Group.find(params[:id])
   end
 
   # POST /groups
   # POST /groups.json
   def create
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @group = Group.new(params[:group])
 
     respond_to do |format|
@@ -56,6 +86,12 @@ class GroupsController < ApplicationController
   # PUT /groups/1
   # PUT /groups/1.json
   def update
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @group = Group.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +108,12 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   # DELETE /groups/1.json
   def destroy
+    #if not logged in or cannot edit keywords, redirect home
+    if(!@current_user || !@current_user.user_type.keywords_edit)
+      redirect_to root_url
+      return
+    end
+    
     @group = Group.find(params[:id])
     @group.destroy
 
