@@ -36,6 +36,12 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
+    #only logged in customers can add to cart.
+    if(!@current_user || !@current_user.user_type.purchase)
+      redirect_to "/log_in"
+      return
+    end
+    
     @order = Order.new
 
     respond_to do |format|
@@ -57,6 +63,12 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    #only logged in customers can add to cart.
+    if(!@current_user || !@current_user.user_type.purchase)
+      redirect_to "/log_in"
+      return
+    end
+    
     @order = Order.new(params[:order])
     
     respond_to do |format|
@@ -71,7 +83,7 @@ class OrdersController < ApplicationController
   end
   
   def add
-    if(!@current_user)
+    if(!@current_user || !@current_user.user_type.purchase)
       redirect_to "/log_in"
       return
     else
