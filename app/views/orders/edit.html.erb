@@ -75,7 +75,7 @@
 
  <br>
    <div>
-      <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-small" %> |
+      <%= link_to 'Continue Shopping', :back, :class => "btn btn-small" %> |
       <% if itemstotal > 0 %>
       <%= link_to "Cancel Order", @order, :method => :delete,
       data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-warning" %>

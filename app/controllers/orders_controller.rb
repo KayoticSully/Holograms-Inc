@@ -70,9 +70,7 @@ class OrdersController < ApplicationController
   def add
     if(!@current_user)
       redirect_to "/log_in"
-      return
-    end
-    if(@current_user)
+    else
       # get the product based on the id passed in
       product = Product.find(params[:id])
       # get the users current cart

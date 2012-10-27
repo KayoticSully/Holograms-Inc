@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @sale.name %>
+</p>
+
+<p>
+  <b>Markdown:</b>
+  <%= @sale.markdown %>
+</p>
+
+<p>
+  <b>Start:</b>
+  <%= @sale.start %>
+</p>
+
+<p>
+  <b>End:</b>
+  <%= @sale.end %>
+</p>
+
+
+<%= link_to 'Edit', edit_sale_path(@sale) %> |
+<%= link_to 'Back', sales_path %>
