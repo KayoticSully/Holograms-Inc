@@ -12,7 +12,7 @@ ProjectCourse::Application.routes.draw do
   
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => redirect('/keywords/promoted')
+  root :to => redirect('/keywords/featured')
   
   get "home/index"
   get "sessions/new"
