@@ -19,8 +19,8 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    #if not logged in OR current users cart != param OR user doesnt have permission to list orders, redirect home
-    if(!@current_user || @current_user.cart.id != Integer(params[:id]) || !@current_user.user_type.orders_list)
+    #if not logged in OR current order history doesnt include param, redirect home
+    if(!@current_user || @current_user.orders.select{|n| n.id == Integer(params[:id])}.length == 0)
       redirect_to root_url
       return
     end
@@ -218,15 +218,41 @@ class OrdersController < ApplicationController
     # get order
     order = Order.find(params[:id])
     
-    # mark as purchased
-    order.purchased = true
+    invalids = Array.new
+    #check that inventory can support purchase
+    order.order_items.each do |order_item|
+      if(order_item.quantity > order_item.product.stock)
+        invalids.push("Cannot purchase #{order_item.quantity} of product: #{order_item.product.name}. Only #{order_item.product.stock}.")
+      end
+    end
     
-    #save changes
-    order.save
-    
-    #redirect to view purchased order via updated "show"
+    #check for errors
+    if(invalids.length == 0)
+      #deduct from stock
+      order.order_items.each do |order_item|
+        if(order_item.quantity <= order_item.product.stock)
+          Product.update(order_item.product.id, "stock" => order_item.product.stock - order_item.quantity)
+        end
+      end
+      
+      # mark as purchased
+      order.purchased = true
+      
+      #save changes
+      order.save
+      
+      #redirect to view purchased order via updated "show"
+        redirect_to :action =>"show"
+       #redirect_to order
+    else
+      #fill the flash with the errors
+      invalids.each do |error|
+        flash[:notice] = error
+      end
+      
+      #redirect back with errors
       redirect_to :action =>"show"
-     #redirect_to order 
+    end
   end
 
   # PUT /orders/1

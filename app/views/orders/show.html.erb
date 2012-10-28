@@ -84,10 +84,9 @@
 	  <td>
 	    
 	    <%= link_to "Make Purchase", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %>
-	    <% purchase = @order.purchased %>
           </td>
           <td>&nbsp</td>
-	  <td><%= link_to "Change Shipping Address OR Payment Method", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %></td>
+	  <td><%= link_to "Change Shipping Address OR Payment Method", "/users/#{@current_user.id}/edit", :class => "btn btn-warning" %></td>
 	  <td>&nbsp</td>
           <td><%= link_to "Cancel Order", @order, :method => :delete, data:
 	    { confirm: 'Are you sure?' }, :class => "btn btn-warning" %>
@@ -109,4 +108,3 @@
   <% end %>
   
    <%= link_to 'Continue Shopping', :back, :class => "btn btn-mini" %>
-  
