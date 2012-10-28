@@ -30,7 +30,7 @@
 					<%= @product.width %> in
 			</div>
 			<div class="span4">
-				<% if (@product.stock) %>
+				<% if (@product.stock>1) %>
 					<b>Currently in stock</b>
 				<% else %>
 					<b>Currently out of stock</b>
