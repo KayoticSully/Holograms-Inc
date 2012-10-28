@@ -87,7 +87,7 @@ open("#{Rails.root}/db/faq_seed.csv") do |helpitems|
   end  
 end
  
- # Clear out UserTypes table in the database
+# Clear out UserTypes table in the database
 UserType.delete_all
 puts " Adding user types"
 # Open the csv file containing the seeds. CSV file has one record per line.
@@ -100,7 +100,7 @@ open("#{Rails.root}/db/usertype_seed.csv") do |usertypes|
                      :products_quantity => products_quantity, :help_edit => help_edit, :name => @name,
                      :users_list => users_list, :orders_list => orders_list, :user_types_edit => user_types_edit,
                      :keywords_edit => keywords_edit, :sales_edit =>sales_edit)  
-   # puts "  Added #@name"                
+#   puts "  Added #@name"                
   end  
 end
 
