@@ -68,7 +68,7 @@
 					<li class="divider"></li>
 					<% @keywords.each do |keyword| %>
 							<li class>
-								<%= link_to keyword.name, keyword %>
+								<%= link_to keyword.name.capitalize!, keyword %>
 							</li>
 					<% end %>
 				</ul>

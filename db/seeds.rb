@@ -95,10 +95,11 @@ puts " Adding user types"
 # Create a new entry in the UserTypes table for each line
 open("#{Rails.root}/db/usertype_seed.csv") do |usertypes|  
   usertypes.read.each_line do |usertype|
-    products,purchase,products_edit,products_quantity,help_edit,@name,users_list,orders_list = usertype.chomp.split("|")
+    products,purchase,products_edit,products_quantity,help_edit,@name,users_list,orders_list,user_types_edit,keywords_edit,sales_edit = usertype.chomp.split("|")
     UserType.create!(:products => products, :purchase => purchase, :products_edit => products_edit,
                      :products_quantity => products_quantity, :help_edit => help_edit, :name => @name,
-                     :users_list => users_list, :orders_list => orders_list)  
+                     :users_list => users_list, :orders_list => orders_list, :user_types_edit => user_types_edit,
+                     :keywords_edit => keywords_edit, :sales_edit =>sales_edit)  
    # puts "  Added #@name"                
   end  
 end
