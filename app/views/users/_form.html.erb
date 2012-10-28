@@ -101,11 +101,15 @@
 		  </div>
 		</div>
 	</div>
+	<% if @user.user_type.user_types_edit %>
+		<div class="row">
+		  <div class="field">
+			<%= f.label :user_type_id %>
+			<%= f.collection_select(:user_type_id, UserType.all, :id, :name) %>
+		  </div>
+		</div>
+	<% end %>
 	<div class="row">
-	  <div class="field">
-		<%= f.label :user_type_id %><br />
-		<%= f.collection_select(:user_type_id, UserType.all, :id, :name) %>
-	  </div>
 	  <div class="actions">
 		<%= f.submit :class => 'btn btn-primary' %>
 	  </div>
