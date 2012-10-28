@@ -155,7 +155,7 @@ class OrdersController < ApplicationController
 #        if order_item.quantity == 1
 #           order_item.quantity = 0
 #        end 
-       OrderItem.destroy(order_item)
+#       OrderItem.destroy(order_item)
       end 
     end
       
