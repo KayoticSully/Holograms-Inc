@@ -38,7 +38,7 @@
 			<%#Account Information and cart%>
 			<ul class="nav pull-right">	
 				<% if current_user %>
-					<li> <a href="#">Logged in as <%= current_user.email_address %> </a> </li>
+					<li> <a href="#">Welcome, <%= current_user.first_name << " " <<current_user.last_name %>! </a> </li>
 					<li> <%= link_to "Log out", log_out_path %> </li>
 				<% else %>
 					<li> <%= link_to "Sign up", sign_up_path %></li>
