@@ -1,4 +1,4 @@
-<%= form_for(@product) do |f| %>
+<%= form_for @product, :url => product_path, :html => { :multipart => true} do |f| %>
   <% if @product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -52,7 +52,8 @@
         <div class="control-group">
           <%= f.label :image, :class => "control-label"%>
           <div class="controls">
-            <%= f.text_field :image %>
+            <%= image_tag @product.image.url(:small) %>
+            <%= f.file_field  :image %>
           </div>
         </div>
       </div>

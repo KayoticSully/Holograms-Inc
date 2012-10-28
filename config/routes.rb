@@ -1,6 +1,5 @@
 ProjectCourse::Application.routes.draw do
   resources :sales
-
   resources :groups
   resources :keywords
   resources :order_items
@@ -11,16 +10,16 @@ ProjectCourse::Application.routes.draw do
   resources :products
   resources :sessions
   
+  # You can have the root of your site routed with "root"
+  # just remember to delete public/index.html.
+  root :to => redirect('/keywords/promoted')
+  
+  get "home/index"
   get "sessions/new"
   get "log_in" => "sessions#new", :as => "log_in"
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "sign_up" => "users#new", :as =>"sign_up"
   
-  get "home/index"
-  
-  # You can have the root of your site routed with "root"
-  # just remember to delete public/index.html.
-  root :to => redirect('/keywords/promoted')
   
   match "orders/add/:id", :to => 'orders#add'
   match "orders/remove/:id", :to => 'orders#remove'

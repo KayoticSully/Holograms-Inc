@@ -7,7 +7,7 @@
 		<div class="span3">
 			<div class="thumbnail">
 				<div class="image_wrapper">
-					<%= link_to image_tag("/assets/#{product.image}", :class => "image_thumbnail"), product %>
+					<%= link_to image_tag(product.image.url(:medium), :class => "image_thumbnail"), product %>
 				</div>
 				<div class="caption">
 					<h5><%= link_to product.name, product %></h5>

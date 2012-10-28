@@ -47,7 +47,7 @@
 					</div>
 				</td>
   				<td class="left">
-  					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
+  					<%= link_to image_tag(order_item.product.image.url(:small)), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
 				<td><strong><%= number_with_precision(order_item.product.price, :precision => 2) %></strong></td>

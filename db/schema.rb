@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027205713) do
+ActiveRecord::Schema.define(:version => 20121027210832) do
 
   create_table "groups", :force => true do |t|
     t.integer  "keyword_id"
@@ -57,17 +57,20 @@ ActiveRecord::Schema.define(:version => 20121027205713) do
     t.string   "name"
     t.text     "description"
     t.decimal  "price"
-    t.string   "image"
     t.integer  "stock"
     t.boolean  "public"
-    t.datetime "created_at",                 :null => false
-    t.datetime "updated_at",                 :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.float    "weight"
     t.float    "height"
     t.float    "length"
     t.float    "width"
-    t.integer  "rating",      :default => 0
+    t.integer  "rating",             :default => 0
     t.integer  "sale_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "sales", :force => true do |t|

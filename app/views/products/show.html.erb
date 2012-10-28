@@ -4,7 +4,7 @@
 <div class="row-fluid">
 	<%#Display product image%>
 	<div class="span4">
-		<%= image_tag("/assets/#{@product.image}", :class => "product_image") %>
+		<%= image_tag @product.image.url(:large), :class => "product_image" %>
 	</div>
 	
 	<div class="span8 well">
@@ -32,9 +32,9 @@
 			<div class="span4">
 				<% if (@product.stock) %>
 					<b>Currently in stock</b>
-				<%else%>
+				<% else %>
 					<b>Currently out of stock</b>
-				<%end%>
+				<% end %>
 				<%= link_to "Add to Cart", "/orders/add/#{@product.id}", :class => "btn btn-warning" %>
 			</div>
 		</div>

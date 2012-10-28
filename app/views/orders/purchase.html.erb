@@ -34,7 +34,7 @@
   				<!-- <td class="cartSelect"> <input type="checkbox"></td> -->
   				<td class="left"> <b><%= order_item.quantity %></b>  </td>
   				<td class="left">
-  					<%= link_to image_tag("/assets/#{order_item.product.image}", :class => "", :size => "50x50"), order_item.product.image %>
+  					<%= link_to image_tag(order_item.product.image.url, :class => "", :size => "50x50"), order_item.product.image %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
 			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->

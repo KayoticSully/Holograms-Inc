@@ -20,9 +20,10 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'paperclip'
 
 # To use ActiveModel has_secure_password
- gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
+gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'

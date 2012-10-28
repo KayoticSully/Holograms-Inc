@@ -42,7 +42,7 @@ open("#{Rails.root}/db/prod_seed.csv") do |products|
   products.read.each_line do |product|  
     @name, description, price, image, stock, public, weight, height, length, width = product.chomp.split("|")
     Product.create!(:name => @name, :description => description, :price => price,
-                    :image => image, :stock => stock, :public => public,
+                    :image => File.open(image), :stock => stock, :public => public,
                     :weight => weight, :height => height, :length => length,
                     :width => width)
    puts "  Added #@name"
