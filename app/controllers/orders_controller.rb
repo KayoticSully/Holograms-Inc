@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   # GET /orders
   # GET /orders.json
   def index
+    #if not logged in OR user doesnt have permission to list orders, redirect home
     if(!@current_user || !@current_user.user_type.orders_list)
       redirect_to root_url
       return
@@ -18,7 +19,8 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
-    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+    #if not logged in OR current users cart != param OR user doesnt have permission to list orders, redirect home
+    if(!@current_user || @current_user.cart.id != Integer(params[:id]) || !@current_user.user_type.orders_list)
       redirect_to root_url
       return
     end
@@ -34,6 +36,12 @@ class OrdersController < ApplicationController
   # GET /orders/new
   # GET /orders/new.json
   def new
+    #only logged in customers can add to cart.
+    if(!@current_user || !@current_user.user_type.purchase)
+      redirect_to "/log_in"
+      return
+    end
+    
     @order = Order.new
 
     respond_to do |format|
@@ -44,7 +52,8 @@ class OrdersController < ApplicationController
 
   # GET /orders/1/edit
   def edit
-    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+    #if not logged in OR current users cart != param, redirect home
+    if(!@current_user || @current_user.cart.id != Integer(params[:id]))
       redirect_to root_url
       return
     end
@@ -54,6 +63,12 @@ class OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
+    #only logged in customers can add to cart.
+    if(!@current_user || !@current_user.user_type.purchase)
+      redirect_to "/log_in"
+      return
+    end
+    
     @order = Order.new(params[:order])
     
     respond_to do |format|
@@ -68,8 +83,9 @@ class OrdersController < ApplicationController
   end
   
   def add
-    if(!@current_user)
+    if(!@current_user || !@current_user.user_type.purchase)
       redirect_to "/log_in"
+      return
     else
       # get the product based on the id passed in
       product = Product.find(params[:id])
@@ -139,7 +155,7 @@ class OrdersController < ApplicationController
 #        if order_item.quantity == 1
 #           order_item.quantity = 0
 #        end 
-       OrderItem.destroy(order_item)
+#       OrderItem.destroy(order_item)
       end 
     end
       
@@ -193,7 +209,8 @@ class OrdersController < ApplicationController
   
   #POST /orders/purchase/1
   def purchase
-    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+    #if not logged in OR current users cart != param, redirect home
+    if(!@current_user || @current_user.cart.id != Integer(params[:id]))
       redirect_to root_url
       return
     end
@@ -215,7 +232,8 @@ class OrdersController < ApplicationController
   # PUT /orders/1
   # PUT /orders/1.json
   def update
-    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+    #if not logged in OR current users cart != param, redirect home
+    if(!@current_user || @current_user.cart.id != Integer(params[:id]))
       redirect_to root_url
       return
     end
@@ -236,7 +254,8 @@ class OrdersController < ApplicationController
   # DELETE /orders/1
   # DELETE /orders/1.json
   def destroy
-    if(!@current_user || !@current_user.orders.select{|n| n == params[:id]})
+    #if not logged in OR current users cart != param, redirect home
+    if(!@current_user || @current_user.cart.id != Integer(params[:id]))
       redirect_to root_url
       return
     end

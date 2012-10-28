@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
                   :password_salt, :password, :password_confirmation, :last_name, :phone_number, :user_type_id, :zipcode, :state, :country
   
   attr_accessor :password
-  before_save :encrypt_password
+  before_save :encrypt_password, :downcase_email
   validates_confirmation_of :password
   validates :password, :presence => true, :length => { :within => 6..40}, :on => :create
   validates :password, :length => { :within => 6..40}, :on => :update
@@ -21,12 +21,16 @@ class User < ActiveRecord::Base
   validates :credit_card, :creditcard  => true
   
   def self.authenticate(email, password)
-    user = find_by_email_address(email)
+    user = find_by_email_address(email.downcase)
     if user && user.hashed_password == BCrypt::Engine.hash_secret(password, user.password_salt)
       user
     else
       nil
     end
+  end
+  
+  def downcase_email
+    self.email_address = self.email_address.downcase
   end
   
   def encrypt_password

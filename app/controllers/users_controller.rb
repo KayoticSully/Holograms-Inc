@@ -2,6 +2,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    #if not logged in OR user doesnt have permission to see user list redirect home
     if(!@current_user || !@current_user.user_type.users_list)
       redirect_to root_url
       return
@@ -18,7 +19,8 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if(!@current_user || !@current_user.user_type.users_list || @current_user.id != params[:id])
+    #if not logged in OR user doesn't have user's list perm OR user id is not = to the param redirect home
+    if(!@current_user || !@current_user.user_type.users_list || @current_user.id != Integer(params[:id]))
       redirect_to root_url
       return
     end
@@ -34,6 +36,12 @@ class UsersController < ApplicationController
   # GET /users/new
   # GET /users/new.json
   def new
+    #if logged in, redirect home.
+    if(@current_user)
+      redirect_to root_url
+      return
+    end
+    
     @user = User.new
 
     respond_to do |format|
@@ -44,7 +52,8 @@ class UsersController < ApplicationController
 
   # GET /users/1/edit
   def edit
-    if(!@current_user || @current_user.id != params[:id])
+    #if not logged in OR user id does not match param redirect home
+    if(!@current_user || @current_user.id != Integer(params[:id]))
       redirect_to root_url
       return
     end
@@ -55,9 +64,16 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    #if logged in, redirect home.
+    if(@current_user)
+      redirect_to root_url
+      return
+    end
+    
     @user = User.new(params[:user])
 
     respond_to do |format|
+      #if user creation succeeds, redirect to login
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
@@ -71,7 +87,8 @@ class UsersController < ApplicationController
   # PUT /users/1
   # PUT /users/1.json
   def update
-    if(!@current_user || @current_user.id != params[:id])
+    #if not logged in or user id doesnt match param, redirect home
+    if(!@current_user || @current_user.id != Integer(params[:id]))
       redirect_to root_url
       return
     end
@@ -91,7 +108,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    if(!@current_user || @current_user != params[:id])
+    #if not logged in or id doesnt match param, redirect home
+    if(!@current_user || @current_user != Integer(params[:id]))
       redirect_to root_url
       return
     end

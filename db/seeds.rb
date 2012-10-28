@@ -26,9 +26,11 @@ open("#{Rails.root}/db/keyword_seed.csv") do |keywords|
    # name = keyword.chomp.split("|")
     @name = keyword.chomp
     Keyword.create!(:name => @name)
-   #puts "  Added #@name"
+   puts "  Added #@name"
   end  
 end
+@cont = Keyword.all()
+puts "#@cont"
 
 # Clear out the Products table in the database
 Product.delete_all
@@ -45,27 +47,31 @@ open("#{Rails.root}/db/prod_seed.csv") do |products|
                     :image => File.open(image), :stock => stock, :public => public,
                     :weight => weight, :height => height, :length => length,
                     :width => width)
-   puts "  Added #@name"
+  #puts "  Added #@name"
   end  
 end
 
 # Clear out the Groups table in the database
-Group.delete_all
-puts " Adding groups"
+ Group.delete_all
+ puts " Adding groups"
 # Open the csv file containing the seeds. CSV file has one record per line.
 # Each line contains a keyword name and a product name, split by a vertical bar.
 # Look up the id of the keyword and product being linked, then create a new
 # entry in the Groups table for each connection
 # Note: This assumes that the id for keyword and product will be found!
-open("#{Rails.root}/db/group_seed.csv") do |groups|  
-  groups.read.each_line do |group|  
-    @keyword_name, @product_name = group.chomp.split("|")
-     keyword_id = Keyword.find(:first, :conditions => "name='#@keyword_name'").id
-     product_id = Product.find(:first, :conditions => "name='#@product_name'").id
-    Group.create!(:keyword_id => keyword_id, :product_id => product_id)  
-    #puts "  Added #@keyword_name -> #@product_name"                
-  end  
-end
+ open("#{Rails.root}/db/group_seed.csv") do |groups|  
+   groups.read.each_line do |group|
+     @keyword_name, @product_name = group.chomp.split("|")
+     @keyword_name = @keyword_name.downcase
+     @keyword_id = Keyword.find(:first, :conditions => "name='#@keyword_name'").id
+    #  puts "here"
+       @product_id = Product.find(:first, :conditions => "name='#@product_name'").id
+     # puts "#@keyword_id"
+      puts "#@product_id"
+     Group.create!(:keyword_id => @keyword_id, :product_id => @product_id)  
+     puts "  Added #@keyword_name -> #@product_name"                
+   end  
+ end
 
 # Clear out the HelpItems table in the database
 HelpItem.delete_all
@@ -89,11 +95,12 @@ puts " Adding user types"
 # Create a new entry in the UserTypes table for each line
 open("#{Rails.root}/db/usertype_seed.csv") do |usertypes|  
   usertypes.read.each_line do |usertype|
-    products,purchase,products_edit,products_quantity,help_edit,@name,users_list,orders_list = usertype.chomp.split("|")
+    products,purchase,products_edit,products_quantity,help_edit,@name,users_list,orders_list,user_types_edit,keywords_edit,sales_edit = usertype.chomp.split("|")
     UserType.create!(:products => products, :purchase => purchase, :products_edit => products_edit,
                      :products_quantity => products_quantity, :help_edit => help_edit, :name => @name,
-                     :users_list => users_list, :orders_list => orders_list)  
-    puts "  Added #@name"                
+                     :users_list => users_list, :orders_list => orders_list, :user_types_edit => user_types_edit,
+                     :keywords_edit => keywords_edit, :sales_edit =>sales_edit)  
+   # puts "  Added #@name"                
   end  
 end
 
@@ -110,7 +117,7 @@ open("#{Rails.root}/db/user_seed.csv") do |users|
     User.create!(:first_name => first_name, :last_name => last_name, :address => address,
                  :city => city, :zipcode => zipcode, :email_address => @email_address, 
                  :user_type_id => usertype_id, :state => state, :country => country, :password => password, :phone_number => "",:credit_card => "")
-    puts "  Added #@email_address - usertype #@usertype_name"                
+   # puts "  Added #@email_address - usertype #@usertype_name"                
   end  
 end
 

@@ -20,7 +20,6 @@ ProjectCourse::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "sign_up" => "users#new", :as =>"sign_up"
   
-  
   match "orders/add/:id", :to => 'orders#add'
   match "orders/remove/:id", :to => 'orders#remove'
   match "orders/removeall/:id", :to => 'orders#removeall'

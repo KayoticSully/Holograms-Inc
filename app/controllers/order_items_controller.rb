@@ -2,6 +2,12 @@ class OrderItemsController < ApplicationController
   # GET /order_items
   # GET /order_items.json
   def index
+    #if not logged in or cannot see orders, redirect home
+    if(!@current_user || !@current_user.user_type.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @order_items = OrderItem.all
 
     respond_to do |format|
@@ -13,6 +19,12 @@ class OrderItemsController < ApplicationController
   # GET /order_items/1
   # GET /order_items/1.json
   def show
+    #if not logged in or cannot see orders, redirect home
+    if(!@current_user || !@current_user.user_type.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @order_item = OrderItem.find(params[:id])
 
     respond_to do |format|
@@ -24,6 +36,12 @@ class OrderItemsController < ApplicationController
   # GET /order_items/new
   # GET /order_items/new.json
   def new
+    #if not logged in or cannot see orders, redirect home
+    if(!@current_user || !@current_user.user_type.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @order_item = OrderItem.new
 
     respond_to do |format|
@@ -34,12 +52,24 @@ class OrderItemsController < ApplicationController
 
   # GET /order_items/1/edit
   def edit
+    #if not logged in or cannot see orders, redirect home
+    if(!@current_user || !@current_user.user_type.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @order_item = OrderItem.find(params[:id])
   end
 
   # POST /order_items
   # POST /order_items.json
   def create
+    #if not logged in or cannot see orders, redirect home
+    if(!@current_user || !@current_user.user_type.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @order_item = OrderItem.new(params[:order_item])
 
     respond_to do |format|
@@ -56,6 +86,12 @@ class OrderItemsController < ApplicationController
   # PUT /order_items/1
   # PUT /order_items/1.json
   def update
+    #if not logged in or cannot see orders, redirect home
+    if(!@current_user || !@current_user.user_type.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @order_item = OrderItem.find(params[:id])
 
     respond_to do |format|
@@ -72,6 +108,12 @@ class OrderItemsController < ApplicationController
   # DELETE /order_items/1
   # DELETE /order_items/1.json
   def destroy
+    #if not logged in or cannot see orders, redirect home
+    if(!@current_user || !@current_user.user_type.orders_list)
+      redirect_to root_url
+      return
+    end
+    
     @order_item = OrderItem.find(params[:id])
     @order_item.destroy
 

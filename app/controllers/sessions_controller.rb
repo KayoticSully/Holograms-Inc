@@ -23,6 +23,12 @@ class SessionsController < ApplicationController
   end
   
   def destroy
+    #if not logged in, redirect home.
+    if(!@current_user)
+      redirect_to root_url
+      return
+    end
+    
     session[:user_id] = nil
     redirect_to root_url, :notice => "Logged out!"
   end
