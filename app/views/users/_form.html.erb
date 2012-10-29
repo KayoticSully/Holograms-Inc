@@ -84,7 +84,7 @@
 		  <div class="field">
 			<%= f.label :password_confirmation %>
 			<%= f.password_field :password_confirmation %>
-		  </div> 
+		  </div>
 		</div>
 	</div>
 	<div class="row">
@@ -101,7 +101,7 @@
 		  </div>
 		</div>
 	</div>
-	<% if @user.user_type.user_types_edit %>
+	<% if @current_user && @current_user.user_type.user_types_edit %>
 		<div class="row">
 		  <div class="field">
 			<%= f.label :user_type_id %>
