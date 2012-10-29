@@ -31,10 +31,10 @@
 					<% end %>
 				</td>
   				<td class="left">
-				        <%= link_to image_tag(order_item.product.image.url(:small), :class => "image_thumbnail"), order_item.product %>
+				        <%= link_to image_tag(order_item.product.image.url(:small)), order_item.product %>
   					<%= link_to order_item.product.name, order_item.product %>
   				</td>
-				<td><strong><%= number_with_precision(order_item.product.price, :precision => 2) %></strong></td>
+				<td><strong>$<%= number_with_precision(order_item.product.price, :precision => 2) %></strong></td>
 			<!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
 				<td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
   			</tr>
@@ -78,7 +78,7 @@
    <div>
       <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-small" %> 
        
-      <% if emptyCart0 == false %><b>|</b>
+      <% if emptyCart0 == false %>
       <%= link_to "Cancel Order", @order, :method => :delete,
       data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-warning" %>
       <% end %>

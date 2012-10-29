@@ -148,14 +148,14 @@ class OrdersController < ApplicationController
       
     if(order_item) # if it is found
       #set quantity to zero
-      if (order_item.quantity > 0) # && order_item.quantity != 1) 
+      if (order_item.quantity > 0 && order_item.quantity != 1) 
        order_item.quantity -= 1
        order_item.save
       else
-#        if order_item.quantity == 1
-#           order_item.quantity = 0
-#        end 
-#       OrderItem.destroy(order_item)
+        if order_item.quantity == 1
+           order_item.quantity = 0
+        end 
+       OrderItem.destroy(order_item)
       end 
     end
       

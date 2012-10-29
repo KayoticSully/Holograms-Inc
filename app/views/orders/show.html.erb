@@ -105,8 +105,8 @@
 
 <!-- <%= debug @order.order_items %> -->
     <% if !purchase %>
-    <%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> |
+    <%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> 
     <% end %>
   <% end %>
   
-   <%= link_to 'Continue Shopping', :back, :class => "btn btn-mini" %>
+   <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>
