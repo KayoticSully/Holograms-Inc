@@ -222,7 +222,7 @@ class OrdersController < ApplicationController
     #check that inventory can support purchase
     order.order_items.each do |order_item|
       if(order_item.quantity > order_item.product.stock)
-        invalids.push("Cannot purchase #{order_item.quantity} of product: #{order_item.product.name}. Only #{order_item.product.stock}.")
+        invalids.push("Cannot purchase #{order_item.quantity} of product: #{order_item.product.name}. Only #{order_item.product.stock} available.")
       end
     end
     
