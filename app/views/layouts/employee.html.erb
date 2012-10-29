@@ -43,6 +43,11 @@
 										</ul>
 									</li>
 								<%end%>
+
+								<%#FAQ and Help management%>
+								<li>
+								<%= link_to "View or Edit FAQ", help_items_path %>
+								</li>
 						<%end%>	
 					</ul>
 					
@@ -52,10 +57,7 @@
 						
 						
 						<% if current_user %>
-							<li> 
-								<%# Wrapped logged in messaage in anchor tags to center in navbar (bootstap is weird) %>
-								<a> Logged in as <%= current_user.email_address %>. </a> 
-							</li>
+							<li> <%= link_to "Welcome, " << current_user.first_name << " " <<current_user.last_name << "!", edit_user_path(current_user) %> </li>
 							<li> <%= link_to "Log out", log_out_path %> </li>
 						<% end %>
 						
@@ -73,11 +75,19 @@
 	</div>
 </div>
 
+
+
 <div id="footer">
 	<a href="/about">About Us</a> |
 	<%= link_to "Help and FAQ", help_items_path %> |
 	<a href="mailto:help@hologramsinc.com">Contact Us</a>
 </div>
+
+<!--Enable dropdowns for employee UI-->
+<script type="text/javascript">
+$('.dropdown-toggle').dropdown()
+</script>
+
 
 </body>
 </html>
