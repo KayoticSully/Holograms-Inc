@@ -26,11 +26,9 @@ open("#{Rails.root}/db/keyword_seed.csv") do |keywords|
    # name = keyword.chomp.split("|")
     @name = keyword.chomp
     Keyword.create!(:name => @name)
-   puts "  Added #@name"
+  # puts "  Added #@name"
   end  
 end
-@cont = Keyword.all()
-puts "#@cont"
 
 # Clear out the Products table in the database
 Product.delete_all
@@ -64,12 +62,9 @@ end
      @keyword_name, @product_name = group.chomp.split("|")
      @keyword_name = @keyword_name.downcase
      @keyword_id = Keyword.find(:first, :conditions => "name='#@keyword_name'").id
-    #  puts "here"
-       @product_id = Product.find(:first, :conditions => "name='#@product_name'").id
-     # puts "#@keyword_id"
-      puts "#@product_id"
+    @product_id = Product.find(:first, :conditions => "name='#@product_name'").id
      Group.create!(:keyword_id => @keyword_id, :product_id => @product_id)  
-     puts "  Added #@keyword_name -> #@product_name"                
+    # puts "  Added #@keyword_name -> #@product_name"                
    end  
  end
 
