@@ -4,3 +4,5 @@
 
 <%= link_to 'Show', @user, :class => "btn btn-small btn-info" %>
 <%= link_to 'Back', users_path, :class => "btn btn-small btn-warning" %>
+<%= link_to 'Back to Order', "/orders/#{@current_user.id}", :class => "btn btn-small btn-warning" %>
+
