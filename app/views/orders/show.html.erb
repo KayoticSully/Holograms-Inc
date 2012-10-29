@@ -40,11 +40,13 @@
   			<tr>
   				<td class="left"> 
 					<strong><%= order_item.quantity %></strong>
+					<% if !@order.purchased %>
 					<div class="btn-group" >
 						<%= link_to "+", "/orders/add/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
 						<%= link_to "-", "/orders/remove/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
 						<%= link_to "x", "/orders/removeall/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
 					</div>
+					<% end %>
 				</td>
   				<td class="left">
   					<%= link_to image_tag(order_item.product.image.url(:small)), order_item.product %>
