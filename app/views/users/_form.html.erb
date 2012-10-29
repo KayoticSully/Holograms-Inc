@@ -101,14 +101,15 @@
 		  </div>
 		</div>
 	</div>
-	<% if @current_user && @current_user.user_type.user_types_edit %>
+	<%#enable this if statement once this field is no longer needed %>
+	<%# if @current_user && @current_user.user_type.user_types_edit %>
 		<div class="row">
 		  <div class="field">
 			<%= f.label :user_type_id %>
 			<%= f.collection_select(:user_type_id, UserType.all, :id, :name) %>
 		  </div>
 		</div>
-	<% end %>
+	<%# end %>
 	<div class="row">
 	  <div class="actions">
 		<%= f.submit :class => 'btn btn-primary' %>
