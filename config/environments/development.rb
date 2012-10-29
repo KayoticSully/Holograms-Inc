@@ -35,5 +35,7 @@ ProjectCourse::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
   
+  config.assets.js_compressor = :closure
+  
   Paperclip.options[:command_path] = "C:/Progra~1/ImageM~1.8-q"
 end

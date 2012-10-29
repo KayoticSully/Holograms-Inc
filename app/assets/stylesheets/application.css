@@ -13,7 +13,3 @@
  *= require override.css.scss
  */
 
-.footer {
-	position: fixed;
-	bottom: 0;
-}
