@@ -11,86 +11,90 @@
         padding-top: 60px;
         padding-bottom: 40px;
       }
- </style>
+  </style>
  
 </head>
 <body>
 
 <%#Opening divs for navbar%>
-<div id="user_nav" class="navbar navbar-fixed-top">
-	<div class="navbar-inner">
+<div id="wrap">
+	<div id="main">
+
+		<div id="user_nav" class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+				
+					<%#Display Brand%>
+				    <ul class="nav">
+						<li>
+							<a class="brand" href="/"><img src="/assets/HoloIncTransSmallFlat.png" alt="Holograms Inc Logo" style="height: 22px; width: 200px; -ms-interpolation-mode:bicubic;" /> </a>
+						</li>
+					</ul>
+					<%#End of display Brand%>
+					
+					<%#Display searchbar%>
+					<form action="/search" class="navbar-search pull-left">
+					  <input type="text" class="search-query" name="query" placeholder="The searchbar - it does nothing!">
+					</form>
+					<%#End of display searchbar%>
+					
+					<%#Account Information and cart%>
+					<ul class="nav pull-right">	
+						<% if current_user %>
+							<li> <%= link_to "Welcome, " << current_user.first_name << " " <<current_user.last_name << "!", edit_user_path(current_user) %> </li>
+							<li> <%= link_to "Log out", log_out_path %> </li>
+						<% else %>
+							<li> <%= link_to "Sign up", sign_up_path %></li>
+							<li> <%= link_to "Log in", log_in_path %> </li>
+						<% end %>
+						<li>
+						  <% if(@current_user) %>
+						    <%= link_to "View cart - #{@current_user.cart.size} items", :controller => "orders", :action =>"edit", :id => @current_user.cart.id %>
+						  <% end %>
+						  </li>
+					</ul>
+					<%#End of Account Information and cart%>
+					
+				</div>
+			</div>
+		</div>
+		<%#End of divs for navbar%>
+
+
 		<div class="container-fluid">
-		
-			<%#Display Brand%>
-		    <ul class="nav">
-				<li>
-					<a class="brand" href="/"><img src="/assets/HoloIncTransSmallFlat.png" alt="Holograms Inc Logo" style="height: 22px; width: 200px; -ms-interpolation-mode:bicubic;" /> </a>
-				</li>
-			</ul>
-			<%#End of display Brand%>
-			
-			<%#Display searchbar%>
-			<form action="/search" class="navbar-search pull-left">
-			  <input type="text" class="search-query" name="query" placeholder="The searchbar - it does nothing!">
-			</form>
-			<%#End of display searchbar%>
-			
-			<%#Account Information and cart%>
-			<ul class="nav pull-right">	
-				<% if current_user %>
-					<li> <%= link_to "Welcome, " << current_user.first_name << " " <<current_user.last_name << "!", edit_user_path(current_user) %> </li>
-					<li> <%= link_to "Log out", log_out_path %> </li>
-				<% else %>
-					<li> <%= link_to "Sign up", sign_up_path %></li>
-					<li> <%= link_to "Log in", log_in_path %> </li>
-				<% end %>
-				<li>
-				  <% if(@current_user) %>
-				    <%= link_to "View cart - #{@current_user.cart.size} items", :controller => "orders", :action =>"edit", :id => @current_user.cart.id %>
-				  <% end %>
-				  </li>
-			</ul>
-			<%#End of Account Information and cart%>
-			
-		</div>
-	</div>
-</div>
-<%#End of divs for navbar%>
-
-
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div id="category_bar" class="span2">
-
-			<div class="well">
-				<ul class="nav navbar-inverse nav-list">
-					<li class="nav-heaver"><h5>Categories</h5></li>
-					<li class="divider"></li>
-					<% @keywords.each do |keyword| %>
-							<li class>
-								<%= link_to keyword.name.capitalize!, keyword %>
-							</li>
+			<div class="row-fluid">
+				<div id="category_bar" class="span2">
+					<ul class="nav navbar-inverse nav-list well">
+						<li class="nav-heaver"><h5>Categories</h5></li>
+						<li class="divider"></li>
+						<% @keywords.each do |keyword| %>
+								<li class>
+									<%= link_to keyword.name.capitalize!, keyword %>
+								</li>
+						<% end %>
+					</ul>
+				</div>
+				<div id="everything_else" class="span10">
+					
+					<% flash.each do |name, msg| %>
+						<%= content_tag :div, msg, :id => "flash_#{name}", :class => "alert alert-info" %>
 					<% end %>
-				</ul>
+					
+					<%= yield %>
+
+					
+				</div>
 			</div>
-		</div>
-		<div id="everything_else" class="span10">
-			
-			<% flash.each do |name, msg| %>
-				<%= content_tag :div, msg, :id => "flash_#{name}", :class => "alert alert-info" %>
-			<% end %>
-			
-			<%= yield %>
-			
-			<div class="footer">
-				<%= link_to "Help", help_items_path %>
-			</div>
-			
 		</div>
 	</div>
 </div>
+				
+<div id="footer">
+	<a href="/about">About Us</a> |
+	<%= link_to "Help and FAQ", help_items_path %> |
+	<a href="mailto:help@hologramsinc.com">Contact Us</a>
 
-
+</div>
 
 </body>
 </html>
