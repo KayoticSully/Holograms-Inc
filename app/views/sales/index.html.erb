@@ -15,15 +15,14 @@
     <td><%= sale.markdown %></td>
     <td><%= sale.start %></td>
     <td><%= sale.end %></td>
-    <td><%= link_to 'Show', sale %></td>
+    <td><%= link_to 'Show', sale, :class=>"btn btn-info" %></td>
     <% if @current_user&&@current_user.user_type.help_edit %>
-		<td><%= link_to 'Edit', edit_sale_path(sale) %></td>
-    	<td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= link_to 'Edit', edit_sale_path(sale), :class=>"btn btn-warning" %></td>
+    	<td><%= link_to 'Delete', sale, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-danger" %></td>
 	<% end %>
   </tr>
 <% end %>
 </table>
 
-<br />
 
-<%= link_to 'New Sale', new_sale_path %>
+<%= link_to 'New Sale', new_sale_path, :class=>"btn btn-success" %>
