@@ -29,6 +29,10 @@
 						<% if current_user %>
 								<%#Stuff for Inventory Management goes here%>
 								<%if current_user.user_type.products %>
+									<li>
+										<%= link_to "Manage Products", products_path %>
+									</li>
+									<%# COMMENTING OUT DROPDOWN
 									<li class="dropdown">
 										<!--This makes the label for the dropdown -->
 										<a id="inventory_dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
@@ -42,12 +46,29 @@
 											</li>
 										</ul>
 									</li>
+									%>
 								<%end%>
-
+								
+								<%#Keyword Management%>
+								<%if current_user.user_type.keywords_edit%>
+									<li>
+										<%=link_to "Manage Keywords", keywords_path %>
+									</li>
+								<%end%>
+								
+								<%#Sales Management%>
+								<%if current_user.user_type.sales_edit %>
+									<li>
+										<%=link_to "Manage Sales", sales_path %>
+									</li>
+								<%end%>
+								
 								<%#FAQ and Help management%>
-								<li>
-								<%= link_to "View or Edit FAQ", help_items_path %>
-								</li>
+								<%if current_user.user_type.help_edit %>
+									<li>
+										<%= link_to "Manage FAQ", help_items_path %>
+									</li>
+								<%end%>
 						<%end%>	
 					</ul>
 					

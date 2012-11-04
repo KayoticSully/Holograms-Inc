@@ -1,14 +1,12 @@
-<h1>Listing sales</h1>
+<legend>Listing sales</legend>
 
-<table>
+<table class="table table-striped table-bordered">
   <tr>
     <th>Name</th>
     <th>Markdown</th>
     <th>Start</th>
     <th>End</th>
-    <th></th>
-    <th></th>
-    <th></th>
+	<th colspan="3">FAQ Management</th>
   </tr>
 
 <% @sales.each do |sale| %>
@@ -18,8 +16,10 @@
     <td><%= sale.start %></td>
     <td><%= sale.end %></td>
     <td><%= link_to 'Show', sale %></td>
-    <td><%= link_to 'Edit', edit_sale_path(sale) %></td>
-    <td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% if @current_user&&@current_user.user_type.help_edit %>
+		<td><%= link_to 'Edit', edit_sale_path(sale) %></td>
+    	<td><%= link_to 'Destroy', sale, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	<% end %>
   </tr>
 <% end %>
 </table>
