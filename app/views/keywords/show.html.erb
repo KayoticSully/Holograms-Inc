@@ -6,13 +6,9 @@
 
 			<li class="span3">
 				<div class="thumbnail">
-					<div class="image_wrapper">
-						<%= link_to image_tag(product.image.url(:medium), :class => "image_thumbnail"), product %>
-					</div>
-					<div id="product-name">
-						<h5><%= link_to product.name, product%></h5>
-					</div>
-					<div id="product-info">
+						<%= link_to image_tag(product.image.url(:medium)), product %>
+					<div class="caption">
+						<h5><%= link_to smart_truncate(product.name,40), product%></h5>
 					<p>
 						Price: <strong>$<%= number_with_precision(product.price, :precision => 2) %></strong>
 						</br>
