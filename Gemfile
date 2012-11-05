@@ -27,6 +27,7 @@ gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
 
 gem 'closure-compiler'
 
+gem 'shipping'
 
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
