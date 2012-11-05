@@ -34,13 +34,19 @@
 					<%#Display searchbar%>
 					<form action="/search" class="navbar-search pull-left">
 					  <input type="text" class="search-query" name="query" placeholder="The searchbar - it does nothing!">
+					  <i class="icon-search"></i>
 					</form>
 					<%#End of display searchbar%>
 					
 					<%#Account Information and cart%>
 					<ul class="nav pull-right">	
 						<% if current_user %>
-							<li> <%= link_to "Welcome, " << current_user.first_name << " " <<current_user.last_name << "!", edit_user_path(current_user) %> </li>
+							<li> 
+								<%= link_to edit_user_path(current_user) do %>
+									Welcome, <%=current_user.first_name%> <%=current_user.last_name%>!  <i class="icon-wrench"></i>
+								<%end%>
+							</li>
+
 							<li> <%= link_to "Log out", log_out_path %> </li>
 						<% else %>
 							<li> <%= link_to "Sign up", sign_up_path %></li>

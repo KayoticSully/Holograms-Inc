@@ -78,7 +78,11 @@
 						
 						
 						<% if current_user %>
-							<li> <%= link_to "Welcome, " << current_user.first_name << " " <<current_user.last_name << "!", edit_user_path(current_user) %> </li>
+							<li> <%#Need to do the link like this to append the wrench icon(can't figure out how to add html to the end of this text field%>
+								<%= link_to edit_user_path(current_user) do %>
+									Welcome, <%=current_user.first_name%> <%=current_user.last_name%>!  <i class="icon-wrench icon-white"></i>
+								<%end%>
+							</li>
 							<li> <%= link_to "Log out", log_out_path %> </li>
 						<% end %>
 						
