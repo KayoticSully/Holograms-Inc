@@ -19,12 +19,25 @@ class KeywordsController < ApplicationController
   # GET /keywords/1
   # GET /keywords/1.json
   def show
-    keywordArr = Keyword.find(:all, :conditions => ["lower(name) =?", params[:id].gsub("_", " ").downcase])
-    @keyword = keywordArr[0]
-    
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @keyword }
+    #The search logic
+    #currently only searches keywords and returns those categories
+    #still needs to have the results returned to a page and the products of each dumped.
+    if(params[:query])
+      # will move search logic to helper
+      # it is just here for now
+      query = "%#{params[:query]}%"
+      keywordArr = Keyword.where("name LIKE ?", query)
+      @keyword = keywordArr[0]
+      
+      # if no results go home
+      if(@keyword == nil)
+        # this does not work?? why?
+        flash[:notice] = 'No search results were found'
+        redirect_to root_url
+      end
+    else
+      keywordArr = Keyword.find(:all, :conditions => ["lower(name) =?", params[:id].gsub("_", " ").downcase])
+      @keyword = keywordArr[0]
     end
   end
 

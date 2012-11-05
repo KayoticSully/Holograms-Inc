@@ -52,6 +52,7 @@ class ProductsController < ApplicationController
       return
     end
     
+    @sales = Sale.find(:all)
     @product = Product.find(params[:id])
   end
 

@@ -20,6 +20,7 @@ ProjectCourse::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "sign_up" => "users#new", :as =>"sign_up"
   
+  
   match "orders/add/:id", :to => 'orders#add'
   match "orders/remove/:id", :to => 'orders#remove'
   match "orders/removeall/:id", :to => 'orders#removeall'
@@ -28,6 +29,8 @@ ProjectCourse::Application.routes.draw do
   match "orders/updateqty/:id/:newqty", :to => 'orders#updateqty'
   match "about", :to => 'home#about'
   match "employee", :to => "home#employee"
+  match "search",  :to => "keywords#show"
+  match "search2",  :to => "keywords#search"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.
