@@ -11,7 +11,7 @@
   <tr>
     <td><%= keyword.name %></td>
     <td><%= keyword.under %></td>
-    <td><%= link_to 'Edit', edit_keyword_path(keyword), :class => "btn btn-warning" %></td>
+    <td><%= link_to 'Edit', edit_keyword_path(keyword.id), :class => "btn btn-warning" %></td>
     <td><%= link_to 'Delete', keyword, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
   </tr>
 <% end %>
