@@ -7,4 +7,22 @@ class Product < ActiveRecord::Base
   has_many :groups
   has_many :keywords, :through => :groups
   belongs_to :sale
+  
+  # Returns the sale price if the item is on sale and false if it is not
+  def sale_price
+    if (sale)
+      price * (100-sale.markdown) / 100
+    else
+      false
+    end
+  end
+  
+  # Returns the markdown of the sale that this product is participating in and false if it's not on sale
+  def sale_markdown
+    if (sale)
+      sale.markdown
+    else
+      false
+    end
+  end
 end

@@ -12,6 +12,12 @@
 					<p>
 						Price: <strong>$<%= number_with_precision(product.price, :precision => 2) %></strong>
 						</br>
+						<% if product.sale_price %>
+						Sale price: <strong>$<%= number_with_precision(product.sale_price, :precision => 2) %></strong>
+						</br>
+						You save <strong><%= product.sale_markdown %>%!!</strong>
+						</br>
+						<% end %>
 						Rating: <%= ("<i class=icon-thumbs-up></i>" * product.rating).html_safe %>
 					</p>
 					<p>

@@ -91,6 +91,8 @@ class ProductsController < ApplicationController
     
     # set keywords selected
     @product.keywords = Keyword.find(params[:keyword_ids])
+    # set sale selected
+    @product.sale_id = params[:sale_id]
     
     respond_to do |format|
       if @product.update_attributes(params[:product])

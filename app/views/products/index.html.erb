@@ -5,6 +5,7 @@
     <th>Name</th>
     <th>Description</th>
     <th>Price</th>
+    <th>Sale price</th>
     <th>Image</th>
     <th>Stock</th>
     <th>Public</th>
@@ -27,6 +28,9 @@
     <td><%= product.name %></td>
     <td><%= product.description %></td>
     <td><%= number_with_precision(product.price, :precision => 2) %></td>
+    <td><%= if (product.sale_price)
+               number_with_precision(product.sale_price, :precision => 2)
+            end  %></td>
     <td><%= link_to "View Image", product.image.url, :class => "btn" %></td>
     <td><%= product.stock %></td>
     <td><%= product.public %></td>

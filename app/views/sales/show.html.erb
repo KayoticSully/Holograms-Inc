@@ -19,6 +19,13 @@
   <b>End:</b>
   <%= @sale.end %>
 </p>
+<p>
+  <b>Products:</b>
+   <%= @products = Product.where("sale_id = ?", @sale.id)
+   # Sully -- why is this not working?
+   @products.each {|product| print product.name }
+   %>
+</p>
 
 
 <%= link_to 'Edit', edit_sale_path(@sale) %> |

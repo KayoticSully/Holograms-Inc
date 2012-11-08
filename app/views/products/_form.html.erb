@@ -129,6 +129,16 @@
           </div>
         </div>
       </div>
+      
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :sales, :class => "control-label"%>
+          <div class="controls">
+            <%= select_tag("sale_id", options_for_select(@sales.collect { |sale| [sale.name, sale.id] }, @product.sale_id), {:include_blank => true, :size=>3})%>
+            </br><%= link_to 'Create new sale', new_sale_path, :class => "btn btn-info" %>
+          </div>
+        </div>
+      </div>
     </div>
     <div class="clear"></div>
   </div>
