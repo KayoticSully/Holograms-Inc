@@ -47,7 +47,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     #if not logged in or doesnt have edit permissions, redirect home.
-    if(!@current_user || !@current_user.user_type.products_edit)
+    if(!@current_user || (!@current_user.user_type.products_edit && !@current_user.user_type.sales_edit))
       redirect_to root_url
       return
     end
@@ -82,17 +82,24 @@ class ProductsController < ApplicationController
   # PUT /products/1.json
   def update
     #if not logged in or doesnt have edit permissions, redirect home.
-    if(!@current_user || !@current_user.user_type.products_edit)
+    if(!@current_user || (!@current_user.user_type.products_edit && !@current_user.user_type.sales_edit && !@current_user.user_type.products_quantity))
       redirect_to root_url
       return
     end
     
+    @sales = Sale.find(:all)
+    
     @product = Product.find(params[:id])
     
     # set keywords selected
-    @product.keywords = Keyword.find(params[:keyword_ids])
+    if (params[:keyword_ids])
+      @product.keywords = Keyword.find(params[:keyword_ids])
+    end
+    
     # set sale selected
-    @product.sale_id = params[:sale_id]
+    if (params[:sale_id])
+      @product.sale_id = Sale.find(params[:sale_id])
+    end
     
     respond_to do |format|
       if @product.update_attributes(params[:product])
