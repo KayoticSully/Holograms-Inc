@@ -117,12 +117,21 @@ class UsersController < ApplicationController
     
     @user = User.find(params[:id])
     #@user.destroy
-    @user.disabled = true
-    @user.save
-
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully disabled." }
-      format.json { head :no_content }
+    if(!@user.user_type.user_types_edit && @current_user.id != @user.id)
+      @user.disabled = true
+      @user.save
+      
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: "User was successfully disabled." }
+        format.json { head :no_content }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to users_url, notice: "User cannot be disabled." }
+        format.json { head :no_content }
+      end
     end
+
+    
   end
 end

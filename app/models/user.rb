@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
     if !user_type.present?
       self.user_type_id = 1
     end
+    
   end
   
 end

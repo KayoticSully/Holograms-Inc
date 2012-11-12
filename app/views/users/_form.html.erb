@@ -104,7 +104,7 @@
 	<%#enable this if statement once this field is no longer needed %>
 	
         <div class="row">
-          <% if(@current_user && @current_user.user_type.user_types_edit) %>
+          <% if(@current_user && @current_user.user_type.user_types_edit && !@user.user_type.user_types_edit) %>
             <div class="span6">
               <div class="field">
                     <%= f.label :user_type_id %>
@@ -112,12 +112,15 @@
               </div>
             </div>
           <% end %>
+          <%# if logged in and the user can edit users and the edited user doesnt have the edit users permission, and is not yourself (or current user doesnt have the edit permission, but is editing himself, show the disable flag.%>
+          <% if(@current_user && ((@current_user.user_type.user_types_edit && !@user.user_type.user_types_edit && @current_user.id != @user.id) || (@current_user.id == @user.id && !@user.user_type.user_types_edit))) %>
             <div class="span6">
               <div class="field">
                     <%= f.label :disabled %>
                     <%= f.check_box :disabled %>
               </div>
             </div>
+          <% end %>
 	  </div>
 	  <div class="actions">
 		<%= f.submit :class => 'btn btn-primary' %>
