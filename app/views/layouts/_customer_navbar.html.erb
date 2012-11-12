@@ -1,0 +1,45 @@
+<div id="user_nav" class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+		
+			<%#Display Brand%>
+		    <ul class="nav">
+				<li>
+					<a class="brand" href="/"><img src="/assets/HoloIncTransSmallFlat.png" alt="Holograms Inc Logo" style="height: 22px; width: 200px; -ms-interpolation-mode:bicubic;" /> </a>
+				</li>
+			</ul>
+			<%#End of display Brand%>
+			
+			<%#Display searchbar%>
+			<form action="/search" class="navbar-search pull-left">
+			  <input type="text" class="search-query" name="query" placeholder="Search...">
+			  <i class="icon-search"></i>
+			</form>
+			<%#End of display searchbar%>
+			
+			<%#Account Information and cart%>
+			<ul class="nav pull-right">	
+				<% if current_user %>
+					<li> 
+						<%= link_to edit_user_path(current_user) do %>
+							Welcome, <%=current_user.first_name%> <%=current_user.last_name%>!  <i class="icon-wrench"></i>
+						<%end%>
+					</li>
+
+					<li> <%= link_to "Log out", log_out_path %> </li>
+				<% else %>
+					<li> <%= link_to "Sign up", sign_up_path %></li>
+					<li> <%= link_to "Log in", log_in_path %> </li>
+				<% end %>
+				<li>
+				  <% if(@current_user) %>
+				    <%= link_to "View cart - #{@current_user.cart.size} items", :controller => "orders", :action =>"edit", :id => @current_user.cart.id %>
+				  <% end %>
+				  </li>
+			</ul>
+			<%#End of Account Information and cart%>
+			
+		</div>
+	</div>
+</div>
+<%#End of divs for navbar%>

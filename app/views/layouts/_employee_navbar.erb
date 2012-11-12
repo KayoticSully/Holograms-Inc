@@ -1,0 +1,73 @@
+<%# Using inverse navbar for employee access to make UI distinct %>
+<div id="user_nav" class="navbar navbar-inverse navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<ul class="nav" role="navigation">
+			
+				<%# link to employee. This link is currently broken, need to add a route or remove it%>
+				<a class="brand" href="/employee">	Employee Access </a>
+				
+				<% if current_user %>
+						<%#Stuff for Inventory Management goes here%>
+						<%if current_user.user_type.products %>
+							<li>
+								<%= link_to "Manage Products", products_path %>
+							</li>
+							<%# COMMENTING OUT DROPDOWN
+							<li class="dropdown">
+								<!--This makes the label for the dropdown -->
+								<a id="inventory_dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+									Inventory
+									<b class="caret"></b>
+								</a>
+								<!--Here goes the list that drops down-->
+								<ul class="dropdown-menu" role="menu" aria-labeledby="inventory_dropdown">
+									<li>
+										<a tabindex="-1" href="#">TODO</a>
+									</li>
+								</ul>
+							</li>
+							%>
+						<%end%>
+						
+						<%#Keyword Management%>
+						<%if current_user.user_type.keywords_edit%>
+							<li>
+								<%=link_to "Manage Keywords", keywords_path %>
+							</li>
+						<%end%>
+						
+						<%#Sales Management%>
+						<%if current_user.user_type.sales_edit %>
+							<li>
+								<%=link_to "Manage Sales", sales_path %>
+							</li>
+						<%end%>
+						
+						<%#FAQ and Help management%>
+						<%if current_user.user_type.help_edit %>
+							<li>
+								<%= link_to "Manage FAQ", help_items_path %>
+							</li>
+						<%end%>
+				<%end%>	
+			</ul>
+			
+			
+			<%# These items will be on the right side of the nav bar %>
+			<ul class="nav pull-right">
+				
+				
+				<% if current_user %>
+					<li> <%#Need to do the link like this to append the wrench icon(can't figure out how to add html to the end of this text field%>
+						<%= link_to edit_user_path(current_user) do %>
+							Welcome, <%=current_user.first_name%> <%=current_user.last_name%>!  <i class="icon-wrench icon-white"></i>
+						<%end%>
+					</li>
+					<li> <%= link_to "Log out", log_out_path %> </li>
+				<% end %>
+				
+			</ul>
+		</div>
+	</div>
+</div>
