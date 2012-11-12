@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   
-  layout "employee", :only => [:employee]
+#  layout "employee", :only => [:employee]
   
   def index
     #redirect_to "/keywords/promoted"

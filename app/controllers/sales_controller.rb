@@ -1,6 +1,6 @@
 class SalesController < ApplicationController
   
-  layout "employee"
+#  layout "employee"
   
   # GET /sales
   # GET /sales.json

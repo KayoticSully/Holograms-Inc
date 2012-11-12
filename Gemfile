@@ -27,6 +27,9 @@ gem 'bcrypt-ruby', '~> 3.0.0', :require => "bcrypt"
 
 gem 'closure-compiler'
 
+# Used to generate business only Shipping Days
+gem 'holidays', '~> 1.0.5'
+
 gem 'active_shipping'
 
 # To use Jbuilder templates for JSON

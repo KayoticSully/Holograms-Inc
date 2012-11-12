@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ProjectCourse</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  
+  <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+ </style>
+ 
+</head>
+<body>
+<div id="wrap">
+	<div id="main">
+		<%= render :partial => "/layouts/employee_navbar" %>
+
+		<% flash.each do |name, msg| %>
+			<%= content_tag :div, msg, :id => "flash_#{name}", :class => "alert alert-info" %>
+		<% end %>
+
+		<%= yield %>
+
+	</div>
+</div>
+
+
+
+<div id="footer">
+	<a href="/about">About Us</a> |
+	<%= link_to "Help and FAQ", help_items_path %> |
+	<a href="mailto:help@hologramsinc.com">Contact Us</a>
+</div>
+
+<!--Enable dropdowns for employee UI-->
+<script type="text/javascript">
+$('.dropdown-toggle').dropdown()
+</script>
+
+
+</body>
+</html>
