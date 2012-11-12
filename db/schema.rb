@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027212637) do
+ActiveRecord::Schema.define(:version => 20121111204224) do
 
   create_table "groups", :force => true do |t|
     t.integer  "keyword_id"
@@ -114,6 +114,7 @@ ActiveRecord::Schema.define(:version => 20121027212637) do
     t.string   "password_salt"
     t.string   "state"
     t.string   "country"
+    t.boolean  "disabled"
   end
 
 end

@@ -31,6 +31,7 @@ ProjectCourse::Application.routes.draw do
   match "employee", :to => "home#employee"
   match "search",  :to => "keywords#show"
   match "search2",  :to => "keywords#search"
+  #match "users/delete/:id", :to => "users#delete_user"
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

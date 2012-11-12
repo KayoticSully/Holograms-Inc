@@ -13,3 +13,6 @@
  *= require override.css.scss
  */
 
+.hidden{
+    display:hidden;
+}

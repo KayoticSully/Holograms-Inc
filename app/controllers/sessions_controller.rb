@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
   
   def create
     user = User.authenticate(params[:email_address], params[:password])
-    if user
+    if user && !user.disabled
       session[:user_id] = user.id
       
       if !user.user_type.purchase

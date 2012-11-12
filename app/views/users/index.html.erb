@@ -23,8 +23,9 @@
     <td><%= user.user_type_id %></td>
     <td><%= link_to 'Show', user, :class => "btn btn-small btn-info" %></td>
     <td><%= link_to 'Edit', edit_user_path(user), :class => "btn btn-small btn-warning" %></td>
-    <td><%= link_to 'Delete', user, method: :delete, data: { confirm: 'Are you sure?' }, 
+    <td><%= link_to 'Delete', user, :method => :delete, data: { confirm: 'Are you sure?' }, 
         :class => "btn btn-small btn-danger" %></td>
 <% end %>
 </table>
 <%= link_to 'Create new User', new_user_path, :class => "btn btn-small btn-success" %>
+
