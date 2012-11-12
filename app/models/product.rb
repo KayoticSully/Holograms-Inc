@@ -1,3 +1,6 @@
+require 'active_shipping'
+include ActiveMerchant::Shipping
+
 class Product < ActiveRecord::Base
   include ActiveModel::Validations
   attr_accessible :description, :image, :name, :price, :public, :stock, :weight, :height, :length, :width, :rating, :sale_id
@@ -33,5 +36,27 @@ class Product < ActiveRecord::Base
     else
       false
     end
+  end
+  
+  def ship_prices_for(user)
+    package = Package.new(weight,
+                          [length, width, height],
+                          :units => :imperial)
+    
+    origin = Location.new(:country  => 'US',
+                          :state    => 'NY',
+                          :address1 => '3399 North Rd.',
+                          :city     => 'Poughkeepsie',
+                          :zip      => '12601')
+    
+    destination = Location.new(:country  => 'US',
+                               :state    => user.state,
+                               :city     => user.city,
+                               :zip      => user.zipcode,
+                               :address1 => user.address)
+    
+    ups = UPS.new(:login => 'KayoticSully', :password => 'WiivoUPS310', :key => 'DCA75091423BBDC8')
+    response = ups.find_rates(origin, destination, package)
+    response.rates.sort_by(&:price).collect {|rate| [rate.service_name, rate.price]}
   end
 end
