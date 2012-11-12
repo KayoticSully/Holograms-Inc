@@ -19,9 +19,11 @@ class KeywordsController < ApplicationController
   # GET /keywords/1
   # GET /keywords/1.json
   def show
+    save_location
+    
     #The search logic
     #currently only searches keywords and returns those categories
-    #still needs to have the results returned to a page and the products of each dumped.
+    #still needs to have the results returned to a page and the products of each dumped
     if(params[:query])
       # will move search logic to helper
       # it is just here for now

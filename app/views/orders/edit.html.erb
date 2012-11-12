@@ -74,9 +74,8 @@
    
  <br>
  <br>
-
    <div>
-      <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-small" %> 
+      <%= link_to 'Continue Shopping', get_location_else(orders_path), :class => "btn btn-small" %> 
        
       <% if emptyCart0 == false %>
       <%= link_to "Cancel Order", @order, :method => :delete,
