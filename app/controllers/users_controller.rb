@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       return
     end
     
-    @users = User.all
+    @users = User.where('disabled != ?', true)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,6 +26,7 @@ class UsersController < ApplicationController
     end
     
     @user = User.find(params[:id])
+    #@user = User.where('disabled != true')
     
     respond_to do |format|
       format.html # show.html.erb
@@ -53,7 +54,7 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     #if not logged in OR user id does not match param redirect home
-    if(!@current_user || @current_user.id != Integer(params[:id]))
+    if(!@current_user || (!@current_user.user_type.user_types_edit && @current_user.id != Integer(params[:id])))
       redirect_to root_url
       return
     end
@@ -109,16 +110,18 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     #if not logged in or id doesnt match param, redirect home
-    if(!@current_user || @current_user != Integer(params[:id]))
+    if(!@current_user || (!@current_user.user_type.user_types_edit && @current_user.id != Integer(params[:id])))
       redirect_to root_url
       return
     end
     
     @user = User.find(params[:id])
-    @user.destroy
+    #@user.destroy
+    @user.disabled = true
+    @user.save
 
     respond_to do |format|
-      format.html { redirect_to users_url }
+      format.html { redirect_to users_url, notice: "User was successfully disabled." }
       format.json { head :no_content }
     end
   end

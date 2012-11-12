@@ -107,11 +107,12 @@ puts " Adding default users and manager ids"
 # Create a new entry in the Users table for each line
 open("#{Rails.root}/db/user_seed.csv") do |users|  
   users.read.each_line do |user|  
-    first_name,last_name,address,city,zipcode,@email_address,password,@usertype_name,state,country = user.chomp.split("|")
+    first_name,last_name,address,city,zipcode,@email_address,password,@usertype_name,state,country,disabled = user.chomp.split("|")
     usertype_id = UserType.find(:first, :conditions => "name='#@usertype_name'").id
     User.create!(:first_name => first_name, :last_name => last_name, :address => address,
                  :city => city, :zipcode => zipcode, :email_address => @email_address, 
-                 :user_type_id => usertype_id, :state => state, :country => country, :password => password, :phone_number => "",:credit_card => "")
+                 :user_type_id => usertype_id, :state => state, :country => country, :password => password,
+                 :phone_number => "",:credit_card => "", :disabled => disabled)
    # puts "  Added #@email_address - usertype #@usertype_name"                
   end  
 end
