@@ -32,6 +32,12 @@ gem 'holidays', '~> 1.0.5'
 
 gem 'active_shipping'
 
+# used to validate dates (make sure sale end date is after sale begin date)
+gem 'validates_timeliness', '~> 3.0'
+
+# used to create a calendar date select
+gem "calendar_date_select", "~> 1.16.4"
+
 # To use Jbuilder templates for JSON
 # gem 'jbuilder'
 

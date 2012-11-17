@@ -98,7 +98,8 @@ class ProductsController < ApplicationController
     
     # set sale selected
     if (params[:sale_id])
-      @product.sale_id = Sale.find(params[:sale_id])
+     # @product.sale_id = Sale.find(params[:sale_id])
+      @product.sale_id = params[:sale_id]
     end
     
     respond_to do |format|

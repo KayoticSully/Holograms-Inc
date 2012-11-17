@@ -10,7 +10,8 @@ class Product < ActiveRecord::Base
   has_many :keywords, :through => :groups
   belongs_to :sale
   
-  validates :price, :numericality => { :greater_than_or_equal_to => 0.01 }
+  validates_presence_of :name, :price, :stock, :weight, :height, :length, :width
+  validates :price, :format => { :with => /^\d+??(?:\.\d{0,2})?$/ }, :numericality => { :greater_than_or_equal_to => 0.01 }
   validates :stock, :numericality => { :greater_than_or_equal_to => 0, :only_integer => true }
   validates :weight, :numericality => { :greater_than_or_equal_to => 0.01 }
   validates :height, :numericality => { :greater_than_or_equal_to => 0.01 }
@@ -21,7 +22,11 @@ class Product < ActiveRecord::Base
   # Returns the sale price if the item is on sale and false if it is not
   def sale_price
     if (sale)
-      price * (100-sale.markdown) / 100
+      if (sale.start > DateTime.now) || (DateTime.now > sale.end) #if the sale hasn't started yet or is over
+        false
+      else
+        price * (100-sale.markdown) / 100
+      end
     else
       false
     end
