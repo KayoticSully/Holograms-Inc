@@ -61,7 +61,7 @@
 	<% subTotal += itemsTotalPrice %>
 	 
 
-       <% end %>
+       
        
       <tr>
 	    <td><strong><%= itemstotal %></strong></td>
@@ -71,15 +71,10 @@
 	    <% @order.total_price = subTotal %>
       </tr>
 			
-    <br> 
-    
 	    </tbody>
        </table>    
     
   </div>
-  <br>
-
-<br>
 
   <% if !@order.purchased %>
    <table>
@@ -98,7 +93,11 @@
       </tr>
       
    </table>
-  
+<% shipTo = [] %>
+<% shipTotol = 0.0 %>
+  <%= @order.order_items.each do |order_item| %>
+     <!-- <% shipTo = order_item.product.ship_prices_for(@current_user) %> -->
+
 <br><div><b>Ship To:</b>
     <table>
       <tr>
@@ -121,43 +120,73 @@
 	<td><b>Choose a Shipping speed:</b>
 	  <label class="radio">
 	    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-	    Standard Shipping (3-5 business days) &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <b>$4.99/ITEM</b>
+	    <%= shipTo[0][0] %> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+				&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp <b>$<%= shipTotal = (shipTo[0][1])/100.0 %></b>
 	  </label>
 	  <label class="radio">
 	  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-	  Two-Day Shipping --> Arrive by: <b><%= (Date.today + 2).to_s %> $6.32/ITEM</b>
+	   <%= shipTo[1][0] %> --> Arrive by: <b><%= (Date.today + 3).to_s %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp $<%= shipTotal = (shipTo[1][1])/100.0 %></b>
+	   
+	  </label>
+	  
+	    
+	  
+	  <label class="radio">
+	  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+	  <%= shipTo[2][0] %> --> Arrive by: <b><%= (Date.today + 2).to_s %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$<%= shipTotal = (shipTo[2][1])/100.0 %></b>
 	  </label>
 	  <label class="radio">
 	  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-	  One-Day Shipping --> Arrive by: <b><%= (Date.today + 1).to_s %> $7.99/ITEM</b>
+	  <%= shipTo[3][0] %> --> Arrive by: <b><%= (Date.today + 2).to_s %>&nbsp&nbsp&nbsp$<%= shipTotal = (shipTo[3][1])/100.0 %></b>
 	  </label>
+	  <label class="radio">
+	  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+	  <%= shipTo[4][0] %> --> Arrive by: <b><%= (Date.today + 1).to_s %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp$<%= shipTotal = (shipTo[4][1])/100.0 %></b>
+	  </label>
+	  <label class="radio">
+	  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+	  <%= shipTo[5][0] %> -->&nbsp             &nbsp       &nbsp &nbsp &nbsp    Arrive by: <b><%= (Date.today + 1).to_s %>&nbsp
+									    &nbsp&nbsp&nbsp&nbsp&nbsp$<%= shipTotal = (shipTo[5][1])/100.0 %></b>
+	  </label>
+	  <label class="radio">
+	  <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
+	  <%= shipTo[6][0] %> Arrive by: <b><%= (Date.today + 1).to_s %>&nbsp&nbsp&nbsp $<%= shipTotal = (shipTo[6][1])/100.0 %></b>
+	  </label>
+	  
 	</td>
 	
 	
-	<td>
+	<td><!--
 	  <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
 	      <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
 	    <td class="right">Taxes:</td><td><b>$</b></td><td class="right"><b>25.00</b></td>
 	  </tr>
+	  -->
 	  <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
 	      <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
-	    <td>Shipping & Hanldling:</td><td><b>$</b></td><td class="right"><b>35.00</b></td>
+	    <td class="right">Shipping:</td><td><b>$</b></td><td class="right"><b><%= shipTotal %></b></td>
 	  </tr>
 	  <tr><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
 	      <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
-	    <td class="right">Total:</td><td><b>$</b></td><td class="right"><b>7125.00</b></td>
+	    <td class="right">Total:</td><td><b>$</b></td><td class="right"><b><%= shipTotal + @order.total_price %></b></td>
 	  </tr>
 	</td>
 	
       </tr>
     </table>
   </div>
+  <% end %> 
 <br>
+
   
-<!-- <%= debug @order.order_items %> -->
+  
+  <!-- <%= debug @order.order_items %> -->
     <% if !purchase %>
-    <%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> 
+      <%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> 
     <% end %>
   <% end %>
   
+  
    <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>
+   <% end %>
