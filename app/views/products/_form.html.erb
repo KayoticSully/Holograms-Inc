@@ -17,11 +17,11 @@
         <div class="control-group">
           <%= f.label :name, :class => "control-label"%>
           <div class="controls">
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.text_field :name %>
-          <% else %>
-            <%= f.text_field :name, :disabled => 'disabled' %>
-          <% end %>  
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.text_field :name %>
+            <% else %>
+              <%= f.text_field :name, :disabled => 'disabled' %>
+            <% end %>  
           </div>
         </div>
       </div>
@@ -30,11 +30,11 @@
         <div class="control-group">
           <%= f.label :description, :class => "control-label"%>
           <div class="controls">
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.text_area :description %>
-          <% else %>
-            <%= f.text_area :description, :disabled => 'disabled' %>
-          <% end %> 
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.text_area :description %>
+            <% else %>
+              <%= f.text_area :description, :disabled => 'disabled' %>
+            <% end %> 
           </div>
         </div>
       </div>
@@ -51,11 +51,11 @@
         <div class="control-group">
           <%= f.label :price, :class => "control-label"%>
           <div class="controls">
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.text_field :price %>
-          <% else %>
-            <%= f.text_field :price, :disabled => 'disabled' %>
-          <% end %> 
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.text_field :price %>
+            <% else %>
+              <%= f.text_field :price, :disabled => 'disabled' %>
+            <% end %> 
           </div>
         </div>
       </div>
@@ -65,10 +65,10 @@
           <%= f.label :image, :class => "control-label"%>
           <div class="controls">
           <%= image_tag @product.image.url(:small) %>
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.file_field  :image %>
-          <% else %>
-          <% end %> 
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.file_field  :image %>
+            <% else %>
+            <% end %> 
           </div>
         </div>
       </div>
@@ -77,11 +77,11 @@
         <div class="control-group">
           <%= f.label :stock, :class => "control-label"%>
           <div class="controls">
-          <% if  (@current_user && @current_user.user_type.products_quantity) %>
-            <%= f.number_field  :stock %>
-          <% else %>
-            <%= f.number_field  :stock, :disabled => 'disabled' %>
-          <% end %> 
+            <% if  (@current_user && @current_user.user_type.products_quantity) %>
+              <%= f.number_field  :stock %>
+            <% else %>
+              <%= f.number_field  :stock, :disabled => 'disabled' %>
+            <% end %> 
           </div>
         </div>
       </div>
@@ -90,11 +90,11 @@
         <div class="control-group">
           <%= f.label :public, :class => "control-label"%>
           <div class="controls">
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.check_box  :public %>
-          <% else %>
-            <%= f.check_box  :public, :disabled => 'disabled' %>
-          <% end %> 
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.check_box  :public %>
+            <% else %>
+              <%= f.check_box  :public, :disabled => 'disabled' %>
+            <% end %> 
           </div>
         </div>
       </div>
@@ -103,11 +103,11 @@
         <div class="control-group">
           <%= f.label :weight, :class => "control-label"%>
           <div class="controls">
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.text_field  :weight %>
-          <% else %>
-            <%= f.text_field  :weight, :disabled => 'disabled' %>
-          <% end %> 
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.text_field  :weight %>
+            <% else %>
+              <%= f.text_field  :weight, :disabled => 'disabled' %>
+            <% end %> 
           </div>
         </div>
       </div>
@@ -115,33 +115,39 @@
       <div class="form-horizontal">
         <div class="control-group">
           <%= f.label :height, :class => "control-label"%>
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.text_field  :height %>
-          <% else %>
-            <%= f.text_field  :height, :disabled => 'disabled' %>
-          <% end %> 
+          <div class="controls">
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.text_field  :height %>
+            <% else %>
+              <%= f.text_field  :height, :disabled => 'disabled' %>
+            <% end %> 
+          </div>
         </div>
       </div>
     
       <div class="form-horizontal">
         <div class="control-group">
           <%= f.label :length, :class => "control-label"%>
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.text_field  :length %>
-          <% else %>
-            <%= f.text_field  :length, :disabled => 'disabled' %>
-          <% end %> 
+          <div class="controls">
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.text_field  :length %>
+            <% else %>
+              <%= f.text_field  :length, :disabled => 'disabled' %>
+            <% end %> 
+          </div>
         </div>
       </div>
     
       <div class="form-horizontal">
         <div class="control-group">
           <%= f.label :width, :class => "control-label"%>
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= f.text_field  :width %>
-          <% else %>
-            <%= f.text_field  :width, :disabled => 'disabled' %>
-          <% end %> 
+          <div class="controls">
+            <% if  (@current_user && @current_user.user_type.products_edit) %>
+              <%= f.text_field  :width %>
+            <% else %>
+              <%= f.text_field  :width, :disabled => 'disabled' %>
+            <% end %> 
+          </div>
         </div>
       </div>
     
