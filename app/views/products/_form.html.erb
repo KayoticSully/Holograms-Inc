@@ -38,10 +38,23 @@
           </div>
         </div>
       </div>
+
+      <div class="form-horizontal">
+        <div class="control-group">
+          <%= f.label :keywords, :class => "control-label"%>
+          <div class="controls">
+          <% if  (@current_user && @current_user.user_type.products_edit) %>
+            <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6})%>
+          <% else %>
+            <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6, :disabled=>'disabled'})%>
+          <% end %> 
+          </div>
+        </div>
+      </div>
       
       <div class="form-horizontal">
         <div class="controls">
-          <%= f.submit %>
+          <%= f.submit :class => "btn btn-success"%>
         </div>
       </div>
     </div>
@@ -162,24 +175,11 @@
       
       <div class="form-horizontal">
         <div class="control-group">
-          <%= f.label :keywords, :class => "control-label"%>
-          <div class="controls">
-          <% if  (@current_user && @current_user.user_type.products_edit) %>
-            <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6})%>
-          <% else %>
-            <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6, :disabled=>'disabled'})%>
-          <% end %> 
-          </div>
-        </div>
-      </div>
-      
-      <div class="form-horizontal">
-        <div class="control-group">
           <%= f.label :sale_id, :class => "control-label"%>
           <div class="controls">
           <% if  (@current_user && @current_user.user_type.sales_edit) %>
              <%= select_tag("sale_id", options_for_select(@sales.collect { |sale| [sale.name, sale.id] }, @product.sale_id), {:include_blank => true, :size=>3})%>
-            </br><%= link_to 'Create new sale', new_sale_path, :class => "btn btn-info" %>
+            </br><%= link_to 'Create a new sale', new_sale_path, :class => "btn btn-info btn-small" %>
           <% else %>
             <%= select_tag("sale_id", options_for_select(@sales.collect { |sale| [sale.name, sale.id] }, @product.sale_id), {:include_blank => true, :size=>3,:disabled=>'disabled'})%>
           <% end %> 
