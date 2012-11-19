@@ -8,48 +8,41 @@
 				<a class="brand" href="/employee">	Employee Access </a>
 				
 				<% if current_user %>
-						<%#Stuff for Inventory Management goes here%>
-						<%if current_user.user_type.products %>
-							<li>
-								<%= link_to "Manage Products", products_path %>
-							</li>
-							<%# COMMENTING OUT DROPDOWN
-							<li class="dropdown">
-								<!--This makes the label for the dropdown -->
-								<a id="inventory_dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
-									Inventory
-									<b class="caret"></b>
-								</a>
-								<!--Here goes the list that drops down-->
-								<ul class="dropdown-menu" role="menu" aria-labeledby="inventory_dropdown">
+
+						<li class="dropdown">
+							<!--This makes the label for the dropdown -->
+							<a id="store_dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+								Store Management
+								<b class="caret"></b>
+							</a>
+							<!--Here goes the list that drops down-->
+							<ul class="dropdown-menu" role="menu" aria-labeledby="store_dropdown">
+								
+								<%#Product Management%>
+								<%if current_user.user_type.products %>
 									<li>
-										<a tabindex="-1" href="#">TODO</a>
+										<%= link_to "Manage Products", products_path, :class => "tabindex=-1" %>
 									</li>
-								</ul>
-							</li>
-							%>
-						<%end%>
-						
-						<%#Keyword Management%>
-						<%if current_user.user_type.keywords_edit%>
-							<li>
-								<%=link_to "Manage Keywords", keywords_path %>
-							</li>
-						<%end%>
-						
-						<%#Sales Management%>
-						<%if current_user.user_type.sales_edit %>
-							<li>
-								<%=link_to "Manage Sales", sales_path %>
-							</li>
-						<%end%>
-						
-						<%#FAQ and Help management%>
-						<%if current_user.user_type.help_edit %>
-							<li>
-								<%= link_to "Manage FAQ", help_items_path %>
-							</li>
-						<%end%>
+								<%end%>
+
+								<%#Keyword Management%>
+								<%if current_user.user_type.keywords_edit%>
+									<li>
+										<%=link_to "Manage Keywords", keywords_path %>
+									</li>
+								<%end%>
+
+								<%#Sales Management%>
+								<%if current_user.user_type.sales_edit %>
+									<li>
+										<%=link_to "Manage Sales", sales_path %>
+									</li>
+								<%end%>
+
+
+							</ul>
+						</li>
+
 
 						<%if current_user.user_type.user_types_edit %>
 							<li class="dropdown">
@@ -67,6 +60,13 @@
 										<%= link_to "Manage User Types", user_types_path, :class=> tabindex="-1" %>
 									</li>
 								</ul>
+							</li>
+						<%end%>
+
+						<%#FAQ and Help management%>
+						<%if current_user.user_type.help_edit %>
+							<li>
+								<%= link_to "Manage FAQ", help_items_path %>
 							</li>
 						<%end%>
 				<%end%>	

@@ -1,3 +1,4 @@
+<div class="container-fluid">
 <%= form_for(@user_type) do |f| %>
   <% if @user_type.errors.any? %>
     <div id="error_explanation">
@@ -11,49 +12,90 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :purchase %><br />
-    <%= f.check_box :purchase %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :products %><br />
-    <%= f.check_box :products %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :products_edit %><br />
-    <%= f.check_box :products_edit %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :products_quantity %><br />
-    <%= f.check_box :products_quantity %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :help_edit %><br />
-    <%= f.check_box :help_edit %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :users_list %><br />
-    <%= f.check_box :users_list %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :orders_list %><br />
-    <%= f.check_box :orders_list %>
-  </div>
-  
-  
-  
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form_wrapper">
+    <div class="form_float"><!--left side column here-->
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :name, :class => "control-label" %>
+            <div class="controls">
+              <%= f.text_field :name %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :purchase, :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box :purchase %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :products, :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box :products %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :products_edit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box :products_edit %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :products_quantity, :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box :products_quantity %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :help_edit, :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box :help_edit %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :users_list, :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box :users_list %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <%= f.label :orders_list, :class => "control-label" %>
+            <div class="controls">
+              <%= f.check_box :orders_list %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-horizontal">
+          <div class="control-group">
+            <div class="controls">
+              <%= f.submit :class => "btn btn-success" %>
+            </div>
+          </div>
+        </div>
+
+    </div>
   </div>
 <% end %>
+</div>

@@ -1,46 +1,46 @@
-<p id="notice"><%= notice %></p>
+<legend>Showing User Type</legend>
 
-<p>
-  <b>Name:</b>
-  <%= @user_type.name %>
-</p>
+<table class = "table table-bordered table-striped">
+  <tr>
+    <td> <b> Name: </b> </td>
+    <td> <%= @user_type.name %> </td>
+  </tr>
 
-<p>
-  <b>Purchase:</b>
-  <%= @user_type.purchase %>
-</p>
+<tr>
+  <td><b>Purchase:</b></td>
+  <td><%= @user_type.purchase %></td>
+</td>
 
-<p>
-  <b>Products:</b>
-  <%= @user_type.products %>
-</p>
+<tr>
+  <td><b>Products:</b></td>
+  <td><%= @user_type.products %></td>
+</tr>
 
-<p>
-  <b>Products Edit:</b>
-  <%= @user_type.products_edit %>
-</p>
+<tr>
+  <td><b>Products Edit:</b></td>
+  <td><%= @user_type.products_edit %></td>
+</tr>
 
-<p>
-  <b>Products Quantity:</b>
-  <%= @user_type.products_quantity %>
-</p>
+<tr>
+  <td><b>Products Quantity:</b></td>
+  <td><%= @user_type.products_quantity %></td>
+</tr>
 
-<p>
-  <b>Help Edit:</b>
-  <%= @user_type.help_edit %>
-</p>
+<tr>
+  <td><b>Help Edit:</b></td>
+  <td><%= @user_type.help_edit %></td>
+</tr>
 
-<p>
-  <b>Users List:</b>
-  <%= @user_type.users_list %>
-</p>
+<tr>
+  <td><b>Users List:</b></td>
+  <td><%= @user_type.users_list %></td>
+</tr>
 
-<p>
-  <b>Orders List:</b>
-  <%= @user_type.orders_list %>
-</p>
+<tr>
+  <td><b>Orders List:</b></td>
+  <td><%= @user_type.orders_list %></td>
+</tr>
+</table>
 
-<%= debug @user_type %>
-
-<%= link_to 'Edit', edit_user_type_path(@user_type) %> |
-<%= link_to 'Back', user_types_path %>
+<%= link_to 'Edit', edit_user_type_path(@user_type), :class => "btn btn-warning" %>
+<%= link_to 'Back', user_types_path, :class => "btn" %>
