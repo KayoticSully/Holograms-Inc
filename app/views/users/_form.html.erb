@@ -15,7 +15,7 @@
 		<% end %>
 	  
 
-
+		<div class="row-fluid">
 		<%#This segment is for actual user input fields%>
 		<div class="form_wrapper">
 			<div class="form_float"><!--left side column here-->
@@ -86,13 +86,7 @@
 					</div>
 	          	<% end %>
 
-				<div class="form-horizontal">
-				  <div class="control-group">
-					<div class="controls">
-						<%= f.submit :class => 'btn btn-primary' %>
-					</div>
-				  </div>
-				</div>
+
 	          	
 
 			</div><!--from_float-->
@@ -166,7 +160,13 @@
 
 			</div><!--from_float-->
 		</div><!--from_wrapper-->
+		</div><!--row-->
 
+				<div class="row">
+
+					<%= f.submit :class => 'btn btn-success' %>
+					
+				</div>
 	<% end %>
 
 </div>
