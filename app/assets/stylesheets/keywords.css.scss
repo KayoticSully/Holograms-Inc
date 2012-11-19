@@ -16,4 +16,10 @@
 .thumbnail {
     margin-bottom: 20px;
     height: 358px;
+    position: relative;
+    
+    .controls {
+        position: absolute;
+        bottom: 0px;
+    }
 }
