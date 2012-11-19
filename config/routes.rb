@@ -29,8 +29,8 @@ ProjectCourse::Application.routes.draw do
   match "orders/updateqty/:id/:newqty", :to => 'orders#updateqty'
   match "about", :to => 'home#about'
   match "employee", :to => "home#employee"
-  match "search",  :to => "keywords#show"
-  match "search2",  :to => "keywords#search"
+  match "search",  :to => "keywords#search"
+  #match "search2",  :to => "keywords#show"
   #match "users/delete/:id", :to => "users#delete_user"
   
   # The priority is based upon order of creation:

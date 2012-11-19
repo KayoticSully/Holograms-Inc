@@ -2,10 +2,35 @@ class ProductsController < ApplicationController
   
 #  layout "employee", :only => [:index, :edit]
   
-  # GET /products
+ # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    if(params[:query])
+      terms = params[:query].split
+      query = Array.new
+      base_query = "name LIKE ?"
+      
+      if(terms.size == 1)
+        query = "%#{terms[0]}%"
+        @products = Product.where(base_query, query)
+      else
+        i = 1
+        until(i == terms.size)
+          base_query += " OR name LIKE ?"
+          i += 1
+        end
+        
+        query = terms.collect!{|t| "'%#{t}%'"}
+        terms.each do |term|
+          base_query.sub!("?", term)
+        end
+        @products = Product.where(base_query)
+      end
+      
+      
+    else
+      @products = Product.all
+    end
     
     respond_to do |format|
       format.html # index.html.erb
