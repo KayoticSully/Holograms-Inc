@@ -50,6 +50,25 @@
 								<%= link_to "Manage FAQ", help_items_path %>
 							</li>
 						<%end%>
+
+						<%if current_user.user_type.user_types_edit %>
+							<li class="dropdown">
+								<!--This makes the label for the dropdown -->
+								<a id="users_dropdown" href="#" role="button" class="dropdown-toggle" data-toggle="dropdown">
+									User Management
+									<b class="caret"></b>
+								</a>
+								<!--Here goes the list that drops down-->
+								<ul class="dropdown-menu" role="menu" aria-labeledby="users_dropdown">
+									<li>
+										<%= link_to "Manage Accounts", users_path, :class=> tabindex="-1" %>
+									</li>
+																		<li>
+										<%= link_to "Manage User Types", user_types_path, :class=> tabindex="-1" %>
+									</li>
+								</ul>
+							</li>
+						<%end%>
 				<%end%>	
 			</ul>
 			
