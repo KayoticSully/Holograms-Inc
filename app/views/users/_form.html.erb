@@ -1,130 +1,172 @@
 <div class="container-fluid">
 
-<%= form_for(@user) do |f| %>
+	<%= form_for(@user) do |f| %>
 
-	<%#This segment is to inform the user of input errors%>
-	<% if @user.errors.any? %>
-		<div id="error_explanation">
-			<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
-			<ul>
-				<% @user.errors.full_messages.each do |msg| %>
-					<li><%= msg %></li>
+		<%#This segment is to inform the user of input errors%>
+		<% if @user.errors.any? %>
+			<div id="error_explanation">
+				<h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+				<ul>
+					<% @user.errors.full_messages.each do |msg| %>
+						<li><%= msg %></li>
+					<% end %>
+				</ul>
+			</div>
+		<% end %>
+	  
+
+
+		<%#This segment is for actual user input fields%>
+		<div class="form_wrapper">
+			<div class="form_float"><!--left side column here-->
+				
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :first_name, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :first_name %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :address, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :address %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :state, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :state %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :country, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :country %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :password, :class => "control-label" %>
+					<div class="controls">
+						<%= f.password_field :password %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :credit_card, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :credit_card %>
+					</div>
+				  </div>
+				</div>
+
+				<%#only allow the user type to be changed if the editor has permissions and it should be permitted%>
+				<% if(@current_user && @current_user.user_type.user_types_edit && !@user.user_type.user_types_edit) %>
+					<div class="form-horizontal">
+					  <div class="control-group">
+						<%= f.label :user_type_id, :class => "control-label" %>
+						<div class="controls">
+							<%= f.collection_select(:user_type_id, UserType.all, :id, :name) %>
+						</div>
+					  </div>
+					</div>
+	          	<% end %>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<div class="controls">
+						<%= f.submit :class => 'btn btn-primary' %>
+					</div>
+				  </div>
+				</div>
+	          	
+
+			</div><!--from_float-->
+
+			<div class="form_float"><!--right side column here-->
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :last_name, :class=> "control-label" %>
+					<div class="controls">
+						<%= f.text_field :last_name %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :city, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :city %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :zipcode, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :zipcode %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :email_address, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :email_address %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :password_confirmation, :class => "control-label" %>
+					<div class="controls">
+						<%= f.password_field :password_confirmation %>
+					</div>
+				  </div>
+				</div>
+
+				<div class="form-horizontal">
+				  <div class="control-group">
+					<%= f.label :phone_number, :class => "control-label" %>
+					<div class="controls">
+						<%= f.text_field :phone_number %>
+					</div>
+				  </div>
+				</div>
+
+				<% if(@current_user && ((@current_user.user_type.user_types_edit && !@user.user_type.user_types_edit && @current_user.id != @user.id) || (@current_user.id == @user.id && !@user.user_type.user_types_edit))) %>
+					<div class="form-horizontal">
+					  <div class="control-group">
+						<%= f.label :disabled, :class => "control-label" %>
+						<div class="controls">
+							<%= f.check_box :disabled %>
+						</div>
+					  </div>
+					</div>
 				<% end %>
-			</ul>
-		</div>
+
+			</div><!--from_float-->
+		</div><!--from_wrapper-->
+
 	<% end %>
-  
 
-
-	<%#This segment is for actual user input fields%>
-	<div class="row">
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :first_name %>
-			<%= f.text_field :first_name %>
-		  </div>
-		</div>
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :last_name %>
-			<%= f.text_field :last_name %>
-		  </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :address %>
-			<%= f.text_field :address %>
-		  </div>
-		</div>
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :city %>
-			<%= f.text_field :city %>
-		  </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :state %>
-			<%= f.text_field :state %>
-		  </div>
-		</div>
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :zipcode %>
-			<%= f.text_field :zipcode %>
-		  </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :country %>
-			<%= f.text_field :country %>
-		  </div>
-		</div>
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :email_address %>
-			<%= f.text_field :email_address %>
-		  </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :password %>
-			<%= f.password_field :password %>
-		  </div>
-		</div>
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :password_confirmation %>
-			<%= f.password_field :password_confirmation %>
-		  </div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :credit_card %>
-			<%= f.text_field :credit_card %>
-		  </div>
-		</div>
-		<div class="span6">
-		  <div class="field">
-			<%= f.label :phone_number %>
-			<%= f.text_field :phone_number %>
-		  </div>
-		</div>
-	</div>
-	<%#enable this if statement once this field is no longer needed %>
-	
-        <div class="row">
-          <% if(@current_user && @current_user.user_type.user_types_edit && !@user.user_type.user_types_edit) %>
-            <div class="span6">
-              <div class="field">
-                    <%= f.label :user_type_id %>
-                    <%= f.collection_select(:user_type_id, UserType.all, :id, :name) %>
-              </div>
-            </div>
-          <% end %>
-          <%# if logged in and the user can edit users and the edited user doesnt have the edit users permission, and is not yourself (or current user doesnt have the edit permission, but is editing himself, show the disable flag.%>
-          <% if(@current_user && ((@current_user.user_type.user_types_edit && !@user.user_type.user_types_edit && @current_user.id != @user.id) || (@current_user.id == @user.id && !@user.user_type.user_types_edit))) %>
-            <div class="span6">
-              <div class="field">
-                    <%= f.label :disabled %>
-                    <%= f.check_box :disabled %>
-              </div>
-            </div>
-          <% end %>
-	  </div>
-	  <div class="actions">
-		<%= f.submit :class => 'btn btn-primary' %>
-	  </div>
-	</div>
-<% end %>
 </div>
