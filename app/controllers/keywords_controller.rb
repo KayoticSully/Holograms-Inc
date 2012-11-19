@@ -41,7 +41,6 @@ class KeywordsController < ApplicationController
       keywordArr = Keyword.find(:all, :conditions => ["lower(name) =?", params[:id].gsub("_", " ").downcase])
       @keyword = keywordArr[0]
       @products = @keyword.products.select{|product| product.public}
-      end
     end
   end
 
