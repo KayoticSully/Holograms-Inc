@@ -4,8 +4,8 @@
 <% emptyCart0 = true %>
 
 <div>
-  	<table border="0" cellspacing="0" class="table table-bordered table-striped"> 
-  		<tbody>
+       <table border="0" cellspacing="0" class="table table-bordered table-striped"> 
+  	    <tbody>
 		  
   			<tr>
   				<th class="left" id="CartHeaderQty"> Qty. </th>
@@ -18,18 +18,18 @@
 	<% itemsTotalPrice = 0 %>
         <% itemsTotalSale = 0 %>
 
-	<% @order.order_items.each do |order_item| %>
+      <% @order.order_items.each do |order_item| %>
 		    	
   			<tr>
   				<td class="left"> 
 					<strong><%= order_item.quantity %></strong>
-					<% if !@order.purchased %>
+				    <% if !@order.purchased %>
 					<div class="btn-group" >
 						<%= link_to "+", "/orders/add/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
 						<%= link_to "-", "/orders/remove/#{order_item.product.id}", :class => "btn btn-mini", :title => "Remove 1" %>
 						<%= link_to "x", "/orders/removeall/#{order_item.product.id}", :class => "btn btn-mini", :title => "Remove All" %>
 					</div>
-					<% end %>
+				    <% end %>
 				</td>
   				<td class="left">
 				        <%= link_to image_tag(order_item.product.image.url(:small)), order_item.product %>
@@ -43,7 +43,7 @@
                                 <% else %>
                                 $<%= number_with_precision(order_item.product.price, :precision => 2) %>
                                   <% itemsTotalPrice = order_item.product.price * order_item.quantity %>
-                              <% end %>
+                                <% end %>
                                   </strong></td>
                                 <td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
   			</tr>
@@ -52,20 +52,21 @@
 	<% if itemstotal > 0 then emptyCart0 = false else emptyCart0 = true %>
 	<% end %>
 	<% subTotal += itemsTotalPrice %>
-	<% end %>
+      <% end %> <!-- Loop -->
       <tr>
 	    <td><strong><%= itemstotal %></strong></td>
 	    <td>&nbsp</td>
 	    <td>&nbsp</td>
 	    <td><b>SubTotal: $<%= number_with_precision(subTotal, :precision => 2) %></b>
             <% if (itemsTotalSale > 0) %>
-              <b><font color='red'></br>Total Savings: $<%=number_with_precision(itemsTotalSale, :precision => 2) %></b></font>
-          <% end %>
+              <b><font color='red'></br>Total Savings: $<%= number_with_precision(itemsTotalSale, :precision => 2) %></b></font>
+            
+            <% end %>
             </td>
 	    <% @order.total_price = subTotal %>
       </tr>
        
-    <br> 
+ <br> 
 	    </tbody>
        </table>
  <br>
