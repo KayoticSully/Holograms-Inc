@@ -2,6 +2,14 @@
 
 <% subTotal = 0 %>
 <% emptyCart0 = true %>
+<% shipTo = 0 %>
+<% ship0  = 0 %>
+<% ship1  = 0 %>
+<% ship2  = 0 %>
+<% ship3  = 0 %>
+<% ship4  = 0 %>
+<% ship5  = 0 %>
+<% ship6  = 0 %>
 
 <div>
        <table border="0" cellspacing="0" class="table table-bordered table-striped"> 
@@ -17,8 +25,10 @@
 	<% itemstotal = 0 %>
 	<% itemsTotalPrice = 0 %>
         <% itemsTotalSale = 0 %>
+	<% items = 0 %>
 
       <% @order.order_items.each do |order_item| %>
+      <% items = order_item %>
 		    	
   			<tr>
   				<td class="left"> 
@@ -49,6 +59,14 @@
   			</tr>
 		    
 	<% itemstotal += order_item.quantity %>
+	<% link_to shipTo = order_item.product.ship_prices_for(@current_user) %>
+	<% ship0 += shipTo[0][1] %>
+	<% ship1 += shipTo[0][1] %>
+	<% ship2 += shipTo[1][1] %>
+	<% ship3 += shipTo[2][1] %>
+	<% ship4 += shipTo[4][1] %>
+	<% ship5 += shipTo[5][1] %>
+	<% ship6 += shipTo[6][1] %>
 	<% if itemstotal > 0 then emptyCart0 = false else emptyCart0 = true %>
 	<% end %>
 	<% subTotal += itemsTotalPrice %>
@@ -81,9 +99,67 @@
 	    <td>
 	    <% if emptyCart0 == false %>
 	    <%= link_to "CheckOut", @order, :class => "btn btn-warning" %>
+	    
 	    <% end %>
           </td>
+      
       </tr>
+      <tr>
+	    <% shipOpt = items.product.ship_prices_for(@current_user) %>
+	    <tr>
+		  <td>
+			<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onchange="shipChoices()">
+			<%= shipOpt[0][0] %>
+		  </td>
+		  <td class="right"><b>$<%= number_with_precision(ship0/100.0, :precision => 2) %></b>
+		  </td>
+	    </tr>
+	    <tr>
+		  <td>
+			<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onchange="shipChoices()"  checked>
+			<%= shipOpt[1][0] %>
+		  </td>
+		  <td class="right"><b>$<%= number_with_precision(ship1/100.0, :precision => 2) %></b>
+		  </td>
+	    </tr>
+	    <tr>
+		  <td>
+			<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" onchange="shipChoices()">
+			<%= shipOpt[2][0] %>
+		  </td>
+		  <td class="right"><b>$<%= number_with_precision(ship2/100.0, :precision => 2) %></b>
+		  </td>
+	    </tr>
+	    <tr>
+		  <td>
+			<input type="radio" name="optionsRadios" id="optionsRadios3" value="option4" onchange="shipChoices()">
+			<%= shipOpt[3][0] %></td>
+		  <td class="right"><b>$<%= number_with_precision(ship3/100.0, :precision => 2) %></b>
+		  </td>
+	    </tr>
+	    <tr>
+		  <td>
+			<input type="radio" name="optionsRadios" id="optionsRadios5" value="option5" onchange="shipChoices()">
+			<%= shipOpt[4][0] %>
+		  </td>
+		  <td class="right"><b>$<%= number_with_precision(ship4/100.0, :precision => 2) %></b>
+		  </td>
+	    </tr>
+	    <tr>
+		  <td>
+			<input type="radio" name="optionsRadios" id="optionsRadios6" value="option6" onchange="shipChoices()">
+			<%= shipOpt[5][0] %></td>
+		  <td class="right"><b>$<%= number_with_precision(ship5/100.0, :precision => 2) %></b>
+		  </td>
+	    </tr>
+	    <tr>
+		  <td>
+			<input type="radio" name="optionsRadios" id="optionsRadios7" value="option7" onchange="shipChoices()">
+			<%= shipOpt[6][0] %></td>
+		  <td class="right"><b>$<%= number_with_precision(ship6/100.0, :precision => 2) %></b>
+		  </td>
+	    </tr>
+      </tr>	    
    </table>
    
  <br>
