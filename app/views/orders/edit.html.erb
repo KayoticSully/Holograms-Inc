@@ -3,6 +3,7 @@
 <% subTotal = 0 %>
 <% emptyCart0 = true %>
 <% shipTo = 0 %>
+<% shipTotal = 0 %>
 <% ship0  = 0 %>
 <% ship1  = 0 %>
 <% ship2  = 0 %>
@@ -10,6 +11,15 @@
 <% ship4  = 0 %>
 <% ship5  = 0 %>
 <% ship6  = 0 %>
+<% shipping = false %>
+
+<script>
+      var SHIPTOTAL = {};
+      
+      SHIPTOTAL.shipCost = <%= shipTotal %>;
+	    
+      
+</script>
 
 <div>
        <table border="0" cellspacing="0" class="table table-bordered table-striped"> 
@@ -94,6 +104,7 @@
 	 <p><b>Your cart is empty at this time</b></p>
   <% end %>
 
+  
    <table>
       <tr>
 	    <td>
@@ -108,7 +119,7 @@
 	    <% shipOpt = items.product.ship_prices_for(@current_user) %>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" onchange="shipChoices()">
+			<input type="radio" name="optionsRadios" id="optionsRadios1" value=0 onclick="shipChoices(value)">
 			<%= shipOpt[0][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship0/100.0, :precision => 2) %></b>
@@ -116,7 +127,7 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" onchange="shipChoices()"  checked>
+			<input type="radio" name="optionsRadios" id="optionsRadios2" value=1 onclick="shipChoices(value)">
 			<%= shipOpt[1][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship1/100.0, :precision => 2) %></b>
@@ -124,7 +135,7 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" onchange="shipChoices()">
+			<input type="radio" name="optionsRadios" id="optionsRadios3" value=2 onclick="shipChoices(value)">
 			<%= shipOpt[2][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship2/100.0, :precision => 2) %></b>
@@ -132,14 +143,14 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios3" value="option4" onchange="shipChoices()">
+			<input type="radio" name="optionsRadios" id="optionsRadios3" value=3 onclick="shipChoices(value)">
 			<%= shipOpt[3][0] %></td>
 		  <td class="right"><b>$<%= number_with_precision(ship3/100.0, :precision => 2) %></b>
 		  </td>
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios5" value="option5" onchange="shipChoices()">
+			<input type="radio" name="optionsRadios" id="optionsRadios5" value=4 onclick="shipChoices(value)">
 			<%= shipOpt[4][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship4/100.0, :precision => 2) %></b>
@@ -147,23 +158,94 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios6" value="option6" onchange="shipChoices()">
+			<input type="radio" name="optionsRadios" id="optionsRadios6" value=5 onclick="shipChoices(value)">
 			<%= shipOpt[5][0] %></td>
 		  <td class="right"><b>$<%= number_with_precision(ship5/100.0, :precision => 2) %></b>
 		  </td>
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios7" value="option7" onchange="shipChoices()">
+			<input type="radio" name="optionsRadios" id="optionsRadios7" value=6 onclick="shipChoices(value)">
 			<%= shipOpt[6][0] %></td>
 		  <td class="right"><b>$<%= number_with_precision(ship6/100.0, :precision => 2) %></b>
 		  </td>
 	    </tr>
       </tr>	    
    </table>
-   
+
+<!--
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script> 
+<script type="text/javascript">
+    //var lastSelected;
+    var currentSelected;
+    $(function () {
+        //if you have any radio selected by default
+        currentSelected = $('[name="optionsRadios"]:checked').val();
+	alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
+	<% @order.total_price = shipTotal = ship1 %>
+	
+    });
+    $(document).on('click', '[name="optionsRadios"]', function () {
+      currentSelected = $(this).val();
+        if (currentSelected == $(this).val() && typeof currentSelected != "undefined") {
+            alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is now selected");
+	    var shipValue = $('[name="optionsRadios"][value="' + currentSelected + '"]').val();
+	    alert("currentSelected = " + parseInt($('[name="optionsRadios"][value="' + currentSelected + '"]').val()));
+	    alert("ShippingCost0 = " + <%=  shipTotal %>);
+	    
+	    if(parseInt(currentSelected) == 0) { <% shipTotal = ship0 %>; <% @order.total_price = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    else
+	    if(parseInt(currentSelected) == 1) { <% shipTotal = ship1 %>; <% @order.total_price = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    else
+	    if(parseInt(currentSelected) == 2) { <% shipTotal = ship2 %>; <% @order.total_price = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    else
+	    if(parseInt(currentSelected) == 3) { <% shipTotal = ship3 %>; <% @order.total_price = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    else
+	    if(parseInt(currentSelected) == 4) { <% shipTotal = ship4 %>; <% @order.total_price = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    else
+	    if(parseInt(currentSelected) == 5) { <% shipTotal = ship5 %>; <% @order.total_price = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    else
+	    if(parseInt(currentSelected) == 6) { <% shipTotal = ship6 %>; <% @order.total_price = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    
+	    //alert("ShippingCost1 = " + <%= shipTotal %>);
+	    
+
+        }//End if
+	//alert("ShippingCost2 = " + <%= shipTotal %>)
+        //currentSelected = $(this).val();
+	
+    });//End function .onclick
+    
+</script>
+-->
+
+<%= @order.total_price = ship1/100.0  %>
+
+<script>
+      function shipChoices(val){
+	    alert("value=" + val)
+	    
+	    switch(parseInt(val)) {
+		  case 0: <% @order.total_price = ship0/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
+		  case 1: <% @order.total_price = ship1/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
+		  case 2: <% @order.total_price = ship2/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
+		  case 3: <% @order.total_price = ship3/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
+		  case 4: <% @order.total_price = ship4/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
+		  case 5: <% @order.total_price = ship5/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
+		  case 6: <% @order.total_price = ship6/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
+		  default: alert("Invalid Crap!")
+	    }
+	    
+      }
+</script>
+
+
  <br>
+      <% if shipping == true %>
+       <p><b>ShipCost: <%= @order.total_price %></b></p>
+      <% end %> 
  <br>
+ 
    <div>
       <%= link_to 'Continue Shopping', get_location_else(orders_path), :class => "btn btn-small" %> 
        
