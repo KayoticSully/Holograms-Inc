@@ -108,10 +108,7 @@
    <table>
       <tr>
 	    <td>
-	    <% if emptyCart0 == false %>
-	    <%= link_to "CheckOut", @order, :class => "btn btn-warning" %>
 	    
-	    <% end %>
           </td>
       
       </tr>
@@ -119,7 +116,7 @@
 	    <% shipOpt = items.product.ship_prices_for(@current_user) %>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios1" value=0 onclick="shipChoices(value)">
+			<input type="radio" name="optionsRadios" id="optionsRadios1" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[0][0])}/#{ship0}" %> onclick="shipChoices(value)">
 			<%= shipOpt[0][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship0/100.0, :precision => 2) %></b>
@@ -127,7 +124,7 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios2" value=1 onclick="shipChoices(value)">
+			<input type="radio" name="optionsRadios" id="optionsRadios2" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[1][0])}/#{ship1}"  %> onclick="shipChoices(value)">
 			<%= shipOpt[1][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship1/100.0, :precision => 2) %></b>
@@ -135,7 +132,7 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios3" value=2 onclick="shipChoices(value)">
+			<input type="radio" name="optionsRadios" id="optionsRadios3" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[2][0])}/#{ship2}"  %> onclick="shipChoices(value)">
 			<%= shipOpt[2][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship2/100.0, :precision => 2) %></b>
@@ -143,14 +140,15 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios3" value=3 onclick="shipChoices(value)">
-			<%= shipOpt[3][0] %></td>
+			<input type="radio" name="optionsRadios" id="optionsRadios3" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[3][0])}/#{ship3}"  %> onclick="shipChoices(value)">
+			<%= shipOpt[3][0] %>
+		</td>
 		  <td class="right"><b>$<%= number_with_precision(ship3/100.0, :precision => 2) %></b>
 		  </td>
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios5" value=4 onclick="shipChoices(value)">
+			<input type="radio" name="optionsRadios" id="optionsRadios5" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[4][0])}/#{ship4}"  %> onclick="shipChoices(value)">
 			<%= shipOpt[4][0] %>
 		  </td>
 		  <td class="right"><b>$<%= number_with_precision(ship4/100.0, :precision => 2) %></b>
@@ -158,15 +156,17 @@
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios6" value=5 onclick="shipChoices(value)">
-			<%= shipOpt[5][0] %></td>
+			<input type="radio" name="optionsRadios" id="optionsRadios6" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[5][0])}/#{ship5}"  %> onclick="shipChoices(value)">
+			<%= shipOpt[5][0] %>
+		</td>
 		  <td class="right"><b>$<%= number_with_precision(ship5/100.0, :precision => 2) %></b>
 		  </td>
 	    </tr>
 	    <tr>
 		  <td>
-			<input type="radio" name="optionsRadios" id="optionsRadios7" value=6 onclick="shipChoices(value)">
-			<%= shipOpt[6][0] %></td>
+			<input type="radio" name="optionsRadios" id="optionsRadios7" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[6][0])}/#{ship6}"  %> onclick="shipChoices(value)">
+			<%= shipOpt[6][0] %>
+			</td>
 		  <td class="right"><b>$<%= number_with_precision(ship6/100.0, :precision => 2) %></b>
 		  </td>
 	    </tr>
@@ -219,23 +219,11 @@
 </script>
 -->
 
-<%= @order.total_price = ship1/100.0  %>
-
 <script>
       function shipChoices(val){
-	    alert("value=" + val)
-	    
-	    switch(parseInt(val)) {
-		  case 0: <% @order.total_price = ship0/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
-		  case 1: <% @order.total_price = ship1/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
-		  case 2: <% @order.total_price = ship2/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
-		  case 3: <% @order.total_price = ship3/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
-		  case 4: <% @order.total_price = ship4/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
-		  case 5: <% @order.total_price = ship5/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
-		  case 6: <% @order.total_price = ship6/100.0 %>; alert("order.total_price=" + <%= @order.total_price %>); break;
-		  default: alert("Invalid Crap!")
-	    }
-	    
+	$.ajax({
+		url : "/updateShipping" + val
+	});
       }
 </script>
 
@@ -247,11 +235,15 @@
  <br>
  
    <div>
-      <%= link_to 'Continue Shopping', get_location_else(orders_path), :class => "btn btn-small" %> 
+	<% if emptyCart0 == false %>
+	    <%= link_to "CheckOut", @order, :class => "btn btn-warning", :id => "CheckOutButton" %>
+	    
+	    <% end %>
+      <%= link_to 'Continue Shopping', get_location_else(orders_path), :class => "btn btn" %> 
        
       <% if emptyCart0 == false %>
       <%= link_to "Cancel Order", @order, :method => :delete,
-      data: { confirm: 'Are you sure?' }, :class => "btn btn-small btn-warning" %>
+      data: { confirm: 'Are you sure?' }, :class => "btn btn btn-warning" %>
       <% end %>
    </div>
 </div>

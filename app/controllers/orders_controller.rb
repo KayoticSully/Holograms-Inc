@@ -26,11 +26,19 @@ class OrdersController < ApplicationController
     end
     
     @order = Order.find(params[:id])
+    @shipping_price = params[:shipping].to_i / 100.0
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @order }
     end
+  end
+  
+  def updateShipping
+    order = Order.find(params[:id])
+    order.shipping_method = params[:method]
+    order.shipping_cost = params[:price].to_i / 100
+    order.save
   end
 
   # GET /orders/new

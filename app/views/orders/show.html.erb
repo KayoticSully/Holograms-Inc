@@ -58,10 +58,11 @@
 	      </tr>
 	<% itemstotal += order_item.quantity %>
 	<% subTotal += itemsTotalPrice %>
-	 
 
        <% end %>
+       
 	      <tr>
+	       
 		    <td><strong><%= itemstotal %></strong></td>
 		    <td>&nbsp</td>
 		    <td>&nbsp</td>
@@ -82,7 +83,7 @@
 	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
 	    <td>Shipping & Handling:</td>
 	    <td>
-	      <b>$<%= number_with_precision(@order.total_price, :precision => 2) %></b>
+	      <b>$<%= number_with_precision(@order.shipping_cost, :precision => 2) %></b>
 	    </td>
 	    
       </tr>
@@ -95,9 +96,11 @@
 	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
 	    <td>Total:</td>
 	    <td>
+	     <% subTotal += @order.shipping_cost %>
 	      <b>$<%= number_with_precision(subTotal, :precision => 2) %></b>
 	    </td>
 	    <% @order.total_price = subTotal %>
+	    <% @order.save %>
       </tr>
     </table>   
   </div>
@@ -124,7 +127,7 @@
 <% shipTo = [] %>
 <% index = 10 %>
 
-<% shipSpeed = "" %>
+<% shipSpeed = @order.shipping_method %>
 
 <!-- Shipping loop goes here -->
 
