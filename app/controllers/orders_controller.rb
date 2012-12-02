@@ -228,12 +228,17 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
     
     invalids = Array.new
-    #check that inventory can support purchase
-    order.order_items.each do |order_item|
-      if(order_item.quantity > order_item.product.stock)
-        invalids.push("Cannot purchase #{order_item.quantity} of product: #{order_item.product.name}. Only #{order_item.product.stock} available.")
-      end
     
+    #check if user has a credit card
+    if(!@current_user.credit_card || @current_user.credit_card == nil || @current_user.credit_card == "")
+      invalids.push("Cannot make a purchase without a credit card. Please update your credit card information.")
+    else
+      #check that inventory can support purchase
+      order.order_items.each do |order_item|
+        if(order_item.quantity > order_item.product.stock)
+          invalids.push("Cannot purchase #{order_item.quantity} of product: #{order_item.product.name}. Only #{order_item.product.stock} available.")
+        end
+      end
     end
     
     #check for errors
