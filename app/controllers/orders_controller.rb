@@ -37,8 +37,9 @@ class OrdersController < ApplicationController
   def updateShipping
     order = Order.find(params[:id])
     order.shipping_method = params[:method]
-    order.shipping_cost = params[:price].to_i / 100
+    order.shipping_cost = params[:price].to_i / 100.0
     order.save
+    @ship_choice = true
   end
 
   # GET /orders/new
@@ -232,6 +233,7 @@ class OrdersController < ApplicationController
       if(order_item.quantity > order_item.product.stock)
         invalids.push("Cannot purchase #{order_item.quantity} of product: #{order_item.product.name}. Only #{order_item.product.stock} available.")
       end
+    
     end
     
     #check for errors
