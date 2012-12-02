@@ -26,7 +26,7 @@
   </div>
   <div class="field">
     <%= f.label :end %>
-    <%= f.datetime_select :end %>
+    <%= f.datetime_select :end, :default => 1.days.from_now %>
   </div>
   <div class="actions">
     <%= f.submit :class=>"btn btn-success"%>
