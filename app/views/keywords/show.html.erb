@@ -15,7 +15,10 @@
 						You save <strong><%= product.sale_markdown %>%!!</strong>
 						</br>
 						<% end %>
-						Rating: <%= ("<i class=icon-thumbs-up></i>" * product.rating).html_safe %>
+						<!--
+						Ratings not yet enabled.
+						Rating: <%#<%= ("<i class=icon-thumbs-up></i>" * product.rating).html_safe %>
+						-->
 					</p>
 					<p class="controls">
 						<% if product.stock>0 %>
