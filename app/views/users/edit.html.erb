@@ -2,6 +2,8 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @user, :class => "btn btn-small btn-info" %>
-<%= link_to 'Back', users_path, :class => "btn btn-small btn-warning" %>
+<%if @current_user.user_type.user_types_edit %>
+	<%= link_to 'Show', @user, :class => "btn btn-small btn-info" %>
+	<%= link_to 'Back', users_path, :class => "btn btn-small btn-warning" %>
+<%end%>
 <%# <%= link_to 'Back to Order', "/orders/#{@current_user.cart.id}/", :class => "btn btn-small btn-warning" %>
