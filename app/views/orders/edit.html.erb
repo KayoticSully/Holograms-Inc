@@ -109,13 +109,15 @@
   
    <table>
       <tr>
-	    <td>
+	  <td>
 	    
           </td>
       
       </tr>
       <tr>
-	    <% shipOpt = items.product.ship_prices_for(@current_user) %>
+	    <% if itemstotal != 0 %>
+		  <% shipOpt = items.product.ship_prices_for(@current_user) %>
+	    
 	    <tr>
 		  <td>
 			<input type="radio" name="optionsRadios" id="optionsRadios1" value=<%= "/#{@order.id}/#{URI::encode(shipOpt[0][0])}/#{ship0}" %> onclick="shipChoices(value)">
@@ -172,6 +174,7 @@
 		  <td class="right"><b>$<%= number_with_precision(ship6/100.0, :precision => 2) %></b>
 		  </td>
 	    </tr>
+	    <% end %>
       </tr>	    
    </table>
 
