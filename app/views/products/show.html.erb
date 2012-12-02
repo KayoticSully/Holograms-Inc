@@ -15,11 +15,11 @@
 		<div class="row-fluid">
 			<div class="span8">
 					<b>Price: </b>
-					<%= number_with_precision(@product.price, :precision => 2) %>
+					<%= "$"<<number_with_precision(@product.price, :precision => 2) %>
 					</br>
 					<% if @product.sale_price %>
-						<b>Sale price: </b>
-						<%= number_with_precision(@product.sale_price, :precision => 2) %>
+						<b>Sale price: $</b>
+						<%= "$"<<number_with_precision(@product.sale_price, :precision => 2) %>
 						</br>
 						<b>You save
 						<%= @product.sale_markdown %>%!
@@ -42,7 +42,7 @@
 				<% if (@product.stock>0) %>
 					<%= link_to "Add to Cart", "/orders/add/#{@product.id}", :class => "btn btn-warning" %>
 				<% else %>
-							<button type="button" class="btn btn-small btn-inverse disabled" disabled="disabled">Out of stock</button>
+					<button type="button" class="btn btn-small btn-inverse disabled" disabled="disabled">Out of stock</button>
 				<% end %>
 				
 			</div>
