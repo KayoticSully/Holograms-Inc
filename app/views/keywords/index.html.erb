@@ -3,14 +3,12 @@
 <table class="table table-striped table-bordered">
   <tr>
     <th>Name</th>
-    <th>Under</th>
     <th colspan=2>Keyword Management</th>
   </tr>
 
 <% @keywords.each do |keyword| %>
   <tr>
     <td><%= keyword.name %></td>
-    <td><%= keyword.under %></td>
     <td><%= link_to 'Edit', edit_keyword_path(keyword.id), :class => "btn btn-warning" %></td>
     <td><%= link_to 'Delete', keyword, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
   </tr>
@@ -19,4 +17,4 @@
 
 <br />
 
-<%= link_to 'New Keyword', new_keyword_path %>
+<%= link_to 'New Keyword', new_keyword_path, :class=>"btn btn-success" %>
