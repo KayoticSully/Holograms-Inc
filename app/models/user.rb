@@ -8,8 +8,8 @@ class User < ActiveRecord::Base
   attr_accessor :password
   before_save :encrypt_password, :downcase_email, :check_type
   validates_confirmation_of :password
-  validates :password, :presence => true, :length => { :within => 6..40}, :on => :create
-  #validates :password, :length => { :within => 6..40}, :on => :update
+  validates :password, :presence => true, :length => { :within => 6..40}, :on => :create 
+  validates :password, :length => { :within => 6..40}, :if => Proc.new{|f| !f.password.blank? }
   
   validates_presence_of :first_name, :last_name, :zipcode, :city, :address, :email_address, :state, :country
   validates_uniqueness_of :email_address

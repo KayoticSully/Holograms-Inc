@@ -1,5 +1,4 @@
-<% if @current_user&&(@current_user.user_type.products_edit || @current_user.user_type.products_quantity || @current_user.user_type.help_edit || @current_user.user_type.keywords_edit || @current_user.user_type.user_types_edit || @current_user.user_type.sales_edit)
-	%>
+<% if(@current_user && !@current_user.user_type.purchase) %>
 
 	<%= render :partial => "/layouts/employee" %>
 

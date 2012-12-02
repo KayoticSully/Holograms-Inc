@@ -89,16 +89,23 @@ class UsersController < ApplicationController
   # PUT /users/1.json
   def update
     #if not logged in or user id doesnt match param, redirect home
-    if(!@current_user || @current_user.id != Integer(params[:id]))
-      redirect_to root_url
-      return
+    if(!@current_user || !@current_user.user_type.user_types_edit)
+      if(@current_user.id != Integer(params[:id]))
+        redirect_to root_url
+        return
+      end
     end
     @user = User.find(params[:id])
 
     respond_to do |format|
       if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
+        if @current_user.user_type.purchase
+          format.html { redirect_to @user, notice: 'User was successfully updated.' }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to '/users', notice: 'User was successfully updated.' }
+          format.json { head :no_content }
+        end
       else
         format.html { render action: "edit" }
         format.json { render json: @user.errors, status: :unprocessable_entity }
