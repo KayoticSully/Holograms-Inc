@@ -12,35 +12,40 @@
         padding-bottom: 40px;
       }
   </style>
- 
+  <noscript>
+    <style>
+      #everything_else {
+	margin-left: 0px;
+	visibility: visible;
+      }
+    </style>
+  </noscript>
 </head>
 <body>
 
 <%#Opening divs for navbar%>
 <div id="wrap">
+      <div id="category_bar" data-spy="affix" class="span3">
+	<ul class="nav navbar-inverse nav-list well">
+		<li class="nav-heaver"><h5>Categories</h5></li>
+		<li class="divider"></li>
+		<% @keywords.each do |keyword| %>
+				<li class>
+					<%= link_to keyword.name.capitalize!, keyword %>
+				</li>
+		<% end %>
+	</ul>
+      </div>
 	<div id="main">
 		<%= render :partial => "/layouts/customer_navbar" %>
 		<div class="container-fluid">
 			<div class="row-fluid">
-				<div id="category_bar" data-spy="affix" class="span2">
-					<ul class="nav navbar-inverse nav-list well">
-						<li class="nav-heaver"><h5>Categories</h5></li>
-						<li class="divider"></li>
-						<% @keywords.each do |keyword| %>
-								<li class>
-									<%= link_to keyword.name.capitalize!, keyword %>
-								</li>
-						<% end %>
-					</ul>
-				</div>
 				<div id="everything_else" class="span10">
-					
 					<% flash.each do |name, msg| %>
 						<%= content_tag :div, msg, :id => "flash_#{name}", :class => "alert alert-info" %>
 					<% end %>
 					
 					<%= yield %>
-
 					
 				</div>
 			</div>

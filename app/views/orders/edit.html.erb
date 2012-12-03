@@ -1,4 +1,17 @@
-<legend>My Shopping Cart</legend>
+<legend>
+	My Shopping Cart
+	 <% if ! @order.order_items.empty? %>
+		<span class="titleButton">
+			<%= link_to_if(@order.shipping_cost != 0, "CheckOut", @order, :class => "btn btn-success", :id => "CheckOutButton", :onClick => "checkOut2()" ) %>
+		</span>
+		<span class="titleButton">
+			<%= link_to "Cancel Order", @order, :method => :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %>
+		</span>
+        <% end %>
+	<span class="titleButton">
+		<%= link_to 'Continue Shopping', get_location_else(orders_path), :class => "btn" %>
+	</span>
+</legend>
 
 <% subTotal = 0 %>
 <% emptyCart0 = true %>
@@ -20,8 +33,6 @@
       var SHIPTOTAL = {};
       
       SHIPTOTAL.shipCost = <%= @order.shipping_cost %>;
-	    
-      
 </script>
 
 <div>
@@ -188,7 +199,7 @@
     $(function () {
         //if you have any radio selected by default
         currentSelected = $('[name="optionsRadios"]:checked').val();
-	alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
+	//alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
         $('[name="optionsRadios"]').checked = true
 	shipChoices($('[name="optionsRadios"]:checked').val())
     });
@@ -261,7 +272,7 @@
 			}
 			//if(shipPrice == 0) {<% shipPrice = ship1 %>}
 			//else
-			alert("radios[i] = " + i + ": and value = " + value[10]+value[11]+value[11]+value[12]+value[13] + ": and price = " + <%= shipPrice %>)
+			//alert("radios[i] = " + i + ": and value = " + value[10]+value[11]+value[11]+value[12]+value[13] + ": and price = " + <%= shipPrice %>)
 			<% @order.shipping_cost = shipPrice %>
 			//alert("@shipping_price = " + @order.shipping_cost)
 			
@@ -277,23 +288,12 @@
  <br>
  
    <div>
-       
-      	 <% if !emptyCart0 %>
-	       <%=
-		  link_to_if(@order.shipping_cost != 0, "CheckOut", @order, :class => "btn btn-warning", :id => "CheckOutButton", :onClick => "checkOut2()" )
-			#link_to("CheckOut", @order, :class => "btn btn-warning", :id => "CheckOutButton")
-			
-	    
-	       %>
-	       
-	       
-        <% end %>
 
 
 <script>
       function shipChoices(val){
 	$.ajax({
-		url : "/updateShipping" + val
+		url : "/updateShipping" + val.replace(/[.]/g, '')
 	});
 	
 	 checkShip(val);
@@ -302,16 +302,9 @@
       function checkShip(val) {
 	    $('[name="optionsRadios"]').checked = true
 	    //alert("shipChoice checked?:" +  @order.shipping_cost)
-	    alert("Value?:" +  val)
+	    //alert("Value?:" +  val)
 	    <% shipping = true %>
       }
 </script>
-
-<%= link_to 'Continue Shopping', get_location_else(orders_path), :class => "btn btn" %> 
-       
-      <% if emptyCart0 == false %>
-      <%= link_to "Cancel Order", @order, :method => :delete,
-      data: { confirm: 'Are you sure?' }, :class => "btn btn btn-warning" %>
-      <% end %>
    </div>
 </div>
