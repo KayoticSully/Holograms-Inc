@@ -38,7 +38,7 @@ class UsersController < ApplicationController
   # GET /users/new.json
   def new
     #if logged in, redirect home.
-    if(@current_user)
+    if(@current_user && !@current_user.user_type.user_types_edit)
       redirect_to root_url
       return
     end
@@ -66,7 +66,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     #if logged in, redirect home.
-    if(@current_user)
+    if(@current_user || !@current_user.user_type.user_types_edit)
       redirect_to root_url
       return
     end
