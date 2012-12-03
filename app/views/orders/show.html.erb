@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <!--<p id="notice"><%= notice %></p>-->
 <% purchase = false %>
 
@@ -373,3 +374,199 @@
   
    <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>
 >>>>>>> Fixed order number
+=======
+<!--<p id="notice"><%= notice %></p>-->
+<% purchase = false %>
+
+<p>
+ <b>User:</b>
+  <%= @order.user.first_name %>
+  <br>
+  
+</p>
+
+<% if @order.purchased %>
+<p><b>Your Order Number is: <%= @order.id %></b><br>Thank You for your Purchase!
+</p>
+<% end %>
+
+<!--
+<p>
+  <b>OrderNumber:</b>
+  <%= @order.total_price %>
+</p>
+-->
+
+  <div>
+  	<table border="0" cellspacing="0" class="table table-bordered table-striped"> 
+  	    <tbody>
+	      <tr>
+		      <th class="left" id="CartHeaderQty"> Qty. </th>
+		      <th class="left" id="CartHeaderDesc" style="width: 50%;"> Product(s) </th>
+		      <th  class="left" id="CartHeaderPrice"> Price </th>
+		      <th class="left" id="CartHeaderTotalPrice"> Total Price </th>
+	      </tr>
+			
+	<% itemstotal = 0 %>
+	
+	<% itemsTotalPrice = 0 %>
+	<% subTotal = 0 %>
+	
+	<% @order.order_items.each do |order_item| %>
+	      <tr>
+		      <td class="left"> 
+			      <strong><%= order_item.quantity %></strong>
+			      <!--
+			      <% if !@order.purchased %>
+			      <div class="btn-group" >
+				      <%= link_to "+", "/orders/add/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
+				      <%= link_to "-", "/orders/remove/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
+				      <%= link_to "x", "/orders/removeall/#{order_item.product.id}", :class => "btn btn-mini", :title => "Add 1" %>
+			      </div>
+			      <% end %>
+			  -->
+		      </td>
+		      <td class="left">
+			      <%= link_to image_tag(order_item.product.image.url(:small)), order_item.product %>
+			      <%= link_to order_item.product.name, order_item.product %>
+		      </td>
+		      <td><strong>$<%= number_with_precision(order_item.product.price, :precision => 2) %></strong></td>
+	      <!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
+		      <td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
+	      </tr>
+	<% itemstotal += order_item.quantity %>
+	<% subTotal += itemsTotalPrice %>
+
+       <% end %>
+       
+	      <tr>
+	       
+		    <td><strong><%= itemstotal %></strong></td>
+		    <td>&nbsp</td>
+		    <td>&nbsp</td>
+		    <td><b>Sub Total: $<%= number_with_precision(subTotal, :precision => 2) %></b></td>
+		    
+	      </tr>
+       
+       	    </tbody>
+        </table>
+	
+    <table>
+      <tr>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>Shipping & Handling:</td>
+	    <td>
+	      <b>$<%= number_with_precision(@order.shipping_cost, :precision => 2) %></b>
+	    </td>
+	    
+      </tr>
+      <tr>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td><td>&nbsp</td>
+	    <td>Total:</td>
+	    <td>
+	     <% subTotal += @order.shipping_cost %>
+	      <b>$<%= number_with_precision(subTotal, :precision => 2) %></b>
+	    </td>
+	    <% @order.total_price = subTotal %>
+	    <% @order.save %>
+      </tr>
+    </table>   
+  </div>
+
+  <% if !@order.purchased %>
+   <table>
+      <tr>
+	  <td>
+	    
+	    <%= link_to "Make Purchase", "/orders/purchase/#{@order.id}", :class => "btn btn-warning" %>
+          </td>
+          <td>&nbsp</td>
+	  <td><%= link_to "Change Shipping Address OR Payment Method", "/users/#{@current_user.id}/edit", :class => "btn btn-warning" %></td>
+	  <td>&nbsp</td>
+          <td><%= link_to "Cancel Order", @order, :method => :delete, data:
+	    { confirm: 'Are you sure?' }, :class => "btn btn-warning" %>
+	  </td>
+	  
+      </tr>
+      
+   </table>
+  <% end %>
+  
+<% shipTo = [] %>
+<% index = 10 %>
+
+<% shipSpeed = @order.shipping_method %>
+
+<!-- Shipping loop goes here -->
+
+<script>
+  window.onload = initForm
+  function initForm() {
+    document.getElementById("sSpeed").addEventListener
+    document.getElementById("sSpeed").onchange = shipChoices;  
+  }
+  
+  function shipChoices() {
+    if(document.getElementById("sSpeed"))
+    shipTotal = (shipTo[index][1])/100.0
+    
+    document.write(shipTotal)
+  }
+</script>
+<br><div><b>Ship To:</b>
+    <table>
+      <tr>
+	<td><%= @order.user.first_name %>&nbsp<%= @order.user.last_name %></td>
+	
+      </tr>
+      <tr>
+	<td><%= @order.user.address %>&nbsp&nbsp<%= @order.user.city %></td>
+	<td>&nbsp</td>
+      </tr>
+      <tr>
+	<td><%= @order.user.state %>&nbsp&nbsp<%= @order.user.zipcode %></td>
+	<td>&nbsp</td>
+      </tr>
+      <tr>
+	<td><%= @order.user.country %></td>
+	<td>&nbsp</td>
+      </tr>
+      </tr>
+      <tr>
+	
+      <% if !@order.purchased %>
+	<!-- Choose Shipping Speed goes here -->
+      <% end %>
+      
+      <!--
+      Shipping & Total goes here
+      -->
+
+	
+      </tr>
+    </table>
+  </div>
+  
+<br>
+
+  
+
+  
+    <% if !@order.purchased %>
+      <%= link_to 'Edit', edit_order_path(@order), :class => "btn btn-mini" %> 
+    <% end %>
+  
+     
+  
+   <%= link_to 'Continue Shopping', orders_path, :class => "btn btn-mini" %>
+>>>>>>> master
