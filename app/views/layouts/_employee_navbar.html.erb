@@ -19,7 +19,7 @@
 							<ul class="dropdown-menu" role="menu" aria-labeledby="store_dropdown">
 								
 								<%#Product Management%>
-								<%if current_user.user_type.products %>
+								<%if current_user.user_type.products || current_user.user_type.sales_edit %>
 									<li>
 										<%= link_to "Manage Products", products_path, :class => "tabindex=-1" %>
 									</li>
