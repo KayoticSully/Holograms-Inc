@@ -60,8 +60,8 @@
 			      <%= link_to image_tag(order_item.product.image.url(:small)), order_item.product %>
 			      <%= link_to order_item.product.name, order_item.product %>
 		      </td>
-		      <td><strong>$<%= number_with_precision(order_item.product.price, :precision => 2) %></strong></td>
-	      <!-- <%= link_to number_with_precision(itemsTotalPrice = order_item.product.price * order_item.quantity,  :precision => 2), order_item.product %> -->
+		      <td><strong>$<%= number_with_precision(order_item.product.sale_price || order_item.product.price, :precision => 2) %></strong></td>
+		      <% number_with_precision(itemsTotalPrice = order_item.product.sale_price || order_item.product.price * order_item.quantity,  :precision => 2) %>
 		      <td class="left"><b>$<%= number_with_precision(itemsTotalPrice, :precision => 2) %></b></td>
 	      </tr>
 	<% itemstotal += order_item.quantity %>
