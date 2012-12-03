@@ -66,13 +66,13 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     #if logged in, redirect home.
-    if(@current_user || !@current_user.user_type.user_types_edit)
+    if(@current_user && !@current_user.user_type.user_types_edit)
       redirect_to root_url
       return
     end
     
     @user = User.new(params[:user])
-
+    
     respond_to do |format|
       #if user creation succeeds, redirect to login
       if @user.save
@@ -95,6 +95,7 @@ class UsersController < ApplicationController
         return
       end
     end
+    
     @user = User.find(params[:id])
 
     respond_to do |format|
