@@ -1,7 +1,20 @@
-<div class="container-fluid">
 
 	<%= form_for(@user) do |f| %>
-
+	<legend>
+		<%= formType %> User
+		<span class="titleButton">
+			<%= f.submit :class => 'btn btn-success' %>
+		</span>
+		<%if @current_user.user_type.user_types_edit %>
+			<span class="titleButton">
+				<%= link_to 'Show', @user, :class => "btn btn-info" %>
+			</span>
+			<span class="titleButton">
+				<%= link_to 'Back', users_path, :class => "btn" %>
+			</span>
+		<%end%>
+	</legend>
+	<div class="container-fluid">
 		<%#This segment is to inform the user of input errors%>
 		<% if @user.errors.any? %>
 			<div id="error_explanation">
@@ -13,8 +26,6 @@
 				</ul>
 			</div>
 		<% end %>
-	  
-
 		<%#This segment is for actual user input fields%>
 		<div class="form_wrapper">
 			
@@ -170,30 +181,22 @@
 						  </div>
 						</div>
 					</div>
-	          	<% end %>
+				<% end %>
 
 	          	<% if(@current_user && ((@current_user.user_type.user_types_edit && !@user.user_type.user_types_edit && @current_user.id != @user.id) || (@current_user.id == @user.id && !@user.user_type.user_types_edit))) %>
 	          		<div class="form_float">
-						<div class="form-horizontal">
-						  <div class="control-group">
-							<%= f.label :disabled, :class => "control-label" %>
-							<div class="controls">
-								<%= f.check_box :disabled %>
-							</div>
-						  </div>
+					<div class="form-horizontal">
+						<div class="control-group">
+						      <%= f.label :disabled, :class => "control-label" %>
+						      <div class="controls">
+							      <%= f.check_box :disabled %>
+						      </div>
 						</div>
+					</div>
 	          		</div>
-				<% end %>
-
+			<% end %>
 			</div>
-
 		</div><!--from_wrapper-->
-
-				<div class="row">
-
-					<%= f.submit :class => 'btn btn-success' %>
-					
-				</div>
 	<% end %>
 
 </div>

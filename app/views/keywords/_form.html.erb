@@ -1,4 +1,18 @@
 <%= form_for(@keyword) do |f| %>
+  <legend>
+    <%= formType %> Keyword
+    <span class="titleButton">
+      <%= f.submit :class => 'btn btn-success'%>
+    </span>
+    <% if formType == "Edit" %>
+      <span class="titleButton">
+        <%= link_to 'Show', @keyword, :class=>"btn btn-info" %>
+      </span>
+    <% end %>
+    <span class="titleButton">
+      <%= link_to 'Back', keywords_path, :class=>"btn" %>
+    </span>
+  </legend>
   <% if @keyword.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@keyword.errors.count, "error") %> prohibited this keyword from being saved:</h2>
@@ -21,7 +35,4 @@
     <%= f.number_field :under %>
   </div>
 -->
-  <div class="actions">
-    <%= f.submit :class => 'btn btn-success'%>
-  </div>
 <% end %>

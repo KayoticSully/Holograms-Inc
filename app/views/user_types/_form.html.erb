@@ -1,5 +1,19 @@
-<div class="container-fluid">
 <%= form_for(@user_type) do |f| %>
+  <legend>
+    <%= formType %> User Type
+    <span class="titleButton">
+      <%= f.submit :class => "btn btn-success" %>
+    </span>
+    <% if formType == "Edit" %>
+      <span class="titleButton">
+        <%= link_to 'Show', @user_type, :class => "btn btn-info" %>
+      </span>
+    <% end %>
+    <span class="titleButton">
+      <%= link_to 'Back', user_types_path, :class => "btn" %>
+    </span>
+  </legend>
+  <div class="container-fluid">
   <% if @user_type.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@user_type.errors.count, "error") %> prohibited this user_type from being saved:</h2>
@@ -86,15 +100,6 @@
             </div>
           </div>
         </div>
-
-        <div class="form-horizontal">
-          <div class="control-group">
-            <div class="controls">
-              <%= f.submit :class => "btn btn-success" %>
-            </div>
-          </div>
-        </div>
-
     </div>
   </div>
 <% end %>

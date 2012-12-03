@@ -1,4 +1,18 @@
-<%= form_for @product, :url => product_path, :html => { :multipart => true} do |f| %>
+<%= form_for(@product, :html => { :multipart => true}) do |f| %>
+  <legend>
+    <%= formType %> Product
+    <span class="titleButton">
+      <%= f.submit :class => "btn btn-success"%>
+    </span>
+    <% if formType == "Edit" %>
+      <span class="titleButton">
+        <%= link_to 'Show', @product, :class=>"btn btn-info" %>
+      </span>
+    <% end %>
+    <span class="titleButton">
+      <%= link_to 'Back', products_path, :class => "btn" %>
+    </span>
+  </legend>
   <% if @product.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
@@ -49,12 +63,6 @@
             <%= select_tag("keyword_ids", options_for_select(@keywords.collect { |keyword| [keyword.name, keyword.id] }, @product.keywords.collect { |keyword| keyword.id}), {:multiple=>true, :size=>6, :disabled=>'disabled'})%>
           <% end %> 
           </div>
-        </div>
-      </div>
-      
-      <div class="form-horizontal">
-        <div class="controls">
-          <%= f.submit :class => "btn btn-success"%>
         </div>
       </div>
     </div>
@@ -177,9 +185,11 @@
         <div class="control-group">
           <%= f.label :sale_id, :class => "control-label"%>
           <div class="controls">
-          <% if  (@current_user && @current_user.user_type.sales_edit) %>
-             <%= select_tag("sale_id", options_for_select(@sales.collect { |sale| [sale.name, sale.id] }, @product.sale_id), {:include_blank => true, :size=>3})%>
-            </br><%= link_to 'Create a new sale', new_sale_path, :class => "btn btn-info btn-small" %>
+          <% if(@current_user && @current_user.user_type.sales_edit) %>
+            <%= select_tag("sale_id", options_for_select(@sales.collect { |sale| [sale.name, sale.id] }, @product.sale_id), {:include_blank => true, :size=>3})%>
+            </br>
+            <br />
+            <%= link_to 'Create a new sale', new_sale_path, :class => "btn btn-info btn-small" %>
           <% else %>
             <%= select_tag("sale_id", options_for_select(@sales.collect { |sale| [sale.name, sale.id] }, @product.sale_id), {:include_blank => true, :size=>3,:disabled=>'disabled'})%>
           <% end %> 

@@ -1,4 +1,5 @@
 ProjectCourse::Application.routes.draw do
+  resources :products
   resources :sales
   resources :groups
   resources :keywords
@@ -7,7 +8,6 @@ ProjectCourse::Application.routes.draw do
   resources :help_items
   resources :user_types
   resources :users
-  resources :products
   resources :sessions
   
   # You can have the root of your site routed with "root"
@@ -30,6 +30,7 @@ ProjectCourse::Application.routes.draw do
   match "about", :to => 'home#about'
   match "employee", :to => "home#employee"
   match "search",  :to => "keywords#search"
+  
   #match "search2",  :to => "keywords#show"
   #match "users/delete/:id", :to => "users#delete_user"
   

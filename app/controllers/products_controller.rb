@@ -37,6 +37,25 @@ class ProductsController < ApplicationController
       format.json { render json: @products }
     end
   end
+  
+   # GET /products/new
+  # GET /products/new.json
+  def new
+    #if not logged in or doesnt have edit permissions, redirect home.
+    if(!@current_user || !@current_user.user_type.products_edit)
+      redirect_to root_url
+      return
+    end
+    
+    @sales = Sale.find(:all)
+    @product = Product.new
+    #@keywords = Keyword.
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @product }
+    end
+  end
 
   # GET /products/1
   # GET /products/1.json
@@ -47,24 +66,6 @@ class ProductsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @product }
-    end
-  end
-
-  # GET /products/new
-  # GET /products/new.json
-  def new
-    #if not logged in or doesnt have edit permissions, redirect home.
-    if(!@current_user || !@current_user.user_type.products_edit)
-      redirect_to root_url
-      return
-    end
-    
-    @product = Product.new
-    #@keywords = Keyword.
-
-    respond_to do |format|
-      format.html # new.html.erb
       format.json { render json: @product }
     end
   end
