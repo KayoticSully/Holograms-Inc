@@ -35,9 +35,10 @@
 #everything_else {
     visibility: hidden;
     overflow: hidden;
+    z-index: 999;
 }
 
 .productSData {
-    bottom:46px;
+    bottom:60px;
     position: absolute;
 }

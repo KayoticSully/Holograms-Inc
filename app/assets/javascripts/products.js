@@ -6,7 +6,7 @@ $(document).ready(function(){
 });
 
 function affixFix(){
-    if($("#affixPane").hasClass('affix')) {
+    if($("#category_bar").hasClass('affix')) {
         $("#everything_else").css('visibility', 'visible');
     } else {
         setTimeout(affixFix, 10);

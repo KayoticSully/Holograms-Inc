@@ -4,7 +4,7 @@
 		<span class="titleButton">
 			<%= f.submit :class => 'btn btn-success' %>
 		</span>
-		<%if @current_user.user_type.user_types_edit %>
+		<%if @user.id && @user.user_type.user_types_edit %>
 			<span class="titleButton">
 				<%= link_to 'Show', @user, :class => "btn btn-info" %>
 			</span>
