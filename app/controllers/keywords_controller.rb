@@ -84,8 +84,8 @@ class KeywordsController < ApplicationController
       return
     end
     
-    @keyword = Keyword.find(params[:id])
-
+    @keyword = Keyword.where('name = ?', params[:id])
+    @keyword = @keyword[0]
     respond_to do |format|
       if @keyword.update_attributes(params[:keyword])
         format.html { redirect_to @keyword, notice: 'Keyword was successfully updated.' }
