@@ -32,7 +32,7 @@
 <script>
       var SHIPTOTAL = {};
       
-      SHIPTOTAL.shipCost = <%= @order.shipping_cost %>;
+      SHIPTOTAL.shipCost = <%= @order.shipping_cost || 0 %>;
 </script>
 
 <div>
@@ -200,8 +200,7 @@
         //if you have any radio selected by default
         currentSelected = $('[name="optionsRadios"]:checked').val();
 	//alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
-        $('[name="optionsRadios"]').checked = true
-	shipChoices($('[name="optionsRadios"]:checked').val())
+	shipChoices(currentSelected);
     });
     //$(document).on('click', '[name="optionsRadios"]', function () {
     /*
@@ -257,7 +256,7 @@
 		  // get value, set checked flag or do whatever you need to
 			value = radios[i].value;
 			radios[i].checked = true;
-			shipChoices(value)
+			shipChoices(value);
 			
 			switch(i) {
 			      case 1: <% shipPrice = ship0 %>; break;
@@ -291,7 +290,7 @@
 
 
 <script>
-      function shipChoices(val){
+      function shipChoices(val) {
 	$.ajax({
 		url : "/updateShipping" + val.replace(/[.]/g, '')
 	});
