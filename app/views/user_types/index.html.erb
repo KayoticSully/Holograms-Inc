@@ -1,4 +1,9 @@
-<legend>Listing User Types</legend>
+<legend>
+  Listing User Types
+  <span class="titleButton">
+    <%= link_to 'New User type', new_user_type_path, :class => "btn btn-small btn-success" %>
+  </span>
+</legend>
 
 <table class="table table-bordered table-striped">
   <tr>
@@ -17,5 +22,3 @@
   </tr>
 <% end %>
 </table>
-
-<%= link_to 'New User type', new_user_type_path, :class => "btn btn-success" %>

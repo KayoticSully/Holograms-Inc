@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 20121111204224) do
     t.string   "password_salt"
     t.string   "state"
     t.string   "country"
-    t.boolean  "disabled"
+    t.boolean  "disabled",         :default => false
   end
 
 end

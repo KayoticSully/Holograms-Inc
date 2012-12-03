@@ -1,4 +1,9 @@
-<legend>All Products</legend>
+<legend>
+  All Products
+  <span class="titleButton">
+    <%= link_to 'New Product', new_product_path, :class=> "btn btn-small btn-success" %>
+  </span>
+</legend>
 
 <table class="table table-bordered table-striped">
   <tr>
@@ -13,14 +18,14 @@
 	<% if current_user %>
 		<% if current_user.user_type.products %>
 			<th></th>
-		<%end%>
+		<% end %>
 		<% if current_user.user_type.products_edit || current_user.user_type.sales_edit || current_user.user_type.products_quantity %>
 			<th></th>
-		<%end%>
+		<% end %>
 		<% if current_user.user_type.products_edit %>
 			<th></th>
-		<%end%>
-	<%end%>
+		<% end %>
+	<% end %>
   </tr>
 
 <% @products.each do |product| %>
@@ -39,17 +44,14 @@
 	<% if current_user %>
 		<% if current_user.user_type.products %>
 		  <td><%= link_to 'Show', product, :class => "btn btn-info" %></td>
-		<%end%>
+		<% end %>
 		<% if current_user.user_type.products_edit || current_user.user_type.sales_edit || current_user.user_type.products_quantity %>
 		  <td><%= link_to 'Edit', edit_product_path(product), :class => "btn btn-warning" %></td>
-		<%end%>
+		<% end %>
 		<% if current_user.user_type.products_edit %>
 		  <td><%= link_to 'Delete', product, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
-		<%end%>
-	<%end%>
+		<% end %>
+	<% end %>
   </tr>
 <% end %>
 </table>
-
-
-<%= link_to 'New Product', new_product_path, :class=> "btn btn-success" %>

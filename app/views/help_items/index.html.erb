@@ -1,4 +1,18 @@
-<legend>Help and FAQs</legend>
+<legend>
+  Help and FAQs
+
+  <span class="titleButton">
+    <a class="btn btn-small" href="mailto:help@hologramsinc.com">E-mail us!</a>
+  </span>
+  
+  <%# if the user is allowed to edit the help files, thenlet them see this link.%>
+  <% if @current_user && @current_user.user_type.help_edit %>
+    <span class="titleButton">
+      <%= link_to 'Create New FAQ Item', new_help_item_path, :class =>"btn btn-small btn-success" %>
+    </span>
+  <% end %>
+  
+</legend>
 
 <%# Creating the table for FAQ %>
 <table class="table table-bordered table-striped">
@@ -22,8 +36,3 @@
   </tr>
 <% end %>
 </table>
-
-<%# if the user is allowed to edit the help files, thenlet them see this link.%>
-<%= if @current_user&&@current_user.user_type.help_edit then link_to 'Create New FAQ Item', new_help_item_path, :class =>"btn btn-success"  end %>
-
-<a class="btn" href="mailto:help@hologramsinc.com">E-mail us!</a>
