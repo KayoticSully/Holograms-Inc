@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
                    :last_name, :phone_number, :user_type_id, :zipcode, :state, :country, :disabled
   
   attr_accessor :password
-  before_validation :clean_data
+  before_validation :clean_data, :upcase_state
   before_save :encrypt_password, :downcase_email, :check_type
   validates_confirmation_of :password
   validates :password, :presence => true, :length => { :within => 6..40}, :on => :create 
@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   validates :email_address, :email => true
   validates :zipcode, :zipcode => true
   validates :phone_number, :phone_number => true
+  validates :state, :state => true
   
   validates :credit_card, :creditcard  => true
   
@@ -37,6 +38,10 @@ class User < ActiveRecord::Base
     else
       nil
     end
+  end
+  
+  def upcase_state
+    self.state = self.state.upcase
   end
   
   def downcase_email
