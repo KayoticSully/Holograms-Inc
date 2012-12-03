@@ -12,6 +12,7 @@
 <% ship5   = 0 %>
 <% ship6   = 0 %>
 <% shipVal = 0 %>
+<% shipPrice = 0 %>
 <% shipping = false %>
 
 
@@ -187,45 +188,87 @@
     $(function () {
         //if you have any radio selected by default
         currentSelected = $('[name="optionsRadios"]:checked').val();
-	//alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
-	<% @order.total_price = shipTotal = ship1 %>
-	
+	alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
+        $('[name="optionsRadios"]').checked = true
+	shipChoices($('[name="optionsRadios"]:checked').val())
     });
-    $(document).on('click', '[name="optionsRadios"]', function () {
-      currentSelected = $(this).val();
-        if (currentSelected == $(this).val() && typeof currentSelected != "undefined") {
+    //$(document).on('click', '[name="optionsRadios"]', function () {
+    /*
+    $(function () {
+      currentSelected = $('[name="optionsRadios"]').val();
+        if (currentSelected == $('[name="optionsRadios"]').val() && typeof currentSelected != "undefined") {
             alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is now selected");
 	    var shipValue = $('[name="optionsRadios"][value="' + currentSelected + '"]').val();
-	    alert("currentSelected = " + parseInt($('[name="optionsRadios"][value="' + currentSelected + '"]').val()));
+	    alert("currentSelected = " + ($('[name="optionsRadios"][value="' + currentSelected + '"]').val()));
 	    alert("ShippingCost0 = " + <%=  shipTotal %>);
 	    
-	    if(parseInt(currentSelected) == 0) { <% shipTotal = ship0 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    if((currentSelected) == 0) { <% shipTotal = ship0 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
 	    else
-	    if(parseInt(currentSelected) == 1) { <% shipTotal = ship1 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    if((currentSelected) == 1) { <% shipTotal = ship1 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
 	    else
-	    if(parseInt(currentSelected) == 2) { <% shipTotal = ship2 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    if((currentSelected) == 2) { <% shipTotal = ship2 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
 	    else
-	    if(parseInt(currentSelected) == 3) { <% shipTotal = ship3 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    if((currentSelected) == 3) { <% shipTotal = ship3 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
 	    else
-	    if(parseInt(currentSelected) == 4) { <% shipTotal = ship4 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    if((currentSelected) == 4) { <% shipTotal = ship4 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
 	    else
-	    if(parseInt(currentSelected) == 5) { <% shipTotal = ship5 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    if((currentSelected) == 5) { <% shipTotal = ship5 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
 	    else
-	    if(parseInt(currentSelected) == 6) { <% shipTotal = ship6 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
+	    if((currentSelected) == 6) { <% shipTotal = ship6 %>; <% @order.shipping_cost = shipTotal/100.0 %>; alert("ShippingCost0 = " + <%= shipTotal/100.0 %>); }
 	    
 	    //alert("ShippingCost1 = " + <%= shipTotal %>);
 	    
+//shipChoices($('[name="optionsRadios"]').val())
 
         }//End if
 	//alert("ShippingCost2 = " + <%= shipTotal %>)
         //currentSelected = $(this).val();
 	
     });//End function .onclick
-    shipChoices($('[name="optionsRadios"]:checked').val())
+    //shipChoices($('[name="optionsRadios"]:checked').val())
+    //shipChoices($('[name="optionsRadios"]').val())
+    */
       }
 </script>
 
-
+<script>
+      function checkOut2() {
+	    var radios = document.getElementsByTagName('input');
+	    var value;
+	//    for(var j=0; j<radios.length; j++) {
+	//	alert("radios[j].value = " + radios[j].value)  
+	//    }
+	    
+	    for (var i = 0; i < radios.length; i++) {
+		  if (radios[i].type === 'radio' && radios[i].checked) {
+		  //if (radios[i].type === 'radio' && $('[name="optionsRadios"]:checked')) {
+			//$('[name="optionsRadios"]:checked')
+		  // get value, set checked flag or do whatever you need to
+			value = radios[i].value;
+			radios[i].checked = true;
+			shipChoices(value)
+			
+			switch(i) {
+			      case 1: <% shipPrice = ship0 %>; break;
+			      case 2: <% shipPrice = ship1 %>; break;
+			      case 3: <% shipPrice = ship2 %>; break;
+			      case 4: <% shipPrice = ship3 %>; break;
+			      case 5: <% shipPrice = ship4 %>; break;
+			      case 6: <% shipPrice = ship5 %>; break;
+			      case 7: <% shipPrice = ship6 %>; break;
+			      case 8: <% shipPrice = ship6 %>; break;
+			      default: alert("Invalid price" + <%= shipPrice %>)
+			}
+			//if(shipPrice == 0) {<% shipPrice = ship1 %>}
+			//else
+			alert("radios[i] = " + i + ": and value = " + value[10]+value[11]+value[11]+value[12]+value[13] + ": and price = " + <%= shipPrice %>)
+			<% @order.shipping_cost = shipPrice %>
+			//alert("@shipping_price = " + @order.shipping_cost)
+			
+		  }
+	    }	    
+      }
+</script>
 
  <br>
       <% if shipping == true %>
@@ -237,7 +280,7 @@
        
       	 <% if !emptyCart0 %>
 	       <%=
-		  link_to_if(@order.shipping_cost != 0, "CheckOut", @order, :class => "btn btn-warning", :id => "CheckOutButton", :onClick => "checkOut()" )
+		  link_to_if(@order.shipping_cost != 0, "CheckOut", @order, :class => "btn btn-warning", :id => "CheckOutButton", :onClick => "checkOut2()" )
 			#link_to("CheckOut", @order, :class => "btn btn-warning", :id => "CheckOutButton")
 			
 	    
@@ -257,9 +300,9 @@
       }
       
       function checkShip(val) {
-	    
+	    $('[name="optionsRadios"]').checked = true
 	    //alert("shipChoice checked?:" +  @order.shipping_cost)
-	    //alert("Value?:" +  val)
+	    alert("Value?:" +  val)
 	    <% shipping = true %>
       }
 </script>
