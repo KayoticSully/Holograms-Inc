@@ -1,6 +1,9 @@
 <legend>Account Creation</legend>
 
 <%= render 'form' %>
-<div class="row-fluid">
-<%= link_to 'Back', users_path, :class=>"btn" %>
-</div>
+<% if (@current_user && (@current_user.user_type.users_list || @current_user.user_type.user_types_edit) ) %>
+	<div class="row-fluid">
+	<%= link_to 'Back', users_path, :class=>"btn" %>
+	</div>
+<% end %>
+
