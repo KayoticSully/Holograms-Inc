@@ -188,7 +188,7 @@
     $(function () {
         //if you have any radio selected by default
         currentSelected = $('[name="optionsRadios"]:checked').val();
-	alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
+	//alert("radio box with value " + $('[name="optionsRadios"][value="' + currentSelected + '"]').val() + " is currently selected");
         $('[name="optionsRadios"]').checked = true
 	shipChoices($('[name="optionsRadios"]:checked').val())
     });
@@ -261,7 +261,7 @@
 			}
 			//if(shipPrice == 0) {<% shipPrice = ship1 %>}
 			//else
-			alert("radios[i] = " + i + ": and value = " + value[10]+value[11]+value[11]+value[12]+value[13] + ": and price = " + <%= shipPrice %>)
+			///alert("radios[i] = " + i + ": and value = " + value[10]+value[11]+value[11]+value[12]+value[13] + ": and price = " + <%= shipPrice %>)
 			<% @order.shipping_cost = shipPrice %>
 			//alert("@shipping_price = " + @order.shipping_cost)
 			
@@ -302,7 +302,7 @@
       function checkShip(val) {
 	    $('[name="optionsRadios"]').checked = true
 	    //alert("shipChoice checked?:" +  @order.shipping_cost)
-	    alert("Value?:" +  val)
+	    //alert("Value?:" +  val)
 	    <% shipping = true %>
       }
 </script>
