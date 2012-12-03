@@ -138,7 +138,9 @@
 </script>
 <br>
  <div>
+   <% if !@order.purchased %>
      <%= link_to "Change Shipping Address OR Payment Method", "/users/#{@current_user.id}/edit", :class => "btn btn-warning" %>
+   <% end %>
     <table> 
       <tr>
        <td><b>Ship To:</b></td>
