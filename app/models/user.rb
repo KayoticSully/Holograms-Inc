@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
                    :last_name, :phone_number, :user_type_id, :zipcode, :state, :country, :disabled
   
   attr_accessor :password
+  before_validation :clean_data
   before_save :encrypt_password, :downcase_email, :check_type
   validates_confirmation_of :password
   validates :password, :presence => true, :length => { :within => 6..40}, :on => :create 
@@ -19,6 +20,15 @@ class User < ActiveRecord::Base
   validates :phone_number, :phone_number => true
   
   validates :credit_card, :creditcard  => true
+  
+  def clean_data
+    # trim whitespace from beginning and end of string attributes
+    attribute_names.each do |name|
+      if send(name).respond_to?(:strip)
+        send("#{name}=", send(name).strip)
+      end
+    end
+  end
   
   def self.authenticate(email, password)
     user = find_by_email_address(email.downcase)
