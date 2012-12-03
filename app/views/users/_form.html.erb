@@ -169,7 +169,7 @@
 			<div class="row-fluid">
 				
 				<%#only allow the user type to be changed if the editor has permissions and it should be permitted%>
-				<% if(@current_user && @current_user.user_type.user_types_edit && !@user.user_type.user_types_edit) %>
+				<% if(@current_user && @current_user.user_type.user_types_edit) %>
 					<div class="form_float">
 						<div class="form-horizontal">
 						  <div class="control-group">
@@ -182,7 +182,8 @@
 					</div>
 				<% end %>
 
-	          	<% if(@current_user && ((@current_user.user_type.user_types_edit && !@user.user_type.user_types_edit && @current_user.id != @user.id) || (@current_user.id == @user.id && !@user.user_type.user_types_edit))) %>
+
+	          	<% if(@current_user && @current_user.user_type.user_types_edit) %>
 	          		<div class="form_float">
 					<div class="form-horizontal">
 						<div class="control-group">
