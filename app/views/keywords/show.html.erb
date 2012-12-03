@@ -7,13 +7,14 @@
 						<%= link_to image_tag(product.image.url(:medium)), product %>
 						<h5><%= link_to smart_truncate(product.name,40), product%></h5>
 					<p>
-						Price: <strong>$<%= number_with_precision(product.price, :precision => 2) %></strong>
-						</br>
 						<% if product.sale_price %>
-						Sale price: <strong>$<%= number_with_precision(product.sale_price, :precision => 2) %></strong>
-						</br>
-						You save <strong><%= product.sale_markdown %>%!!</strong>
-						</br>
+							Price: <strong class="strike">$<%= number_with_precision(product.price, :precision => 2) %></strong>
+							<span class="sale">Sale price:</span>&nbsp;<strong>$<%= number_with_precision(product.sale_price, :precision => 2) %></strong>
+							</br>
+							<strong>You save <%= product.sale_markdown %>%!!</strong>
+							</br>
+						<% else %>
+							Price: <strong>$<%= number_with_precision(product.price, :precision => 2) %></strong>
 						<% end %>
 						<!--
 						Ratings not yet enabled.
@@ -21,7 +22,7 @@
 						-->
 					</p>
 					<p class="controls">
-						<%if (!@current_user || @current_user.user_type.purchase) %>
+						<% if (!@current_user || @current_user.user_type.purchase) %>
 							<% if product.stock>0 %>
 								<%= link_to "Add to Cart", "/orders/add/#{product.id}", :class => "btn btn-small btn-warning" %>
 							<% else %>

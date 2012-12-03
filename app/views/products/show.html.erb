@@ -12,20 +12,19 @@
 		<div class="row-fluid">
 		<%= @product.description %>
 		</div>
+		<br />
 		<div class="row-fluid">
 			<div class="span8">
-					<b>Price: </b>
-					<%= "$"<<number_with_precision(@product.price, :precision => 2) %>
-					</br>
 					<% if @product.sale_price %>
-						<b>Sale price: $</b>
-						<%= "$"<<number_with_precision(@product.sale_price, :precision => 2) %>
+						<strong>Price:</strong>&nbsp;<span class="strike">$<%= number_with_precision(@product.price, :precision => 2) %></span>
+						<span class="sale">Sale price:</span>&nbsp;<strong>$<%= number_with_precision(@product.sale_price, :precision => 2) %></strong>
 						</br>
-						<b>You save
-						<%= @product.sale_markdown %>%!
+						<strong>You save <%= @product.sale_markdown %>%!!</strong>
 						</br>
-						</b>
+					<% else %>
+						<strong>Price:</strong>&nbsp;$<%= number_with_precision(@product.price, :precision => 2) %>
 					<% end %>
+					<br />
 					  <b>Weight:</b>
 					  <%= @product.weight %> oz
   					</br>
